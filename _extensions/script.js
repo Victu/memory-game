@@ -1,0 +1,347 @@
+// ------------------------------- Configurações do conteúdo principal -------------------------------------
+
+const body = document.getElementsByTagName('body')[0] // Seleciona o elemento <body> do documento
+const caixas = document.querySelectorAll('.caixa') // Seleciona todas as botões com a classe 'caixa'
+const imagens = Array() // Array que armazenará os caminhos das imagens dos personagens
+var imagens_reveladas = Array() // Array para armazenar imagens reveladas no clique
+var caixas_selecionadas = Array() // Array para armazenar as caixas que foram clicadas
+var numero_de_vidas = document.getElementById('numero-de-vidas')
+var total_vidas = 8 // Quantidade atual de vidas
+var acertos = 0 // Variável para contar os acertos  
+const game_over_msg = document.getElementById('mensagem-final')
+const vida_retirada = document.getElementById('vida-retirada').style
+var add = 0 
+
+// Adiciona duas vezes os caminhos das imagens ao array, formando pares
+while (add < 2) {
+    for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++)
+        imagens.push(`_images/person-${numero_da_imagem}.png`)
+
+    add++
+}
+
+// Embaralha o array de imagens 
+embaralharVetor(imagens)
+
+// Associa o evento de clique a cada caixa
+caixas.forEach((elemento, index) => {
+    elemento.addEventListener('click', caixa => {
+        let reiniciar = null
+                
+        // Exibe a imagem correspondente à posição embaralhada
+        caixa.target.style.backgroundImage = `url('${imagens[index]}')`
+        caixa.target.style.filter = 'initial'
+        caixa.target.style.transform = 'initial'
+        caixa.target.style.pointerEvents = 'none'
+        caixa.target.style.border = '5px silver groove'
+        vida_retirada.transform = ''
+        
+        // Guarda imagem e caixa selecionada
+        imagens_reveladas.unshift(imagens[index])
+        caixas_selecionadas.unshift(caixa.target)
+
+        // Quando duas imagens são reveladas
+        if (imagens_reveladas.length == 2) {
+            if (imagens_reveladas[0] !== imagens_reveladas[1]) {
+                total_vidas--
+
+                setTimeout(() => { vida_retirada.visibility = 'hidden' }, 300)
+
+                vida_retirada.visibility = 'visible'
+                vida_retirada.transform = 'translateY(-150px)'
+
+                // Se forem diferentes, desativa temporariamente os cliques
+                caixas.forEach(objeto => { objeto.style.pointerEvents = 'none' })
+
+                caixas_selecionadas[1].style.transform = 'initial'
+                numero_de_vidas.innerHTML = `${total_vidas}`
+                numero_de_vidas.style.animation = 'mudaCor 0.3s linear 3'
+
+                // Após um tempo, reseta as caixas para o estado inicial
+                setTimeout(() => {
+                    for (let caixa_selecionada of caixas_selecionadas) {
+                        // Define imagem de fundo conforme o tema
+                        if (!tema_alternado)
+                            caixa_selecionada.style.backgroundImage = `url('_images/box_yellow.png')`
+                        else
+                            caixa_selecionada.style.backgroundImage = `url('_images/box_blue.png')`
+
+                        caixa_selecionada.style.cursor = 'pointer'
+
+                        setTimeout(() => { caixa_selecionada.style.pointerEvents = 'auto' }, 450)
+
+                        caixa_selecionada.style.transform = 'rotate(-360deg)'
+                        caixa_selecionada.style.boxShadow = 'none'
+                        
+                        // Restaura efeitos de hover
+                        caixa_selecionada.addEventListener('mouseenter', evento => {
+                            evento.target.style.filter = ''
+                            evento.target.style.transform = ''
+
+                            if (!tema_alternado)
+                                evento.target.style.boxShadow = ''
+                            else
+                                evento.target.style.boxShadow = '-10px 0px 30px rgba(0, 60, 255, 0.8), 10px 0px 30px rgba(0, 60, 255, 0.8)',
+                                '0px -10px 30px rgba(0, 60, 255, 0.8), 0px 10px 30px rgba(0, 60, 255, 0.8)'
+                        })
+
+                        caixa_selecionada.addEventListener('mouseleave', evento => {
+                            evento.target.style.filter = ''
+                            evento.target.style.transform = ''
+                        })
+                    }
+
+                    // Reativa o clique nas caixas que ainda não foram resolvidas
+                    caixas.forEach(objeto => {
+                        objeto.style.border = 'none'
+                        const cor_da_caixa = getComputedStyle(objeto).backgroundImage
+
+                        if (cor_da_caixa.includes('box_yellow.png') || cor_da_caixa.includes('box_blue.png'))
+                            objeto.style.pointerEvents = 'auto'
+                    })
+
+                    // Limpa os arrays
+                    imagens_reveladas = Array()
+                    caixas_selecionadas = Array()
+                    numero_de_vidas.style.animation = 'initial'
+
+                    if (total_vidas == 0) {
+                        setTimeout(() => {
+                            game_over_msg.innerHTML = 'Game<br><br>Over'
+                            game_over_msg.style.color = 'rgba(255, 50, 50, 0.9)'
+                            game_over_msg.style.visibility = 'visible'
+                            game_over_msg.style.opacity = 1
+                            game_over_msg.style.animation = 'sumir 0.6s ease-in-out infinite'
+                        }, 1100)
+
+                        setTimeout(() => {
+                            reiniciar = confirm('Deseja tentar novamente?')
+
+                            if (reiniciar) location.reload()
+                        }, 3600)
+
+                        caixas.forEach(objeto => {
+                            objeto.style.opacity = '0'
+                            objeto.style.visibility = 'hidden'
+                            objeto.style.transform = 'rotate(-360deg)'
+                        })
+                    }        
+                }, 800)
+            } else {
+                acertos++
+
+                // Se as imagens forem iguais (par encontrado), esconde as caixas
+                caixas.forEach(objeto => { objeto.style.pointerEvents = 'none' })
+                caixas_selecionadas[0].style.transform = 'initial'
+                caixas_selecionadas[1].style.transform = 'initial'
+
+                // Após um tempo, faz as caixas desaparecerem
+                setTimeout(() => {
+                    for (let caixa_selecionada of caixas_selecionadas) {
+                        caixa_selecionada.style.transform = 'translateY(-160px)'
+                        caixa_selecionada.style.transition = '0.7s'
+                        caixa_selecionada.style.opacity = '0'
+                        caixa_selecionada.style.visibility = 'hidden'
+                    }
+
+                    // Reativa cliques nas caixas não resolvidas
+                    caixas.forEach(objeto => {
+                        const cor_da_caixa = getComputedStyle(objeto).backgroundImage
+
+                        if (cor_da_caixa.includes('box_yellow.png') || cor_da_caixa.includes('box_blue.png'))
+                            objeto.style.pointerEvents = 'auto'
+                    })
+
+                    // Limpa os arrays
+                    imagens_reveladas = Array()
+                    caixas_selecionadas = Array()
+
+                    if (acertos == 8) {
+                        acertos = 0
+
+                        setTimeout(() => {
+                            game_over_msg.innerHTML = 'You<br><br>Win!'
+                            game_over_msg.style.marginLeft = '4rem'
+                            game_over_msg.style.color = 'lime'
+                            game_over_msg.style.visibility = 'visible'
+                            game_over_msg.style.opacity = 1
+                            game_over_msg.style.animation = 'sumir 0.6s ease-in-out infinite'
+                        }, 1100)
+
+                        setTimeout(() => { alert('Você conseguiu finalizar!') }, 3600);
+                    }
+                }, 1000)
+            }
+        }
+    })
+})
+
+// ------------------------------- Menu lateral e submenus -------------------------------------
+
+const botao_mostrar_menu = document.getElementById('botao-menu-lateral') // Seleciona o botão responsável por mostrar/ocultar o menu lateral
+const main = document.getElementsByTagName('main')[0] // Seleciona o elemento <main> do documento
+const seta = document.getElementById('seta-botao').style // Seleciona o estilo da seta do botão de menu
+const menu_lateral = document.getElementById('menu-lateral') // Seleciona o menu lateral
+const cabecalho_menu = document.getElementById('cabecalho-menu-lateral').style
+const botao_temas = document.getElementById('botao-temas')
+const sub_menu_temas = document.getElementById('sub-menu-temas').style
+const botao_dificuldade = document.getElementById('botao-dificuldade')
+const sub_menu_dificuldade = document.getElementById('sub-menu-dificuldade').style
+var menu_visivel = true // Variável para controlar a visibilidade do menu lateral     
+var sub_menu_visivel = false // Variável para controlar a visibilidade do submenu de temas   
+var tema_alternado = false // Variável para controlar o tema
+
+// Mostra ou oculta o menu lateral
+function mostrarMenu() {
+    if (!menu_visivel) {
+        // Ao fechar o menu
+        if (medidaDaTela(1230)) {
+            main.style.transform = 'initial'
+            main.style.transition = '0.5s'
+        }
+
+        menu_lateral.style.transform = 'translateX(-100%)'
+        menu_lateral.style.transition = '0.5s'
+        botao_mostrar_menu.style.transform = ''
+        botao_mostrar_menu.style.transition = '0.5s'
+        botao_mostrar_menu.title = 'Abrir menu'
+        seta.transform = 'initial'
+        seta.transition = '0.4s'
+        sub_menu_temas.transition = '0.2s'
+        sub_menu_temas.transform = 'scaleY(0)'
+        sub_menu_dificuldade.transition = '0.2s'
+        sub_menu_dificuldade.transform = 'scaleY(0)'
+        menu_visivel = true  
+        sub_menu_visivel = false
+    } else {
+        // Ao abrir o menu
+        if (medidaDaTela(1230)){
+            main.style.transform = 'translateX(215px)'
+            main.style.transition = '0.5s'
+        }
+
+        menu_lateral.style.transform = 'initial'
+        menu_lateral.style.transition = '0.5s'
+        botao_mostrar_menu.style.transform = 'translateX(60px)'
+        botao_mostrar_menu.style.transition = '0.5s'
+        botao_mostrar_menu.title = 'Fechar menu'
+        seta.transform = 'rotate(180deg)'
+        seta.transition = '0.4s'
+        menu_visivel = false
+        sub_menu_visivel = true
+    }
+}
+
+// Mostra ou oculta o submenu
+botao_temas.addEventListener('click', () => {
+    sub_menu_dificuldade.transition = '0.2s'
+    sub_menu_dificuldade.transform = 'scaleY(0)'
+
+    if (sub_menu_visivel) {
+        sub_menu_temas.transition = '0.2s'
+        sub_menu_temas.transform = 'scaleY(1)'
+        sub_menu_visivel = false
+    } else {
+        sub_menu_temas.transition = '0.2s'
+        sub_menu_temas.transform = 'scaleY(0)'
+        sub_menu_visivel = true   
+    }
+})
+
+// Ativa o tema escuro
+document.getElementById('noite').addEventListener('click', () => {
+    tema_alternado = true
+    
+    body.style.backgroundImage = "url('_images/bg_night.png')"
+    menu_lateral.style.backgroundImage = "url('_images/bg-3_night.png')"
+    cabecalho_menu.backgroundImage = "url('_images/title-memory-game_night.png')"
+
+    caixas.forEach(caixa => {
+        const imagem_revelada = getComputedStyle(caixa).backgroundImage
+
+        if (!imagem_revelada.includes(`box_blue.png`)) 
+            caixa.style.backgroundImage = "url('_images/box_blue.png')"
+
+        for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
+            if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
+                caixa.style.backgroundImage = imagem_revelada
+        }
+
+        // Adiciona efeitos de hover específicos do tema escuro
+        caixa.addEventListener('mouseenter', evento => {
+            evento.target.style.boxShadow = '-10px 0px 30px rgba(0, 60, 255, 0.8), 10px 0px 30px rgba(0, 60, 255, 0.8)',
+            '0px -10px 30px rgba(0, 60, 255, 0.8), 0px 10px 30px rgba(0, 60, 255, 0.8)'
+        })
+        caixa.addEventListener('mouseleave', evento => { evento.target.style.boxShadow = 'none' })
+    })
+})
+
+// Ativa o tema claro
+document.getElementById('dia').addEventListener('click', () => {
+    tema_alternado = false
+    
+    body.style.backgroundImage = "url('_images/bg.png')"
+    menu_lateral.style.backgroundImage = "url('_images/bg-3.png')"
+    cabecalho_menu.backgroundImage = "url('_images/title-memory-game.png')"
+    
+    caixas.forEach(caixa => {
+        const imagem_revelada = getComputedStyle(caixa).backgroundImage
+
+        if (!imagem_revelada.includes('box_yellow.png'))
+            caixa.style.backgroundImage = "url('_images/box_yellow.png')"
+
+        for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
+            if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
+                caixa.style.backgroundImage = imagem_revelada
+        }
+
+        // Remove efeitos de hover do tema escuro
+        caixa.addEventListener('mouseenter', evento => { evento.target.style.boxShadow = '' })
+        caixa.addEventListener('mouseleave', evento => { evento.target.style.boxShadow = 'none' })
+    })
+})
+
+botao_dificuldade.addEventListener('click', () => {
+    sub_menu_temas.transition = '0.2s'
+    sub_menu_temas.transform = 'scaleY(0)'
+    
+    if (sub_menu_visivel) {
+        sub_menu_dificuldade.transition = '0.2s'
+        sub_menu_dificuldade.transform = 'scaleY(1)'
+        sub_menu_visivel = false
+    } else {
+        sub_menu_dificuldade.transition = '0.2s'
+        sub_menu_dificuldade.transform = 'scaleY(0)'
+        sub_menu_visivel = true   
+    }
+})
+
+document.querySelectorAll('#sub-menu-dificuldade > li').forEach(texto => {
+    texto.addEventListener('click', () => {
+        if (texto.innerText == 'Fácil') {
+            total_vidas = 8
+            numero_de_vidas.innerHTML = `${total_vidas}`
+        } else if (texto.innerText == 'Médio') {
+            total_vidas = 5
+            numero_de_vidas.innerHTML = `${total_vidas}`
+        } else {
+            total_vidas = 3
+            numero_de_vidas.innerHTML = `${total_vidas}`
+        }
+    })
+})
+
+// --------------------------------------------------------------------------------------------------
+
+function embaralharVetor(vetor) {
+    for (let y = vetor.length - 1; y > 0; y--) {
+        const x = Math.floor(Math.random() * (y + 1));
+        [vetor[y], vetor[x]] = [vetor[x], vetor[y]] 
+    }
+}
+
+function medidaDaTela(medida) {
+    const medida_max = matchMedia(`(max-width: ${medida}px)`)
+
+    return medida_max.matches
+}

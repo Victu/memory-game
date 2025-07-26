@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="_extensions/script.js"></script>
+    <link rel="stylesheet" href="_extensions/style.css" media="all">
+    <link rel="stylesheet" href="_extensions/mediaQueries.css" media="screen">
+    <title>Jogo da Memória</title>
+</head>
+
+<body>
+    <aside id="menu-lateral">
+        <button id="botao-menu-lateral" onclick="mostrarMenu()" title="Abrir menu">
+            <img src="_images/arrow.png" id="seta-botao" alt="Seta do Menu Lateral">
+        </button>
+        <header id="cabecalho-menu-lateral"> <!-- Título em background no menu lateral --> </header>
+        
+        <nav>
+            <ul type="none" id="opcoes-menu">
+                <li id="botao-temas">Tema
+                    <ul type="none" id="sub-menu-temas" class="sub-menu">
+                        <li id="dia"><span>🔆</span> Dia</li>
+                        <li id="noite"><span>🌙</span> Noite</li>
+                    </ul>
+                </li>
+                <li id="botao-dificuldade">Dificuldade
+                    <ul type="none" id="sub-menu-dificuldade" class="sub-menu">
+                        <li class="nivel-dificuldade">Fácil</li>
+                        <li class="nivel-dificuldade">Médio</li>
+                        <li class="nivel-dificuldade">Difícil</li>
+                    </ul>
+                </li>
+                <li>Sair</li>
+                <li>Sobre</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <header id="cabecalho-principal">
+            <figure>
+                <img src="_images/life.png" alt="Ícone de vidas" width="55">
+                <figcaption>Vidas: <span id="numero-de-vidas">8</span></figcaption>
+            </figure>
+        </header>
+
+        <div id="caixas">
+            <!-- Cada botão representa uma "caixa com interrogação" -->
+            <button class="caixa p-1"></button>
+            <button class="caixa p-2"></button>
+            <button class="caixa p-3"></button>
+            <button class="caixa p-4"></button>
+            <button class="caixa p-5"></button>
+            <button class="caixa p-6"></button>
+            <button class="caixa p-7"></button>
+            <button class="caixa p-8"></button>
+            <button class="caixa p-9"></button>
+            <button class="caixa p-10"></button>
+            <button class="caixa p-11"></button>
+            <button class="caixa p-12"></button>
+            <button class="caixa p-13"></button>
+            <button class="caixa p-14"></button>
+            <button class="caixa p-15"></button>
+            <button class="caixa p-16"></button>
+            <span id="vida-retirada">- 1 vida</span>
+            <div id="mensagem-final"> <!-- Aqui é inserido uma mensagem após o fim do jogo --> </div>
+        </div>
+    </main>
+</body>
+</html>
