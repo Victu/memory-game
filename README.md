@@ -4,7 +4,7 @@ Esta é uma versão inicial do jogo. Ainda há alguns elementos a serem implemen
 
 ℹ️ <strong>Manual</strong>
 
-O objetivo do jogo é óbvio: encontre todos os pares de cartas idênticas no menor número de tentativas possível.
+O objetivo do jogo é óbvio: Encontre todos os pares de cartas idênticas no menor número de tentativas possível.
 
 Início do Jogo: Ao carregar a página, você verá um tabuleiro com 16 cartas viradas para baixo.
 
