@@ -40,7 +40,7 @@
     #sobre {
         position: absolute;
         top: 10%;
-        line-height: 25px;
+        line-height: 30px;
         font-size: small;
         padding: 20px 20px;
     }
@@ -48,7 +48,7 @@
     #fechar-sobre {
         position: relative;
         top: -20px;
-        left: 99%;
+        left: 100%;
         border: none;
         background: none;
     }

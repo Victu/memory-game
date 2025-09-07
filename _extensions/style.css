@@ -188,9 +188,9 @@ main {
     display: none;
     font-size: large;
     color: rgb(223, 223, 223);
-    line-height: 35px;
-    padding: 20px 20px;
-    background: url('../_images/bg-bricks.png');
+    line-height: 40px;
+    padding: 20px;
+    background: url('../_images/bg-bricks.png') no-repeat;
     background-size: cover;
     position: absolute;
     top: 6%;
@@ -199,7 +199,7 @@ main {
     width: max-content;
     height: max-content;
     border: solid 6px #2E1B14;
-    border-radius: 8px;
+    border-radius: 7px;
     z-index: 1000;
     text-shadow: 12px 0 14px #000,
         -12px 0 14px #000,
