@@ -1,12 +1,12 @@
-// ------------------------------- Configurações do conteúdo principal -------------------------------------
+// --------------------------- Configurações do conteúdo principal ---------------------------------
 
-const body = document.getElementsByTagName('body')[0] // Seleciona o elemento <body> do documento
+const body = document.getElementsByTagName('body')[0].style // Seleciona o elemento <body> do documento
 const caixas = document.querySelectorAll('.caixa') // Seleciona todas as botões com a classe 'caixa'
 const imagens = Array() // Array que armazenará os caminhos das imagens dos personagens
 var imagens_reveladas = Array() // Array para armazenar imagens reveladas no clique
 var caixas_selecionadas = Array() // Array para armazenar as caixas que foram clicadas
 var numero_de_vidas = document.getElementById('numero-de-vidas')
-var total_vidas = 8 // Quantidade atual de vidas
+var total_vidas = 5 // Quantidade atual de vidas
 var acertos = 0 // Variável para contar os acertos  
 const game_over_msg = document.getElementById('mensagem-final')
 const vida_retirada = document.getElementById('vida-retirada').style
@@ -44,7 +44,7 @@ caixas.forEach((elemento, index) => {
         if (imagens_reveladas.length == 2) {
             if (imagens_reveladas[0] !== imagens_reveladas[1]) {
                 total_vidas--
-
+                new Audio('./_sounds/error.mp3').play()
                 setTimeout(() => { vida_retirada.visibility = 'hidden' }, 300)
 
                 vida_retirada.visibility = 'visible'
@@ -107,6 +107,8 @@ caixas.forEach((elemento, index) => {
 
                     if (total_vidas == 0) {
                         setTimeout(() => {
+                            tocarAudio(total_vidas)
+
                             game_over_msg.innerHTML = 'Game<br><br>Over'
                             game_over_msg.style.color = 'rgba(255, 50, 50, 0.9)'
                             game_over_msg.style.visibility = 'visible'
@@ -115,7 +117,7 @@ caixas.forEach((elemento, index) => {
                         }, 1100)
 
                         setTimeout(() => {
-                            reiniciar = confirm('Deseja tentar novamente?')
+                            reiniciar = confirm('Deseja reiniciar?')
 
                             if (reiniciar) location.reload()
                         }, 3600)
@@ -129,6 +131,7 @@ caixas.forEach((elemento, index) => {
                 }, 800)
             } else {
                 acertos++
+                new Audio('./_sounds/success.mp3').play()
 
                 // Se as imagens forem iguais (par encontrado), esconde as caixas
                 caixas.forEach(objeto => { objeto.style.pointerEvents = 'none' })
@@ -160,6 +163,7 @@ caixas.forEach((elemento, index) => {
                         acertos = 0
 
                         setTimeout(() => {
+                            tocarAudio(total_vidas)
                             game_over_msg.innerHTML = 'You<br><br>Win!'
                             game_over_msg.style.marginLeft = '4rem'
                             game_over_msg.style.color = 'lime'
@@ -179,16 +183,15 @@ caixas.forEach((elemento, index) => {
 // ------------------------------- Menu lateral e submenus -------------------------------------
 
 const botao_mostrar_menu = document.getElementById('botao-menu-lateral') // Seleciona o botão responsável por mostrar/ocultar o menu lateral
-const main = document.getElementsByTagName('main')[0] // Seleciona o elemento <main> do documento
+const main = document.getElementsByTagName('main')[0].style // Seleciona o elemento <main> do documento
 const seta = document.getElementById('seta-botao').style // Seleciona o estilo da seta do botão de menu
-const menu_lateral = document.getElementById('menu-lateral') // Seleciona o menu lateral
+const menu_lateral = document.getElementById('menu-lateral').style // Seleciona o menu lateral
 const cabecalho_menu = document.getElementById('cabecalho-menu-lateral').style
-const botao_temas = document.getElementById('botao-temas')
 const sub_menu_temas = document.getElementById('sub-menu-temas').style
-const botao_dificuldade = document.getElementById('botao-dificuldade')
 const sub_menu_dificuldade = document.getElementById('sub-menu-dificuldade').style
 var menu_visivel = true // Variável para controlar a visibilidade do menu lateral     
-var sub_menu_visivel = false // Variável para controlar a visibilidade do submenu de temas   
+var sub_menu_temas_visivel = true // Variável para controlar a visibilidade do submenu de temas 
+var sub_menu_dificuldade_visivel = true  
 var tema_alternado = false // Variável para controlar o tema
 
 // Mostra ou oculta o menu lateral
@@ -196,12 +199,12 @@ function mostrarMenu() {
     if (!menu_visivel) {
         // Ao fechar o menu
         if (medidaDaTela(1230)) {
-            main.style.transform = 'initial'
-            main.style.transition = '0.5s'
+            main.transform = 'initial'
+            main.transition = '0.5s'
         }
 
-        menu_lateral.style.transform = 'translateX(-100%)'
-        menu_lateral.style.transition = '0.5s'
+        menu_lateral.transform = 'translateX(-100%)'
+        menu_lateral.transition = '0.5s'
         botao_mostrar_menu.style.transform = ''
         botao_mostrar_menu.style.transition = '0.5s'
         botao_mostrar_menu.title = 'Abrir menu'
@@ -212,39 +215,38 @@ function mostrarMenu() {
         sub_menu_dificuldade.transition = '0.2s'
         sub_menu_dificuldade.transform = 'scaleY(0)'
         menu_visivel = true  
-        sub_menu_visivel = false
     } else {
         // Ao abrir o menu
         if (medidaDaTela(1230)){
-            main.style.transform = 'translateX(215px)'
-            main.style.transition = '0.5s'
+            main.transform = 'translateX(215px)'
+            main.transition = '0.5s'
         }
 
-        menu_lateral.style.transform = 'initial'
-        menu_lateral.style.transition = '0.5s'
+        menu_lateral.transform = 'initial'
+        menu_lateral.transition = '0.5s'
         botao_mostrar_menu.style.transform = 'translateX(60px)'
         botao_mostrar_menu.style.transition = '0.5s'
         botao_mostrar_menu.title = 'Fechar menu'
         seta.transform = 'rotate(180deg)'
         seta.transition = '0.4s'
         menu_visivel = false
-        sub_menu_visivel = true
     }
 }
 
-// Mostra ou oculta o submenu
-botao_temas.addEventListener('click', () => {
+// Botão para o submenu de temas
+document.getElementById('botao-temas').addEventListener('click', () => {
     sub_menu_dificuldade.transition = '0.2s'
     sub_menu_dificuldade.transform = 'scaleY(0)'
+    sub_menu_dificuldade_visivel = true
 
-    if (sub_menu_visivel) {
+    if (sub_menu_temas_visivel) {
         sub_menu_temas.transition = '0.2s'
         sub_menu_temas.transform = 'scaleY(1)'
-        sub_menu_visivel = false
-    } else {
+        sub_menu_temas_visivel = false
+    } else if (!sub_menu_temas_visivel) {
         sub_menu_temas.transition = '0.2s'
         sub_menu_temas.transform = 'scaleY(0)'
-        sub_menu_visivel = true   
+        sub_menu_temas_visivel = true   
     }
 })
 
@@ -252,8 +254,8 @@ botao_temas.addEventListener('click', () => {
 document.getElementById('noite').addEventListener('click', () => {
     tema_alternado = true
     
-    body.style.backgroundImage = "url('_images/bg_night.png')"
-    menu_lateral.style.backgroundImage = "url('_images/bg-3_night.png')"
+    body.backgroundImage = "url('_images/bg_night.png')"
+    menu_lateral.backgroundImage = "url('_images/bg-3_night.png')"
     cabecalho_menu.backgroundImage = "url('_images/title-memory-game_night.png')"
 
     caixas.forEach(caixa => {
@@ -280,8 +282,8 @@ document.getElementById('noite').addEventListener('click', () => {
 document.getElementById('dia').addEventListener('click', () => {
     tema_alternado = false
     
-    body.style.backgroundImage = "url('_images/bg.png')"
-    menu_lateral.style.backgroundImage = "url('_images/bg-3.png')"
+    body.backgroundImage = "url('_images/bg.png')"
+    menu_lateral.backgroundImage = "url('_images/bg-3.png')"
     cabecalho_menu.backgroundImage = "url('_images/title-memory-game.png')"
     
     caixas.forEach(caixa => {
@@ -301,18 +303,20 @@ document.getElementById('dia').addEventListener('click', () => {
     })
 })
 
-botao_dificuldade.addEventListener('click', () => {
+// Botão para o submenu dificuldade
+document.getElementById('botao-dificuldade').addEventListener('click', () => {
     sub_menu_temas.transition = '0.2s'
     sub_menu_temas.transform = 'scaleY(0)'
+    sub_menu_temas_visivel = true 
     
-    if (sub_menu_visivel) {
+    if (sub_menu_dificuldade_visivel) {
         sub_menu_dificuldade.transition = '0.2s'
         sub_menu_dificuldade.transform = 'scaleY(1)'
-        sub_menu_visivel = false
+        sub_menu_dificuldade_visivel = false
     } else {
         sub_menu_dificuldade.transition = '0.2s'
         sub_menu_dificuldade.transform = 'scaleY(0)'
-        sub_menu_visivel = true   
+        sub_menu_dificuldade_visivel = true   
     }
 })
 
@@ -320,15 +324,25 @@ document.querySelectorAll('#sub-menu-dificuldade > li').forEach(texto => {
     texto.addEventListener('click', () => {
         if (texto.innerText == 'Fácil') {
             total_vidas = 8
-            numero_de_vidas.innerHTML = `${total_vidas}`
+            numero_de_vidas.innerText = `${total_vidas}`
         } else if (texto.innerText == 'Médio') {
             total_vidas = 5
-            numero_de_vidas.innerHTML = `${total_vidas}`
+            numero_de_vidas.innerText = `${total_vidas}`
         } else {
             total_vidas = 3
-            numero_de_vidas.innerHTML = `${total_vidas}`
+            numero_de_vidas.innerText = `${total_vidas}`
         }
+
+        alert(`Nível ${texto.innerHTML.toUpperCase()}: ${total_vidas} vidas`)
     })
+})
+
+document.getElementById('botao-sobre').addEventListener('click', () => {
+    document.getElementById('sobre').style.display = 'block'
+})
+
+document.getElementById('fechar-sobre').addEventListener('click', () => {
+    document.getElementById('sobre').style.display = 'none'
 })
 
 // --------------------------------------------------------------------------------------------------
@@ -344,4 +358,11 @@ function medidaDaTela(medida) {
     const medida_max = matchMedia(`(max-width: ${medida}px)`)
 
     return medida_max.matches
+}
+
+function tocarAudio(vidas) {
+    if (vidas == 0) 
+        new Audio('./_sounds/game-over.wav').play()
+    else
+        new Audio('./_sounds/victory.wav').play()
 }

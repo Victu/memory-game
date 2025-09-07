@@ -18,21 +18,21 @@
         
         <nav>
             <ul type="none" id="opcoes-menu">
-                <li id="botao-temas">Tema
+                <li id="botao-temas">Tema »
                     <ul type="none" id="sub-menu-temas" class="sub-menu">
-                        <li id="dia"><span>🔆</span> Dia</li>
+                        <li id="dia"><span>☀️</span> Dia</li>
                         <li id="noite"><span>🌙</span> Noite</li>
                     </ul>
                 </li>
-                <li id="botao-dificuldade">Dificuldade
+                <li id="botao-dificuldade">Nível »
                     <ul type="none" id="sub-menu-dificuldade" class="sub-menu">
                         <li class="nivel-dificuldade">Fácil</li>
                         <li class="nivel-dificuldade">Médio</li>
                         <li class="nivel-dificuldade">Difícil</li>
                     </ul>
                 </li>
+                <li id="botao-sobre">Sobre</li>
                 <li>Sair</li>
-                <li>Sobre</li>
             </ul>
         </nav>
     </aside>
@@ -41,11 +41,11 @@
         <header id="cabecalho-principal">
             <figure>
                 <img src="_images/life.png" alt="Ícone de vidas" width="55">
-                <figcaption>Vidas: <span id="numero-de-vidas">8</span></figcaption>
+                <figcaption>Vidas: <span id="numero-de-vidas">5</span></figcaption>
             </figure>
         </header>
 
-        <div id="caixas">
+        <section id="caixas">
             <!-- Cada botão representa uma "caixa com interrogação" -->
             <button class="caixa p-1"></button>
             <button class="caixa p-2"></button>
@@ -65,7 +65,14 @@
             <button class="caixa p-16"></button>
             <span id="vida-retirada">- 1 vida</span>
             <div id="mensagem-final"> <!-- Aqui é inserido uma mensagem após o fim do jogo --> </div>
-        </div>
+        </section>
     </main>
+
+    <div id="sobre">
+        <button id="fechar-sobre" title="Fechar">X</button>
+        <p>Desenvolvedor: Victor Silva</p><br>
+        <p>GitHub: <a href="https://github.com/Victu" target="_blank" style="color: rgb(223, 223, 223); text-decoration: none; animation: iluminaTexto 2s infinite;" title="Ir à página">victu</a></p><br>
+        <p>Versão: 2.5</p>
+    </div>
 </body>
 </html>

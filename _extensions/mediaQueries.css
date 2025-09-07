@@ -37,6 +37,22 @@
         height: 80px; 
     }
 
+    #sobre {
+        position: absolute;
+        top: 10%;
+        line-height: 25px;
+        font-size: small;
+        padding: 20px 20px;
+    }
+
+    #fechar-sobre {
+        position: relative;
+        top: -20px;
+        left: 99%;
+        border: none;
+        background: none;
+    }
+
     #vida-retirada {
         position: absolute;
         top: 34.5%;
