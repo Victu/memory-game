@@ -59,7 +59,7 @@
         font-size: 1.6em;
     }
 
-    #mensagem-final { font-size: 4.9em; }
+    #game-over-msg { font-size: 4.9em; }
 }
 
 @media (max-height: 690px) {
@@ -105,7 +105,7 @@
         font-size: 1.6em;
     }
 
-    #mensagem-final { 
+    #game-over-msg { 
         position: absolute;
         top: 16rem;
         font-size: 4.9em;

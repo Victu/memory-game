@@ -240,7 +240,7 @@ main {
     }
 }
 
-#mensagem-final {
+#game-over-msg {
     position: absolute;
     top: 30%;
     font-size: 6em;

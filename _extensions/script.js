@@ -8,7 +8,7 @@ var caixas_selecionadas = Array() // Array para armazenar as caixas que foram cl
 var numero_de_vidas = document.getElementById('numero-de-vidas')
 var total_vidas = 5 // Quantidade atual de vidas
 var acertos = 0 // Variável para contar os acertos  
-const game_over_msg = document.getElementById('mensagem-final')
+const game_over_msg = document.getElementById('game-over-msg')
 const vida_retirada = document.getElementById('vida-retirada').style
 var add = 0 
 
@@ -182,18 +182,18 @@ caixas.forEach((elemento, index) => {
 
 // ------------------------------- Menu lateral e submenus -------------------------------------
 
-const botao_mostrar_menu = document.getElementById('botao-menu-lateral') // Seleciona o botão responsável por mostrar/ocultar o menu lateral
+const botao_menu_lateral = document.getElementById('botao-menu-lateral') // Seleciona o botão responsável por mostrar/ocultar o menu lateral
 const main = document.getElementsByTagName('main')[0].style // Seleciona o elemento <main> do documento
-const seta = document.getElementById('seta-botao').style // Seleciona o estilo da seta do botão de menu
+const seta_botao = document.getElementById('seta-botao').style // Seleciona o estilo da seta do botão de menu
 const menu_lateral = document.getElementById('menu-lateral').style // Seleciona o menu lateral
-const cabecalho_menu = document.getElementById('cabecalho-menu-lateral').style
+const cabecalho_menu_lateral = document.getElementById('cabecalho-menu-lateral').style
 const sub_menu_temas = document.getElementById('sub-menu-temas').style
 const sub_menu_dificuldade = document.getElementById('sub-menu-dificuldade').style
 var menu_visivel = true // Variável para controlar a visibilidade do menu lateral     
 var tema_alternado = false // Variável para controlar o tema
 
 // Mostra ou oculta o menu lateral
-botao_mostrar_menu.addEventListener('click', evento => {
+botao_menu_lateral.addEventListener('click', evento => {
     if (!menu_visivel) {
         // Ao fechar o menu
         if (medidaDaTela(1230)) {
@@ -206,8 +206,8 @@ botao_mostrar_menu.addEventListener('click', evento => {
         evento.target.style.transform = ''
         evento.target.style.transition = '0.5s'
         evento.target.title = 'Abrir menu'
-        seta.transform = 'initial'
-        seta.transition = '0.4s'
+        seta_botao.transform = 'initial'
+        seta_botao.transition = '0.4s'
         menu_visivel = true  
     } else {
         // Ao abrir o menu
@@ -221,21 +221,21 @@ botao_mostrar_menu.addEventListener('click', evento => {
         evento.target.style.transform = 'translateX(60px)'
         evento.target.style.transition = '0.5s'
         evento.target.title = 'Fechar menu'
-        seta.transform = 'rotate(180deg)'
-        seta.transition = '0.4s'
+        seta_botao.transform = 'rotate(180deg)'
+        seta_botao.transition = '0.4s'
         menu_visivel = false
     }
 })
 
 // Botão para o submenu de temas
 document.getElementById('botao-temas').addEventListener('mouseenter', evento => {
-    sub_menu_dificuldade.transition = '0.2s'
+    sub_menu_dificuldade.transition = '0.4s'
     sub_menu_dificuldade.transform = 'scaleY(0)'
     sub_menu_temas.transition = '0.2s'
     sub_menu_temas.transform = 'scaleY(1)'
 
     evento.target.addEventListener('mouseleave', () => {
-        sub_menu_temas.transition = '0.2s'
+        sub_menu_temas.transition = '0.4s'
         sub_menu_temas.transform = 'scaleY(0)'
     })
 })
@@ -246,7 +246,7 @@ document.getElementById('noite').addEventListener('click', () => {
     
     body.backgroundImage = "url('_images/bg_night.png')"
     menu_lateral.backgroundImage = "url('_images/bg-3_night.png')"
-    cabecalho_menu.backgroundImage = "url('_images/title-memory-game_night.png')"
+    cabecalho_menu_lateral.backgroundImage = "url('_images/title-memory-game_night.png')"
 
     caixas.forEach(caixa => {
         const imagem_revelada = getComputedStyle(caixa).backgroundImage
@@ -274,7 +274,7 @@ document.getElementById('dia').addEventListener('click', () => {
     
     body.backgroundImage = "url('_images/bg.png')"
     menu_lateral.backgroundImage = "url('_images/bg-3.png')"
-    cabecalho_menu.backgroundImage = "url('_images/title-memory-game.png')"
+    cabecalho_menu_lateral.backgroundImage = "url('_images/title-memory-game.png')"
     
     caixas.forEach(caixa => {
         const imagem_revelada = getComputedStyle(caixa).backgroundImage
@@ -295,13 +295,13 @@ document.getElementById('dia').addEventListener('click', () => {
 
 // Botão para o submenu dificuldade
 document.getElementById('botao-dificuldade').addEventListener('mouseenter', evento => {
-    sub_menu_temas.transition = '0.2s'
+    sub_menu_temas.transition = '0.4s'
     sub_menu_temas.transform = 'scaleY(0)'
     sub_menu_dificuldade.transition = '0.2s'
     sub_menu_dificuldade.transform = 'scaleY(1)'
 
     evento.target.addEventListener('mouseleave', () => {
-        sub_menu_dificuldade.transition = '0.2s'
+        sub_menu_dificuldade.transition = '0.4s'
         sub_menu_dificuldade.transform = 'scaleY(0)'
     })
 })
@@ -318,6 +318,14 @@ document.querySelectorAll('#sub-menu-dificuldade > li').forEach(texto => {
             total_vidas = 3
             numero_de_vidas.innerText = `${total_vidas}`
         }
+
+        menu_visivel = true
+        seta_botao.transform = 'initial'
+        seta_botao.transition = '0.4s'
+        menu_lateral.transform = 'translateX(-100%)'
+        menu_lateral.transition = '0.5s'
+        sub_menu_dificuldade.transition = '0.4s'
+        sub_menu_dificuldade.transform = 'scaleY(0)'
 
         alert(`Nível ${texto.innerHTML.toUpperCase()}: ${total_vidas} vidas`)
     })
