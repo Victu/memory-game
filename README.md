@@ -56,12 +56,14 @@ JavaScript (ES6+): Responsável por toda a lógica do jogo, incluindo o embaralh
 
 `/`<br>
 `|-- _extensions/`<br>
-`|   |-- script.js`       # Lógica principal do jogo<br>
-`|   |-- style.css`       # Estilos principais<br>
-`|   -- mediaQueries.css` # Estilos para responsividade<br>
-`|-- _images/`            # Pasta para todas as imagens do jogo<br>
-`|-- _font/`              # Pasta para a fonte customizada (pixelFont)<br>
-`-- mainContent.html`     # Arquivo principal da página<br>
+`|   |-- script.js`<br>
+`|   |-- style.css`<br>        
+`|   |-- mediaQueries.css`<br> 
+`|-- _font/`<br>               
+`|-- _media/`<br>              
+`|-- |-- _images/`<br>        
+`|-- |-- _sounds/`<br>        
+`-- mainContent.html`
 
 ⌨️ <strong>Como Executar o Projeto</strong>
 

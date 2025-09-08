@@ -9,13 +9,13 @@ var numero_de_vidas = document.getElementById('numero-de-vidas')
 var total_vidas = 5 // Quantidade atual de vidas
 var acertos = 0 // Variável para contar os acertos  
 const game_over_msg = document.getElementById('game-over-msg')
-const vida_retirada = document.getElementById('vida-retirada').style
+const vida_retirada = document.getElementById('vida-retirada')
 var add = 0 
 
 // Adiciona duas vezes os caminhos das imagens ao array, formando pares
 while (add < 2) {
     for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++)
-        imagens.push(`_images/person-${numero_da_imagem}.png`)
+        imagens.push(`_media/_images/person-${numero_da_imagem}.png`)
 
     add++
 }
@@ -34,7 +34,7 @@ caixas.forEach((elemento, index) => {
         caixa.target.style.transform = 'initial'
         caixa.target.style.pointerEvents = 'none'
         caixa.target.style.border = '5px silver groove'
-        vida_retirada.transform = ''
+        vida_retirada.style.transform = ''
         
         // Guarda imagem e caixa selecionada
         imagens_reveladas.unshift(imagens[index])
@@ -44,12 +44,13 @@ caixas.forEach((elemento, index) => {
         if (imagens_reveladas.length == 2) {
             if (imagens_reveladas[0] !== imagens_reveladas[1]) {
                 total_vidas--
-                new Audio('./_sounds/error.mp3').play()
-                setTimeout(() => { vida_retirada.visibility = 'hidden' }, 300)
+                new Audio('./_media/_sounds/error.mp3').play()
+                setTimeout(() => { vida_retirada.style.visibility = 'hidden' }, 300)
 
-                vida_retirada.visibility = 'visible'
-                vida_retirada.transform = 'translateY(-150px)'
-
+                vida_retirada.style.visibility = 'visible'
+                vida_retirada.style.transform = 'translateY(-150px)'
+                vida_retirada.innerText = '-1 vida'
+                
                 // Se forem diferentes, desativa temporariamente os cliques
                 caixas.forEach(objeto => { objeto.style.pointerEvents = 'none' })
 
@@ -62,9 +63,9 @@ caixas.forEach((elemento, index) => {
                     for (let caixa_selecionada of caixas_selecionadas) {
                         // Define imagem de fundo conforme o tema
                         if (!tema_alternado)
-                            caixa_selecionada.style.backgroundImage = `url('_images/box_yellow.png')`
+                            caixa_selecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`
                         else
-                            caixa_selecionada.style.backgroundImage = `url('_images/box_blue.png')`
+                            caixa_selecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`
 
                         caixa_selecionada.style.cursor = 'pointer'
 
@@ -131,7 +132,7 @@ caixas.forEach((elemento, index) => {
                 }, 800)
             } else {
                 acertos++
-                new Audio('./_sounds/success.mp3').play()
+                new Audio('./_media/_sounds/success.mp3').play()
 
                 // Se as imagens forem iguais (par encontrado), esconde as caixas
                 caixas.forEach(objeto => { objeto.style.pointerEvents = 'none' })
@@ -244,15 +245,15 @@ document.getElementById('botao-temas').addEventListener('mouseenter', evento => 
 document.getElementById('noite').addEventListener('click', () => {
     tema_alternado = true
     
-    body.backgroundImage = "url('_images/bg_night.png')"
-    menu_lateral.backgroundImage = "url('_images/bg-3_night.png')"
-    cabecalho_menu_lateral.backgroundImage = "url('_images/title-memory-game_night.png')"
+    body.backgroundImage = "url('_media/_images/bg_night.png')"
+    menu_lateral.backgroundImage = "url('_media/_images/bg-3_night.png')"
+    cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game_night.png')"
 
     caixas.forEach(caixa => {
         const imagem_revelada = getComputedStyle(caixa).backgroundImage
 
         if (!imagem_revelada.includes(`box_blue.png`)) 
-            caixa.style.backgroundImage = "url('_images/box_blue.png')"
+            caixa.style.backgroundImage = "url('_media/_images/box_blue.png')"
 
         for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
             if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
@@ -272,15 +273,15 @@ document.getElementById('noite').addEventListener('click', () => {
 document.getElementById('dia').addEventListener('click', () => {
     tema_alternado = false
     
-    body.backgroundImage = "url('_images/bg.png')"
-    menu_lateral.backgroundImage = "url('_images/bg-3.png')"
-    cabecalho_menu_lateral.backgroundImage = "url('_images/title-memory-game.png')"
+    body.backgroundImage = "url('_media/_images/bg.png')"
+    menu_lateral.backgroundImage = "url('_media/_images/bg-3.png')"
+    cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game.png')"
     
     caixas.forEach(caixa => {
         const imagem_revelada = getComputedStyle(caixa).backgroundImage
 
         if (!imagem_revelada.includes('box_yellow.png'))
-            caixa.style.backgroundImage = "url('_images/box_yellow.png')"
+            caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')"
 
         for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
             if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
@@ -352,6 +353,7 @@ function sair() {
 
 // --------------------------------------------------------------------------------------------------
 
+// Algoritmo para embaralhar vetor
 function embaralharVetor(vetor) {
     for (let y = vetor.length - 1; y > 0; y--) {
         const x = Math.floor(Math.random() * (y + 1));
@@ -367,7 +369,7 @@ function medidaDaTela(medida) {
 
 function tocarAudio(vidas) {
     if (vidas == 0) 
-        new Audio('./_sounds/game-over.wav').play()
+        new Audio('./_media/_sounds/game-over.wav').play()
     else
-        new Audio('./_sounds/victory.wav').play()
+        new Audio('./_media/_sounds/victory.wav').play()
 }
