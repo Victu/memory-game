@@ -195,7 +195,7 @@ var sub_menu_dificuldade_visivel = true
 var tema_alternado = false // Variável para controlar o tema
 
 // Mostra ou oculta o menu lateral
-function mostrarMenu() {
+botao_mostrar_menu.addEventListener('click', evento => {
     if (!menu_visivel) {
         // Ao fechar o menu
         if (medidaDaTela(1230)) {
@@ -205,9 +205,9 @@ function mostrarMenu() {
 
         menu_lateral.transform = 'translateX(-100%)'
         menu_lateral.transition = '0.5s'
-        botao_mostrar_menu.style.transform = ''
-        botao_mostrar_menu.style.transition = '0.5s'
-        botao_mostrar_menu.title = 'Abrir menu'
+        evento.target.style.transform = ''
+        evento.target.style.transition = '0.5s'
+        evento.target.title = 'Abrir menu'
         seta.transform = 'initial'
         seta.transition = '0.4s'
         sub_menu_temas.transition = '0.2s'
@@ -224,14 +224,14 @@ function mostrarMenu() {
 
         menu_lateral.transform = 'initial'
         menu_lateral.transition = '0.5s'
-        botao_mostrar_menu.style.transform = 'translateX(60px)'
-        botao_mostrar_menu.style.transition = '0.5s'
-        botao_mostrar_menu.title = 'Fechar menu'
+        evento.target.style.transform = 'translateX(60px)'
+        evento.target.style.transition = '0.5s'
+        evento.target.title = 'Fechar menu'
         seta.transform = 'rotate(180deg)'
         seta.transition = '0.4s'
         menu_visivel = false
     }
-}
+})
 
 // Botão para o submenu de temas
 document.getElementById('botao-temas').addEventListener('click', () => {

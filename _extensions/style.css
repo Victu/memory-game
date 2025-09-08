@@ -227,16 +227,16 @@ main {
 
 @keyframes iluminaTexto {
     0%, 100% {
-        text-shadow: 18px 0 15px yellow,
-        -18px 0 15px red,
-        0 18px 15px green,
-        0 -18px 15px blue;
+        text-shadow: 18px 0 30px green,
+        -18px 0 30px green,
+        0 10px 30px green,
+        0 -10px 30px green;
     }
     50% {
-        text-shadow: 18px 0 15px blue,
-        -18px 0 15px yellow,
-        0 18px 15px red,
-        0 -18px 15px green;
+        text-shadow: 18px 0 30px lawngreen,
+        -18px 0 30px lawngreen,
+        0 10px 30px lawngreen,
+        0 -10px 30px lawngreen;
     }
 }
 
