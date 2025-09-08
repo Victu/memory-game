@@ -190,8 +190,6 @@ const cabecalho_menu = document.getElementById('cabecalho-menu-lateral').style
 const sub_menu_temas = document.getElementById('sub-menu-temas').style
 const sub_menu_dificuldade = document.getElementById('sub-menu-dificuldade').style
 var menu_visivel = true // Variável para controlar a visibilidade do menu lateral     
-var sub_menu_temas_visivel = true // Variável para controlar a visibilidade do submenu de temas 
-var sub_menu_dificuldade_visivel = true // Variável para controlar a visibilidade do submenu de níveis 
 var tema_alternado = false // Variável para controlar o tema
 
 // Mostra ou oculta o menu lateral
@@ -210,10 +208,6 @@ botao_mostrar_menu.addEventListener('click', evento => {
         evento.target.title = 'Abrir menu'
         seta.transform = 'initial'
         seta.transition = '0.4s'
-        sub_menu_temas.transition = '0.2s'
-        sub_menu_temas.transform = 'scaleY(0)'
-        sub_menu_dificuldade.transition = '0.2s'
-        sub_menu_dificuldade.transform = 'scaleY(0)'
         menu_visivel = true  
     } else {
         // Ao abrir o menu
@@ -234,20 +228,16 @@ botao_mostrar_menu.addEventListener('click', evento => {
 })
 
 // Botão para o submenu de temas
-document.getElementById('botao-temas').addEventListener('click', () => {
+document.getElementById('botao-temas').addEventListener('mouseenter', evento => {
     sub_menu_dificuldade.transition = '0.2s'
     sub_menu_dificuldade.transform = 'scaleY(0)'
-    sub_menu_dificuldade_visivel = true
+    sub_menu_temas.transition = '0.2s'
+    sub_menu_temas.transform = 'scaleY(1)'
 
-    if (sub_menu_temas_visivel) {
-        sub_menu_temas.transition = '0.2s'
-        sub_menu_temas.transform = 'scaleY(1)'
-        sub_menu_temas_visivel = false
-    } else if (!sub_menu_temas_visivel) {
+    evento.target.addEventListener('mouseleave', () => {
         sub_menu_temas.transition = '0.2s'
         sub_menu_temas.transform = 'scaleY(0)'
-        sub_menu_temas_visivel = true   
-    }
+    })
 })
 
 // Ativa o tema escuro
@@ -304,20 +294,16 @@ document.getElementById('dia').addEventListener('click', () => {
 })
 
 // Botão para o submenu dificuldade
-document.getElementById('botao-dificuldade').addEventListener('click', () => {
+document.getElementById('botao-dificuldade').addEventListener('mouseenter', evento => {
     sub_menu_temas.transition = '0.2s'
     sub_menu_temas.transform = 'scaleY(0)'
-    sub_menu_temas_visivel = true 
-    
-    if (sub_menu_dificuldade_visivel) {
-        sub_menu_dificuldade.transition = '0.2s'
-        sub_menu_dificuldade.transform = 'scaleY(1)'
-        sub_menu_dificuldade_visivel = false
-    } else {
+    sub_menu_dificuldade.transition = '0.2s'
+    sub_menu_dificuldade.transform = 'scaleY(1)'
+
+    evento.target.addEventListener('mouseleave', () => {
         sub_menu_dificuldade.transition = '0.2s'
         sub_menu_dificuldade.transform = 'scaleY(0)'
-        sub_menu_dificuldade_visivel = true   
-    }
+    })
 })
 
 document.querySelectorAll('#sub-menu-dificuldade > li').forEach(texto => {
@@ -338,12 +324,23 @@ document.querySelectorAll('#sub-menu-dificuldade > li').forEach(texto => {
 })
 
 document.getElementById('botao-sobre').addEventListener('click', () => {
-    document.getElementById('sobre').style.display = 'block'
+    const sobre = document.getElementById('sobre').style
+
+    if (sobre.display != 'block')
+        sobre.display = 'block'
+    else
+        sobre.display = 'none'
 })
 
 document.getElementById('fechar-sobre').addEventListener('click', () => {
     document.getElementById('sobre').style.display = 'none'
 })
+
+function sair() {
+    let confirmado = confirm('Tem certeza que deseja sair?')
+
+    if (confirmado) close()
+}
 
 // --------------------------------------------------------------------------------------------------
 
