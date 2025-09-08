@@ -191,7 +191,7 @@ const sub_menu_temas = document.getElementById('sub-menu-temas').style
 const sub_menu_dificuldade = document.getElementById('sub-menu-dificuldade').style
 var menu_visivel = true // Variável para controlar a visibilidade do menu lateral     
 var sub_menu_temas_visivel = true // Variável para controlar a visibilidade do submenu de temas 
-var sub_menu_dificuldade_visivel = true  
+var sub_menu_dificuldade_visivel = true // Variável para controlar a visibilidade do submenu de níveis 
 var tema_alternado = false // Variável para controlar o tema
 
 // Mostra ou oculta o menu lateral

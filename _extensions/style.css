@@ -225,7 +225,7 @@ main {
     font-family: pixelFont;
 }
 
-@keyframes iluminaTexto {
+@keyframes iluminarTexto {
     0%, 100% {
         text-shadow: 18px 0 30px green,
         -18px 0 30px green,
