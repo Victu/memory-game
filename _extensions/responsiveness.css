@@ -3,6 +3,8 @@
 @charset "UTF-8";
 
 @media (max-width: 750px) {
+    #logomark { width: 410px; }
+
     main {
         width: 420px;
         max-width: 420px;
@@ -65,6 +67,8 @@
 }
 
 @media (max-height: 690px) {
+    #logomark { width: 410px; }
+    
     main {
         width: 420px;
         max-width: 420px;

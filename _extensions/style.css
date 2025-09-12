@@ -6,16 +6,46 @@
     font-weight: normal;
 }
 
+:root {
+    --cor-primaria: rgb(223, 223, 233);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: pixelFont;
 }
 
 body {
-    font-family: pixelFont;
     background-image: url('../_media/_images/bg.png');
     overflow: hidden;
+}
+
+#intro {
+    position: relative;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: max-content;
+    margin: 50% auto;
+    padding: 4px;
+    row-gap: 70px;
+}
+
+#logomark { animation: piscarLuz 1.5s infinite alternate steps(1); }
+
+#start {
+    width: max-content;
+    cursor: pointer;
+    background: none;
+    border: 2px groove black;
+}
+
+@keyframes piscarLuz {
+    0%, 100% { filter: brightness(0.3); }
+    50% { filter: brightness(1.2); }
 }
 
 main {
@@ -31,7 +61,7 @@ main {
 
 @keyframes mudaCor {
     0% { color: red; }
-    100% { color: rgb(223, 223, 223); }
+    100% { color: var(--cor-primaria); }
 }
 
 #cabecalho-principal {
@@ -39,6 +69,7 @@ main {
     padding: 20px;
     position: relative;
     top: -54px;
+    visibility: hidden;
 }
 
 #cabecalho-principal img, figcaption { display: inline; }
@@ -49,7 +80,7 @@ main {
     position: relative;
     top: -8px;
     font-size: 2em;
-    color: rgb(223, 223, 223);
+    color: var(--cor-primaria);
     text-shadow: 2px 2px 1px rgb(10, 10, 10);
 }
 
@@ -73,8 +104,10 @@ main {
     border: none;
     background-image: url('../_media/_images/box_yellow.png');
     background-size: cover;
-    transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in;
     pointer-events: all;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .caixa:hover {
@@ -138,7 +171,7 @@ main {
     font-family: pixelFont;
     border-right: 2px solid #222;
     box-sizing: border-box;
-    z-index: 1000;
+    z-index: 100;
 }
 
 #menu-lateral li { cursor: pointer; }
@@ -162,7 +195,7 @@ main {
     position: absolute;
     left: 15.3pc;
     background-color: #222;
-    color: rgb(223, 223, 223);
+    color: var(--cor-primaria);
     font-size: 0.8em;
     border-style: solid;
     border-color: #444;
@@ -187,7 +220,7 @@ main {
 #sobre {
     display: none;
     font-size: large;
-    color: rgb(223, 223, 223);
+    color: var(--cor-primaria);
     line-height: 40px;
     padding: 20px;
     background: url('../_media/_images/bg-bricks.png') no-repeat;
@@ -220,23 +253,25 @@ main {
     background: none;
     font-size: larger;
     font-weight: 300;
-    color: rgb(223, 223, 223);
+    color: var(--cor-primaria);
     cursor: pointer;
     font-family: pixelFont;
 }
 
 @keyframes iluminarTexto {
     0%, 100% {
-        text-shadow: 18px 0 30px green,
-        -18px 0 30px green,
-        0 10px 30px green,
-        0 -10px 30px green;
+        text-shadow: 12px 0 14px #000,
+        -12px 0 14px #000,
+        0 12px 14px #000,
+        0 -6px 14px #000;
+        filter: brightness(0.8);
     }
     50% {
         text-shadow: 18px 0 30px lawngreen,
         -18px 0 30px lawngreen,
         0 10px 30px lawngreen,
         0 -10px 30px lawngreen;
+        filter: brightness(1.2);
     }
 }
 
@@ -245,7 +280,7 @@ main {
     top: 30%;
     font-size: 6em;
     font-family: pixelFont;
-    text-shadow: 2px 2px 1px rgb(10, 10, 10);;
+    text-shadow: 2px 2px 1px #0a0a0a;;
     visibility: hidden;
     opacity: 0;
     animation: none;
@@ -265,7 +300,7 @@ main {
     transition: 1s;
 }
 
-@keyframes sumir {
+@keyframes piscarMsg {
     0% {
         opacity: 1;
         visibility: visible;

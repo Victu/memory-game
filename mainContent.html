@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="_extensions/script.js"></script>
     <link rel="stylesheet" href="_extensions/style.css">
-    <link rel="stylesheet" href="_extensions/mediaQueries.css" media="screen">
+    <link rel="stylesheet" href="_extensions/responsiveness.css" media="screen">
     <link rel="shortcut icon" href="_media/favicon.png" type="image/x-icon">
     <title>Jogo da Memória</title>
 </head>
@@ -46,25 +46,29 @@
             </figure>
         </header>
 
+        <section id="intro">
+            <img id="logomark" src="_media/_images/logomark.png" alt="Logomarca do Jogo da Memória" width="540">
+            <button id="start">Começar</button>
+        </section>
         <section id="caixas">
             <!-- Cada botão representa uma "caixa com interrogação" -->
-            <button class="caixa p-1"></button>
-            <button class="caixa p-2"></button>
-            <button class="caixa p-3"></button>
-            <button class="caixa p-4"></button>
-            <button class="caixa p-5"></button>
-            <button class="caixa p-6"></button>
-            <button class="caixa p-7"></button>
-            <button class="caixa p-8"></button>
-            <button class="caixa p-9"></button>
-            <button class="caixa p-10"></button>
-            <button class="caixa p-11"></button>
-            <button class="caixa p-12"></button>
-            <button class="caixa p-13"></button>
-            <button class="caixa p-14"></button>
-            <button class="caixa p-15"></button>
-            <button class="caixa p-16"></button>
-            <span id="vida-retirada"><!-- Aqui haverá uma mensagem sempre que perder uma vida --> </span>
+            <button class="caixa 1"></button>
+            <button class="caixa 2"></button>
+            <button class="caixa 3"></button>
+            <button class="caixa 4"></button>
+            <button class="caixa 5"></button>
+            <button class="caixa 6"></button>
+            <button class="caixa 7"></button>
+            <button class="caixa 8"></button>
+            <button class="caixa 9"></button>
+            <button class="caixa 10"></button>
+            <button class="caixa 11"></button>
+            <button class="caixa 12"></button>
+            <button class="caixa 13"></button>
+            <button class="caixa 14"></button>
+            <button class="caixa 15"></button>
+            <button class="caixa 16"></button>
+            <span id="vida-retirada"> <!-- Aqui haverá uma mensagem sempre que perder uma vida --> </span>
             <div id="game-over-msg"> <!-- Aqui haverá uma mensagem após o fim do jogo --> </div>
         </section>
     </main>
@@ -72,7 +76,7 @@
     <!-- Informações de software que serão exibidas numa "janela" após clicar na opção SOBRE -->
     <div id="sobre">
         <button id="fechar-sobre" title="Fechar">X</button>
-        <p>Desenvolvido por <span style="filter: contrast(1.8); animation: iluminarTexto 3s infinite; color: yellowgreen;">&copy;Victor Silva</span></p><br>
+        <p>Desenvolvido por <span style="animation: iluminarTexto 3s infinite; color: yellowgreen;">&copy;Victor Silva</span></p><br>
         <p>Data da Criação: 10/06/2025</p><br>
         <p>Versão: 2.5</p><br>
         <p>GitHub: <a href="https://github.com/Victu" target="_blank" style="color: rgb(223, 223, 223);" title="Ir à página">victu</a></p>

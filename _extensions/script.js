@@ -23,6 +23,29 @@ while (add < 2) {
 // Embaralha o array de imagens 
 embaralharVetor(imagens)
 
+// Animação da introdução
+document.addEventListener('DOMContentLoaded', () => {
+    caixas.forEach(caixa => { caixa.style.transform = 'translateX(60vw)'})
+
+    // Ação do botão "Começar"
+    document.getElementById('start').addEventListener('click', async () => {
+        document.getElementById('intro').style.display = 'none'
+        document.getElementById('cabecalho-principal').style.visibility = 'visible'
+        document.getElementById('caixas').style.display = 'grid'
+
+        for (const caixa of caixas) {
+            caixa.style.visibility = 'visible';
+            caixa.style.opacity = '1';
+            caixa.style.transform = ''
+            caixa.style.pointerEvents = 'none'
+
+            await new Promise(resolve => setTimeout(resolve, 250))
+        }
+
+        caixas.forEach(caixa => caixa.style.pointerEvents = 'auto') 
+    })
+})
+
 // Associa o evento de clique a cada caixa
 caixas.forEach((elemento, index) => {
     elemento.addEventListener('click', caixa => {
@@ -45,14 +68,14 @@ caixas.forEach((elemento, index) => {
             if (imagens_reveladas[0] !== imagens_reveladas[1]) {
                 total_vidas--
                 new Audio('./_media/_sounds/error.mp3').play()
-                setTimeout(() => { vida_retirada.style.visibility = 'hidden' }, 300)
+                setTimeout(() => vida_retirada.style.visibility = 'hidden', 300)
 
                 vida_retirada.style.visibility = 'visible'
                 vida_retirada.style.transform = 'translateY(-150px)'
                 vida_retirada.innerText = '-1 vida'
                 
                 // Se forem diferentes, desativa temporariamente os cliques
-                caixas.forEach(objeto => { objeto.style.pointerEvents = 'none' })
+                caixas.forEach(objeto => objeto.style.pointerEvents = 'none')
 
                 caixas_selecionadas[1].style.transform = 'initial'
                 numero_de_vidas.innerHTML = `${total_vidas}`
@@ -60,7 +83,7 @@ caixas.forEach((elemento, index) => {
 
                 // Após um tempo, reseta as caixas para o estado inicial
                 setTimeout(() => {
-                    for (let caixa_selecionada of caixas_selecionadas) {
+                    for (const caixa_selecionada of caixas_selecionadas) {
                         // Define imagem de fundo conforme o tema
                         if (!tema_alternado)
                             caixa_selecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`
@@ -69,7 +92,7 @@ caixas.forEach((elemento, index) => {
 
                         caixa_selecionada.style.cursor = 'pointer'
 
-                        setTimeout(() => { caixa_selecionada.style.pointerEvents = 'auto' }, 450)
+                        setTimeout(() => caixa_selecionada.style.pointerEvents = 'auto', 450)
 
                         caixa_selecionada.style.transform = 'rotate(-360deg)'
                         caixa_selecionada.style.boxShadow = 'none'
@@ -109,20 +132,20 @@ caixas.forEach((elemento, index) => {
                     if (total_vidas == 0) {
                         setTimeout(() => {
                             tocarAudio(total_vidas)
-
+                            document.querySelector('#cabecalho-principal > figure').style.display = 'none'
                             game_over_msg.innerHTML = 'Game<br><br>Over'
                             game_over_msg.style.color = 'rgba(255, 50, 50, 0.9)'
                             game_over_msg.style.visibility = 'visible'
                             game_over_msg.style.opacity = 1
-                            game_over_msg.style.animation = 'sumir 0.6s ease-in-out infinite'
+                            game_over_msg.style.animation = 'piscarMsg 0.6s ease-in-out infinite'
                         }, 1100)
-
+                        
                         setTimeout(() => {
                             reiniciar = confirm('Deseja reiniciar?')
 
                             if (reiniciar) location.reload()
                         }, 3600)
-
+                        
                         caixas.forEach(objeto => {
                             objeto.style.opacity = '0'
                             objeto.style.visibility = 'hidden'
@@ -135,13 +158,13 @@ caixas.forEach((elemento, index) => {
                 new Audio('./_media/_sounds/success.mp3').play()
 
                 // Se as imagens forem iguais (par encontrado), esconde as caixas
-                caixas.forEach(objeto => { objeto.style.pointerEvents = 'none' })
+                caixas.forEach(objeto => objeto.style.pointerEvents = 'none')
                 caixas_selecionadas[0].style.transform = 'initial'
                 caixas_selecionadas[1].style.transform = 'initial'
 
                 // Após um tempo, faz as caixas desaparecerem
                 setTimeout(() => {
-                    for (let caixa_selecionada of caixas_selecionadas) {
+                    for (const caixa_selecionada of caixas_selecionadas) {
                         caixa_selecionada.style.transform = 'translateY(-160px)'
                         caixa_selecionada.style.transition = '0.7s'
                         caixa_selecionada.style.opacity = '0'
@@ -165,15 +188,16 @@ caixas.forEach((elemento, index) => {
 
                         setTimeout(() => {
                             tocarAudio(total_vidas)
+                            document.querySelector('#cabecalho-principal > figure').style.display = 'none'
                             game_over_msg.innerHTML = 'You<br><br>Win!'
                             game_over_msg.style.marginLeft = '4rem'
                             game_over_msg.style.color = 'lime'
                             game_over_msg.style.visibility = 'visible'
                             game_over_msg.style.opacity = 1
-                            game_over_msg.style.animation = 'sumir 0.6s ease-in-out infinite'
+                            game_over_msg.style.animation = 'piscarMsg 0.6s ease-in-out infinite'
                         }, 1100)
 
-                        setTimeout(() => { alert('Você conseguiu finalizar!') }, 3600);
+                        setTimeout(() => alert('Você conseguiu finalizar!'), 3600);
                     }
                 }, 1000)
             }
@@ -265,7 +289,8 @@ document.getElementById('noite').addEventListener('click', () => {
             evento.target.style.boxShadow = '-10px 0px 30px rgba(0, 60, 255, 0.8), 10px 0px 30px rgba(0, 60, 255, 0.8)',
             '0px -10px 30px rgba(0, 60, 255, 0.8), 0px 10px 30px rgba(0, 60, 255, 0.8)'
         })
-        caixa.addEventListener('mouseleave', evento => { evento.target.style.boxShadow = 'none' })
+
+        caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
     })
 })
 
@@ -289,8 +314,8 @@ document.getElementById('dia').addEventListener('click', () => {
         }
 
         // Remove efeitos de hover do tema escuro
-        caixa.addEventListener('mouseenter', evento => { evento.target.style.boxShadow = '' })
-        caixa.addEventListener('mouseleave', evento => { evento.target.style.boxShadow = 'none' })
+        caixa.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '')
+        caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
     })
 })
 
