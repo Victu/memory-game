@@ -6,6 +6,7 @@
     #intro {
         position: absolute;
         top: 22.5%;
+        gap: 52px;
     }
 
     #logomark { width: 410px; }
@@ -13,6 +14,8 @@
     #start {
         font-size: 0.8em;
     }
+
+    #slider-conteiner { font-size: .75em; }
 
     main {
         width: 420px;
@@ -84,6 +87,8 @@
     #logomark { width: 410px; }
 
     #start { font-size: 0.8em; }
+    
+    #slider-conteiner { font-size: .75em; }
     
     main {
         width: 420px;

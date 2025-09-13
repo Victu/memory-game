@@ -49,7 +49,12 @@
         <section id="intro">
             <img id="logomark" src="_media/_images/logomark.png" alt="Logomarca do Jogo da Memória" width="540">
             <button id="start">Começar</button>
+            <div id="slider-conteiner">
+                <h2 style="text-align: center;"> Nível</h2><br>
+                <button id="botao-esquerdo" onclick="nivel('diminuir')">&larr;</button> <span id="nivel-dificuldade">Médio</span> <button id="botao-direito" onclick="nivel('aumentar')">&rarr;</button>
+            </div>
         </section>
+
         <section id="caixas">
             <!-- Cada botão representa uma "caixa com interrogação" -->
             <button class="caixa 1"></button>

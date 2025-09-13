@@ -10,6 +10,8 @@ var total_vidas = 5 // Quantidade total de vidas
 var acertos = 0 // Variável para contar os acertos  
 const game_over_msg = document.getElementById('game-over-msg')
 const vida_retirada = document.getElementById('vida-retirada')
+var nivel_atual = 2
+const nivel_dificuldade = document.getElementById('nivel-dificuldade')
 
 // Adiciona duas vezes os caminhos das imagens ao array, formando pares
 for (let i = 0; i < 2; i++) {
@@ -47,6 +49,34 @@ document.addEventListener('DOMContentLoaded', () => {
         caixas.forEach(caixa => caixa.style.pointerEvents = 'auto') 
     })
 })
+
+function nivel(escolha) {
+    switch (escolha) {
+        case 'aumentar':
+            nivel_atual++
+            break;
+        case 'diminuir':
+            nivel_atual--
+            break;
+    }
+
+    if (nivel_atual < 1) {
+        nivel_atual = 1
+    } else if (nivel_atual > 3) {
+        nivel_atual = 3
+    } else {
+        if (nivel_atual == 1) {
+            numero_de_vidas.innerText = total_vidas = 8
+            nivel_dificuldade.innerText = 'Fácil'
+        } else if (nivel_atual == 2) {
+            numero_de_vidas.innerText = total_vidas = 5
+            nivel_dificuldade.innerText = 'Médio'        
+        } else if (nivel_atual == 3) {
+            numero_de_vidas.innerText = total_vidas = 3
+            nivel_dificuldade.innerText = 'Difícil'
+        }
+    }
+}
 
 // Associa o evento de clique a cada caixa
 caixas.forEach((elemento, index) => {
@@ -396,7 +426,7 @@ function tocarAudio(vidas) {
         new Audio('./_media/_sounds/victory.wav').play()
 }
 
-async function pausar(seg) {
+function pausar(seg) {
     seg *= 1000
 
     return new Promise(resolve => setTimeout(resolve, seg))
