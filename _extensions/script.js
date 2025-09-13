@@ -5,19 +5,16 @@ const caixas = document.querySelectorAll('.caixa') // Seleciona todas as botões
 const imagens = Array() // Array que armazenará os caminhos das imagens dos personagens
 var imagens_reveladas = Array() // Array para armazenar imagens reveladas no clique
 var caixas_selecionadas = Array() // Array para armazenar as caixas que foram clicadas
-var numero_de_vidas = document.getElementById('numero-de-vidas')
-var total_vidas = 5 // Quantidade atual de vidas
+var numero_de_vidas = document.getElementById('numero-de-vidas') // Quantidade de vidas sendo exibidas ao usuário
+var total_vidas = 5 // Quantidade total de vidas
 var acertos = 0 // Variável para contar os acertos  
 const game_over_msg = document.getElementById('game-over-msg')
 const vida_retirada = document.getElementById('vida-retirada')
-var add = 0 
 
 // Adiciona duas vezes os caminhos das imagens ao array, formando pares
-while (add < 2) {
+for (let i = 0; i < 2; i++) {
     for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++)
         imagens.push(`_media/_images/person-${numero_da_imagem}.png`)
-
-    add++
 }
 
 // Embaralha o array de imagens 
@@ -26,20 +23,25 @@ embaralharVetor(imagens)
 // Animação da introdução
 document.addEventListener('DOMContentLoaded', () => {
     caixas.forEach(caixa => { caixa.style.transform = 'translateX(60vw)'})
-
+    const intro = document.getElementById('intro').style
+    
     // Ação do botão "Começar"
-    document.getElementById('start').addEventListener('click', async () => {
-        document.getElementById('intro').style.display = 'none'
-        document.getElementById('cabecalho-principal').style.visibility = 'visible'
+    document.getElementById('start').addEventListener('click', async botao => {
+        intro.transform = 'scale(4) rotate(-50deg)'
+        intro.transition = '1s ease-in-out'
+        intro.opacity = '0'
+        intro.visibility = 'hidden'
+        botao.target.style.display = 'none'
         document.getElementById('caixas').style.display = 'grid'
+        await pausar(2)
 
         for (const caixa of caixas) {
+            document.getElementById('cabecalho-principal').style.visibility = 'visible'
             caixa.style.visibility = 'visible';
             caixa.style.opacity = '1';
             caixa.style.transform = ''
             caixa.style.pointerEvents = 'none'
-
-            await new Promise(resolve => setTimeout(resolve, 250))
+            await pausar(0.20)
         }
 
         caixas.forEach(caixa => caixa.style.pointerEvents = 'auto') 
@@ -69,14 +71,12 @@ caixas.forEach((elemento, index) => {
                 total_vidas--
                 new Audio('./_media/_sounds/error.mp3').play()
                 setTimeout(() => vida_retirada.style.visibility = 'hidden', 300)
-
                 vida_retirada.style.visibility = 'visible'
                 vida_retirada.style.transform = 'translateY(-150px)'
                 vida_retirada.innerText = '-1 vida'
                 
                 // Se forem diferentes, desativa temporariamente os cliques
                 caixas.forEach(objeto => objeto.style.pointerEvents = 'none')
-
                 caixas_selecionadas[1].style.transform = 'initial'
                 numero_de_vidas.innerHTML = `${total_vidas}`
                 numero_de_vidas.style.animation = 'mudaCor 0.3s linear 3'
@@ -91,9 +91,7 @@ caixas.forEach((elemento, index) => {
                             caixa_selecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`
 
                         caixa_selecionada.style.cursor = 'pointer'
-
                         setTimeout(() => caixa_selecionada.style.pointerEvents = 'auto', 450)
-
                         caixa_selecionada.style.transform = 'rotate(-360deg)'
                         caixa_selecionada.style.boxShadow = 'none'
                         
@@ -219,6 +217,7 @@ var tema_alternado = false // Variável para controlar o tema
 
 // Mostra ou oculta o menu lateral
 botao_menu_lateral.addEventListener('click', evento => {
+    
     if (!menu_visivel) {
         // Ao fechar o menu
         if (medidaDaTela(1230)) {
@@ -268,7 +267,6 @@ document.getElementById('botao-temas').addEventListener('mouseenter', evento => 
 // Ativa o tema escuro
 document.getElementById('noite').addEventListener('click', () => {
     tema_alternado = true
-    
     body.backgroundImage = "url('_media/_images/bg_night.png')"
     menu_lateral.backgroundImage = "url('_media/_images/bg-3_night.png')"
     cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game_night.png')"
@@ -297,11 +295,10 @@ document.getElementById('noite').addEventListener('click', () => {
 // Ativa o tema claro
 document.getElementById('dia').addEventListener('click', () => {
     tema_alternado = false
-    
     body.backgroundImage = "url('_media/_images/bg.png')"
     menu_lateral.backgroundImage = "url('_media/_images/bg-3.png')"
     cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game.png')"
-    
+
     caixas.forEach(caixa => {
         const imagem_revelada = getComputedStyle(caixa).backgroundImage
 
@@ -397,4 +394,10 @@ function tocarAudio(vidas) {
         new Audio('./_media/_sounds/game-over.wav').play()
     else
         new Audio('./_media/_sounds/victory.wav').play()
+}
+
+async function pausar(seg) {
+    seg *= 1000
+
+    return new Promise(resolve => setTimeout(resolve, seg))
 }

@@ -23,25 +23,29 @@ body {
 }
 
 #intro {
-    position: relative;
-    top: 10%;
+    position: absolute;
+    top: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: max-content;
-    margin: 50% auto;
-    padding: 4px;
+    margin-left: 5px;
     row-gap: 70px;
 }
 
-#logomark { animation: piscarLuz 1.5s infinite alternate steps(1); }
+#logomark { animation: piscarLuz 2.5s infinite steps(1); }
 
 #start {
     width: max-content;
     cursor: pointer;
     background: none;
-    border: 2px groove black;
+    padding: 5px;
+    border: 3px groove black;
+    font-size: 1.2em;
+    background: linear-gradient(45deg, gray, lightgray);
 }
+
+#start:hover { background: linear-gradient(45deg, lightgray, gray); }
 
 @keyframes piscarLuz {
     0%, 100% { filter: brightness(0.3); }
