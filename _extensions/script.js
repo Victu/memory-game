@@ -1,6 +1,6 @@
 // --------------------------- Configurações do conteúdo principal ---------------------------------
 
-const body = document.getElementsByTagName('body')[0].style // Seleciona o elemento <body> do documento
+const body = document.body.style // Seleciona o elemento <body> do documento
 const caixas = document.querySelectorAll('.caixa') // Seleciona todas as botões com a classe 'caixa'
 const imagens = Array() // Array que armazenará os caminhos das imagens dos personagens
 var imagens_reveladas = Array() // Array para armazenar imagens reveladas no clique
@@ -10,7 +10,7 @@ var total_vidas = 5 // Quantidade total de vidas
 var acertos = 0 // Variável para contar os acertos  
 const game_over_msg = document.getElementById('game-over-msg')
 const vida_retirada = document.getElementById('vida-retirada')
-var nivel_atual = 2
+var nivel_atual = 2 // Nível médio, por padrão
 const nivel_dificuldade = document.getElementById('nivel-dificuldade')
 
 // Adiciona duas vezes os caminhos das imagens ao array, formando pares
@@ -26,16 +26,21 @@ embaralharVetor(imagens)
 document.addEventListener('DOMContentLoaded', () => {
     caixas.forEach(caixa => { caixa.style.transform = 'translateX(60vw)'})
     const intro = document.getElementById('intro').style
+    const config = document.getElementById('slider-container').style
     
     // Ação do botão "Começar"
-    document.getElementById('start').addEventListener('click', async botao => {
+    document.getElementById('start').addEventListener('click', async botao_start => {
+        botao_start.target.style.display = 'none'
+        config.display = 'none'
         intro.transform = 'scale(4) rotate(-50deg)'
         intro.transition = '1s ease-in-out'
         intro.opacity = '0'
         intro.visibility = 'hidden'
-        botao.target.style.display = 'none'
         document.getElementById('caixas').style.display = 'grid'
         await pausar(2)
+        main.backgroundColor = 'rgba(0, 0, 0, 0.45)'
+        main.transition = '1.5s'
+        await pausar(2.5)
 
         for (const caixa of caixas) {
             document.getElementById('cabecalho-principal').style.visibility = 'visible'
@@ -53,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function nivel(escolha) {
     switch (escolha) {
         case 'aumentar':
-            nivel_atual++
+            nivel_atual++ // Sobe o nível de dificuldade
             break;
         case 'diminuir':
-            nivel_atual--
+            nivel_atual-- // Reduz o nível de dificuldade
             break;
     }
 
@@ -247,14 +252,13 @@ var tema_alternado = false // Variável para controlar o tema
 
 // Mostra ou oculta o menu lateral
 botao_menu_lateral.addEventListener('click', evento => {
-    
     if (!menu_visivel) {
         // Ao fechar o menu
         if (medidaDaTela(1230)) {
             main.transform = 'initial'
             main.transition = '0.5s'
         }
-
+    
         menu_lateral.transform = 'translateX(-100%)'
         menu_lateral.transition = '0.5s'
         evento.target.style.transform = ''
@@ -269,7 +273,7 @@ botao_menu_lateral.addEventListener('click', evento => {
             main.transform = 'translateX(215px)'
             main.transition = '0.5s'
         }
-
+        
         menu_lateral.transform = 'initial'
         menu_lateral.transition = '0.5s'
         evento.target.style.transform = 'translateX(60px)'
@@ -346,7 +350,7 @@ document.getElementById('dia').addEventListener('click', () => {
     })
 })
 
-// Botão para o submenu dificuldade
+// Opção para o submenu dificuldade
 document.getElementById('botao-dificuldade').addEventListener('mouseenter', evento => {
     sub_menu_temas.transition = '0.4s'
     sub_menu_temas.transform = 'scaleY(0)'
@@ -384,6 +388,7 @@ document.querySelectorAll('#sub-menu-dificuldade > li').forEach(texto => {
     })
 })
 
+// Ação da opção "Sobre"
 document.getElementById('botao-sobre').addEventListener('click', () => {
     const sobre = document.getElementById('sobre').style
 

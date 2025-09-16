@@ -7,7 +7,7 @@
 }
 
 :root {
-    --cor-primaria: rgb(223, 223, 233);
+    --font-color: rgb(223, 223, 233);
 }
 
 * {
@@ -52,26 +52,36 @@ body {
     50% { filter: brightness(1.2); }
 }
 
-#slider-conteiner { 
-    font-size: .95em; 
-    color: var(--cor-primaria);
-    text-shadow: 0px 5px 10px #000;
+#slider-container { 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    font-size: 1.2em; 
+    color: black;
+    padding: 4px;
+    box-sizing: border-box;
+    min-width: 240px;
 }
 
-#slider-conteiner > button {
+#slider-container button {
     cursor: pointer;
     background: linear-gradient(45deg, gray, lightgray);
     padding: 3px;
     border: 2px groove black;
 }
 
-#slider-conteiner > button:hover { background: linear-gradient(45deg, lightgray, gray); }
+#slider-container > button:hover { background: linear-gradient(45deg, lightgray, gray); }
+
+#slider-container span {
+    margin: 0 18px 0 18px;
+}
 
 main {
     max-width: 550px;
     width: 550px;
     height: 690px;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: /*rgba(0, 0, 0, 0.35)*/ transparent;
     margin: 85px auto;
     box-sizing: border-box;
     display: grid;
@@ -80,7 +90,7 @@ main {
 
 @keyframes mudaCor {
     0% { color: red; }
-    100% { color: var(--cor-primaria); }
+    100% { color: var(--font-color); }
 }
 
 #cabecalho-principal {
@@ -99,7 +109,7 @@ main {
     position: relative;
     top: -8px;
     font-size: 2em;
-    color: var(--cor-primaria);
+    color: var(--font-color);
     text-shadow: 2px 2px 1px rgb(10, 10, 10);
 }
 
@@ -214,7 +224,7 @@ main {
     position: absolute;
     left: 15.3pc;
     background-color: #222;
-    color: var(--cor-primaria);
+    color: var(--font-color);
     font-size: 0.8em;
     border-style: solid;
     border-color: #444;
@@ -239,7 +249,7 @@ main {
 #sobre {
     display: none;
     font-size: large;
-    color: var(--cor-primaria);
+    color: var(--font-color);
     line-height: 40px;
     padding: 20px;
     background: url('../_media/_images/bg-bricks.png') no-repeat;
@@ -272,7 +282,7 @@ main {
     background: none;
     font-size: larger;
     font-weight: 300;
-    color: var(--cor-primaria);
+    color: var(--font-color);
     cursor: pointer;
     font-family: pixelFont;
 }
