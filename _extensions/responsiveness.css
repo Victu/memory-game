@@ -88,6 +88,15 @@
     #intro {
         position: absolute;
         top: 14.5%;
+        gap: 52px;
+    }
+
+    #luz-logomark-container {
+        top: 16.7%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 360px;
+        height: 180px;
     }
 
     #logomark { width: 410px; }

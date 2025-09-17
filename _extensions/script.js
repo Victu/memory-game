@@ -37,11 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
         intro.transition = '1s ease-in-out'
         intro.opacity = '0'
         intro.visibility = 'hidden'
+        document.getElementById('logomark').style.animation = 'none'
+        document.getElementById('luz-logomark-container').style.display = 'none'
         document.getElementById('caixas').style.display = 'grid'
         await pausar(2)
         main.backgroundColor = 'rgba(0, 0, 0, 0.4)'
-        main.backdropFilter = 'blur(5px)'
+        main.backdropFilter = 'blur(6px)'
         main.transition = '1.5s'
+        botao_menu_lateral.style.transform = 'translate(60px, 50px)'
+        botao_menu_lateral.style.transition = '1s'
+        seta_botao.animation = 'apontar 0.6s linear 5'
         await pausar(2.5)
 
         for (const caixa of caixas) {
@@ -65,13 +70,13 @@ function escolher(escolha) {
         case 'diminuir':
             nivel_atual-- // Reduz o nível de dificuldade
             break
-        case 'claro':
-            tema.innerText = 'Claro'
+        case 'dia':
+            tema.innerText = 'Dia'
             tema_escuro = false
             alternarTema()
             break
-        case 'escuro':
-            tema.innerText = 'Escuro'
+        case 'noite':
+            tema.innerText = 'Noite'
             tema_escuro = true
             alternarTema()
             break
@@ -93,7 +98,6 @@ function escolher(escolha) {
             nivel_dificuldade.innerText = 'Difícil'
         }
     }
-
 }
 
 // Associa o evento de clique a cada caixa
@@ -274,7 +278,7 @@ botao_menu_lateral.addEventListener('click', evento => {
     
         menu_lateral.transform = 'translateX(-100%)'
         menu_lateral.transition = '0.5s'
-        evento.target.style.transform = ''
+        evento.target.style.transform = 'translate(60px, 50px)'
         evento.target.style.transition = '0.5s'
         evento.target.title = 'Abrir menu'
         seta_botao.transform = 'initial'
@@ -289,7 +293,7 @@ botao_menu_lateral.addEventListener('click', evento => {
         
         menu_lateral.transform = 'initial'
         menu_lateral.transition = '0.5s'
-        evento.target.style.transform = 'translateX(60px)'
+        evento.target.style.transform = 'translate(60px, 50px)'
         evento.target.style.transition = '0.5s'
         evento.target.title = 'Fechar menu'
         seta_botao.transform = 'rotate(180deg)'
@@ -311,84 +315,13 @@ document.getElementById('botao-temas').addEventListener('mouseenter', evento => 
     })
 })
 
-// Alterna para o tema escuro
+// Alterna para o tema "Noite"
 document.getElementById('noite').addEventListener('click', () => {
     tema_escuro = true
     alternarTema()
-/*    body.backgroundImage = "url('_media/_images/bg_night.png')"
-    menu_lateral.backgroundImage = "url('_media/_images/bg-3_night.png')"
-    cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game_night.png')"
-
-    caixas.forEach(caixa => {
-        const imagem_revelada = getComputedStyle(caixa).backgroundImage
-
-        if (!imagem_revelada.includes(`box_blue.png`)) 
-            caixa.style.backgroundImage = "url('_media/_images/box_blue.png')"
-
-        for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
-            if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
-                caixa.style.backgroundImage = imagem_revelada
-        }
-
-        // Adiciona efeitos de hover específicos do tema escuro
-        caixa.addEventListener('mouseenter', evento => {
-            evento.target.style.boxShadow = '-10px 0px 30px rgba(0, 60, 255, 0.8), 10px 0px 30px rgba(0, 60, 255, 0.8)',
-            '0px -10px 30px rgba(0, 60, 255, 0.8), 0px 10px 30px rgba(0, 60, 255, 0.8)'
-        })
-
-        caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
-    }) */
 })
 
-function alternarTema() {
-    if (tema_escuro) {
-        body.backgroundImage = "url('_media/_images/bg_night.png')"
-        menu_lateral.backgroundImage = "url('_media/_images/bg-3_night.png')"
-        cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game_night.png')"
-
-        caixas.forEach(caixa => {
-            const imagem_revelada = getComputedStyle(caixa).backgroundImage
-
-            if (!imagem_revelada.includes(`box_blue.png`)) 
-                caixa.style.backgroundImage = "url('_media/_images/box_blue.png')"
-
-            for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
-                if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
-                    caixa.style.backgroundImage = imagem_revelada
-            }
-
-            // Adiciona efeitos de hover específicos do tema escuro
-            caixa.addEventListener('mouseenter', evento => {
-                evento.target.style.boxShadow = '-10px 0px 30px rgba(0, 60, 255, 0.8), 10px 0px 30px rgba(0, 60, 255, 0.8)',
-                '0px -10px 30px rgba(0, 60, 255, 0.8), 0px 10px 30px rgba(0, 60, 255, 0.8)'
-            })
-
-            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
-        })
-    } else {
-        body.backgroundImage = "url('_media/_images/bg.png')"
-        menu_lateral.backgroundImage = "url('_media/_images/bg-3.png')"
-        cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game.png')"
-
-        caixas.forEach(caixa => {
-            const imagem_revelada = getComputedStyle(caixa).backgroundImage
-
-            if (!imagem_revelada.includes('box_yellow.png'))
-                caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')"
-
-            for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
-                if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
-                    caixa.style.backgroundImage = imagem_revelada
-            }
-
-            // Remove efeitos de hover do tema escuro
-            caixa.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '')
-            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
-        })
-    }
-}
-
-// Alterna para o tema claro
+// Alterna para o tema "Dia"
 document.getElementById('dia').addEventListener('click', () => {
     tema_escuro = false
     alternarTema()
@@ -459,6 +392,56 @@ function embaralharVetor(vetor) {
     for (let y = vetor.length - 1; y > 0; y--) {
         const x = Math.floor(Math.random() * (y + 1));
         [vetor[y], vetor[x]] = [vetor[x], vetor[y]] 
+    }
+}
+
+function alternarTema() {
+    if (tema_escuro) {
+        body.backgroundImage = "url('_media/_images/bg_night.png')"
+        menu_lateral.backgroundImage = "url('_media/_images/bg-3_night.png')"
+        cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game_night.png')"
+
+        caixas.forEach(caixa => {
+            const imagem_revelada = getComputedStyle(caixa).backgroundImage
+
+            if (!imagem_revelada.includes(`box_blue.png`)) 
+                caixa.style.backgroundImage = "url('_media/_images/box_blue.png')"
+
+            for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
+                if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
+                    caixa.style.backgroundImage = imagem_revelada
+            }
+
+            // Adiciona efeitos de hover específicos do tema escuro
+            caixa.addEventListener('mouseenter', evento => {
+                evento.target.style.boxShadow = '-10px 0px 30px var(--caixa-efeito-noite)',
+                '10px 0px 30px var(--caixa-efeito-noite)',
+                '0px -10px 30px var(--caixa-efeito-noite)',
+                '0px 10px 30px var(--caixa-efeito-noite)'
+            })
+
+            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
+        })
+    } else {
+        body.backgroundImage = "url('_media/_images/bg.png')"
+        menu_lateral.backgroundImage = "url('_media/_images/bg-3.png')"
+        cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game.png')"
+
+        caixas.forEach(caixa => {
+            const imagem_revelada = getComputedStyle(caixa).backgroundImage
+
+            if (!imagem_revelada.includes('box_yellow.png'))
+                caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')"
+
+            for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
+                if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
+                    caixa.style.backgroundImage = imagem_revelada
+            }
+
+            // Remove efeitos de hover do tema escuro
+            caixa.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '')
+            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
+        })
     }
 }
 
