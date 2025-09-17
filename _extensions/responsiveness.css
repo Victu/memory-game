@@ -4,12 +4,12 @@
 
 @media (max-width: 750px) {
     #intro {
-        top: 14.5%;
+        top: 19.5%;
         gap: 52px;
     }
 
     #luz-logomark-container {
-        top: 16.7%;
+        top: 21.5%;
         left: 50%;
         transform: translateX(-50%);
         width: 360px;
@@ -31,7 +31,7 @@
     
     #texto-copyright {
         font-size: .6em;
-        bottom: -170px;
+        top: -767px;
     }
 
     main {
@@ -92,12 +92,12 @@
 
 @media (max-height: 690px) {
     #intro {
-        top: 14.5%;
+        top: 19.5%;
         gap: 52px;
     }
 
     #luz-logomark-container {
-        top: 16.7%;
+        top: 21.5%;
         left: 50%;
         transform: translateX(-50%);
         width: 360px;
@@ -106,8 +106,8 @@
 
     #logomark { width: 410px; }
 
-    #start { font-size: 0.8em; }
-    
+    #start { font-size: .8em; }
+
     #slider-container button { font-size: .6em; }
 
     #slider-container p { font-size: 1.15em; }
@@ -119,9 +119,9 @@
     
     #texto-copyright {
         font-size: .6em;
-        bottom: -170px;
+        top: -767px;
     }
-    
+
     main {
         width: 420px;
         max-width: 420px;
@@ -155,7 +155,7 @@
         width: 80px;
         height: 80px; 
     }
-    
+
     #sobre {
         top: 10%;
         line-height: 30px;
@@ -171,12 +171,9 @@
     }
 
     #vida-retirada {
-        top: 48%;
+        top: 34.5%;
         font-size: 1.6em;
     }
 
-    #game-over-msg { 
-        top: 16rem;
-        font-size: 4.9em;
-    }
+    #game-over-msg { font-size: 4.9em; }
 }

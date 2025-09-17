@@ -25,12 +25,12 @@ body {
 
 #intro {
     position: absolute;
-    top: 12%;
+    top: 16%;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: max-content;
-    row-gap: 70px;
+    gap: 70px;
     padding: 0;
     margin: 0;
 }
@@ -48,7 +48,7 @@ body {
 
 #luz-logomark-container {
     position: absolute;
-    top: 14.55%;
+    top: 18.55%;
     left: 50%;
     transform: translateX(-43%);
     width: 570px;
@@ -114,7 +114,7 @@ body {
 
 #texto-copyright {
     position: relative;
-    bottom: 6px;
+    top: -928px;
     display: block;
     font-size: .8em;
     font-style: oblique;
