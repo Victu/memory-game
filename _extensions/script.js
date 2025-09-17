@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     caixas.forEach(caixa => { caixa.style.transform = 'translateX(60vw)'})
     const intro = document.getElementById('intro').style
     const slider_container = document.getElementById('slider-container').style
+    const musica = new Audio('_media/_sounds/soundtrack.ogg')
     
     // Ação do botão "Começar"
     document.getElementById('start').addEventListener('click', async botao_start => {
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         intro.transition = '1s ease-in-out'
         intro.opacity = '0'
         intro.visibility = 'hidden'
+        
         document.getElementById('logomark').style.animation = 'none'
         document.getElementById('luz-logomark-container').style.display = 'none'
         document.getElementById('caixas').style.display = 'grid'
@@ -191,7 +193,7 @@ caixas.forEach((elemento, index) => {
                         }, 1100)
                         
                         setTimeout(() => {
-                            reiniciar = confirm('Deseja reiniciar?')
+                            reiniciar = confirm('Deseja voltar para a tela inicial?')
 
                             if (reiniciar) location.reload()
                         }, 3600)
@@ -263,7 +265,7 @@ const seta_botao = document.getElementById('seta-botao').style // Seleciona o es
 const menu_lateral = document.getElementById('menu-lateral').style // Seleciona o menu lateral
 const cabecalho_menu_lateral = document.getElementById('cabecalho-menu-lateral').style
 const sub_menu_temas = document.getElementById('sub-menu-temas').style
-const sub_menu_dificuldade = document.getElementById('sub-menu-dificuldade').style
+const sub_menu_musica = document.getElementById('sub-menu-musica').style
 var menu_visivel = true // Variável para controlar a visibilidade do menu lateral     
 var tema_escuro = false // Variável para controlar o tema escuro/claro
 
@@ -304,13 +306,13 @@ botao_menu_lateral.addEventListener('click', evento => {
 
 // Botão para o submenu de temas
 document.getElementById('botao-temas').addEventListener('mouseenter', evento => {
-    sub_menu_dificuldade.transition = '0.4s'
-    sub_menu_dificuldade.transform = 'scaleY(0)'
+    sub_menu_musica.transition = '0.2s'
+    sub_menu_musica.transform = 'scaleY(0)'
     sub_menu_temas.transition = '0.2s'
     sub_menu_temas.transform = 'scaleY(1)'
 
     evento.target.addEventListener('mouseleave', () => {
-        sub_menu_temas.transition = '0.4s'
+        sub_menu_temas.transition = '0.2s'
         sub_menu_temas.transform = 'scaleY(0)'
     })
 })
@@ -328,15 +330,15 @@ document.getElementById('dia').addEventListener('click', () => {
 })
 
 // Opção para o submenu dificuldade
-document.getElementById('botao-dificuldade').addEventListener('mouseenter', evento => {
-    sub_menu_temas.transition = '0.4s'
+document.getElementById('botao-musica').addEventListener('mouseenter', evento => {
+    sub_menu_temas.transition = '0.2s'
     sub_menu_temas.transform = 'scaleY(0)'
-    sub_menu_dificuldade.transition = '0.2s'
-    sub_menu_dificuldade.transform = 'scaleY(1)'
+    sub_menu_musica.transition = '0.2s'
+    sub_menu_musica.transform = 'scaleY(1)'
 
     evento.target.addEventListener('mouseleave', () => {
-        sub_menu_dificuldade.transition = '0.4s'
-        sub_menu_dificuldade.transform = 'scaleY(0)'
+        sub_menu_musica.transition = '0.2s'
+        sub_menu_musica.transform = 'scaleY(0)'
     })
 })
 
@@ -358,8 +360,8 @@ document.querySelectorAll('#sub-menu-dificuldade > li').forEach(texto => {
         seta_botao.transition = '0.4s'
         menu_lateral.transform = 'translateX(-100%)'
         menu_lateral.transition = '0.5s'
-        sub_menu_dificuldade.transition = '0.4s'
-        sub_menu_dificuldade.transform = 'scaleY(0)'
+        sub_menu_musica.transition = '0.4s'
+        sub_menu_musica.transform = 'scaleY(0)'
 
         alert(`Nível ${texto.innerHTML.toUpperCase()}: ${total_vidas} vidas`)
     })
@@ -379,11 +381,11 @@ document.getElementById('fechar-sobre').addEventListener('click', () => {
     document.getElementById('sobre').style.display = 'none'
 })
 
-function sair() {
-    let confirmado = confirm('Tem certeza que deseja sair?')
+document.getElementById('botao-fechar').addEventListener('click', () =>  {
+    let confirmado = confirm('Tem certeza que deseja fechar?')
 
     if (confirmado) close()
-}
+})
 
 // --------------------------------------------------------------------------------------------------
 
