@@ -33,8 +33,30 @@ body {
     row-gap: 70px;
 }
 
-#logomark { animation: piscarLuz 2.5s infinite steps(1); }
+#logomark { animation: piscarLuz 2s infinite steps(1) alternate; }
 
+#luz-logomark-container {
+    position: absolute;
+    top: 14.2%;
+    left: 50%;
+    transform: translateX(-43%);
+    width: 570px;
+    height: 290px;
+    border-radius: 17% 17% 20% 20%;
+    animation: acenderLogomark 2s infinite steps(1) alternate-reverse;
+}
+
+@keyframes acenderLogomark {
+    0%, 100% {
+        box-shadow: -18px -18px 30px rgba(255, 0, 0, 0.7),
+        18px -18px 30px rgba(0, 248, 0, 0.767),
+        -18px 18px 30px rgb(38, 173, 218, 0.7),
+        18px 18px 30px rgba(255, 0, 0, 0.7);
+    }
+    50% {
+        box-shadow: none;
+    }
+}
 #start {
     width: max-content;
     cursor: pointer;
