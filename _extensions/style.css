@@ -48,15 +48,16 @@ body {
 
 @keyframes acenderLogomark {
     0%, 100% {
-        box-shadow: -18px -18px 30px rgba(255, 0, 0, 0.7),
-        18px -18px 30px rgba(0, 248, 0, 0.767),
-        -18px 18px 30px rgb(38, 173, 218, 0.7),
-        18px 18px 30px rgba(255, 0, 0, 0.7);
+        box-shadow: -18px -18px 40px rgba(255, 0, 0, 0.7),
+        18px -18px 40px rgba(0, 248, 0, 0.767),
+        -18px 18px 40px rgb(38, 173, 218, 0.7),
+        18px 18px 40px rgba(255, 0, 0, 0.7);
     }
     50% {
         box-shadow: none;
     }
 }
+
 #start {
     width: max-content;
     cursor: pointer;
