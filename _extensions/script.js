@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         document.getElementById('logomark').style.animation = 'none'
         document.getElementById('luz-logomark-container').style.display = 'none'
+        document.getElementById('texto-copyright').style.display = 'none'
         document.getElementById('caixas').style.display = 'grid'
         await pausar(2)
         main.backgroundColor = 'rgba(0, 0, 0, 0.4)'
@@ -54,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (const caixa of caixas) {
             document.getElementById('cabecalho-principal').style.visibility = 'visible'
-            caixa.style.visibility = 'visible';
-            caixa.style.opacity = '1';
+            caixa.style.visibility = 'visible'
+            caixa.style.opacity = '1'
             caixa.style.transform = ''
             caixa.style.pointerEvents = 'none'
             await pausar(0.20)
@@ -183,6 +184,8 @@ caixas.forEach((elemento, index) => {
                     numero_de_vidas.style.animation = 'initial'
 
                     if (total_vidas == 0) {
+                        musica.muted = true
+
                         setTimeout(() => {
                             tocarAudio(total_vidas)
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none'
@@ -240,6 +243,8 @@ caixas.forEach((elemento, index) => {
                         acertos = 0
 
                         setTimeout(() => {
+                            musica.muted = true
+
                             tocarAudio(total_vidas)
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none'
                             game_over_msg.innerHTML = 'You<br><br>Win!'
@@ -319,18 +324,19 @@ document.getElementById('botao-temas').addEventListener('mouseenter', evento => 
 })
 
 // Alterna para o tema "Noite"
-document.getElementById('noite').addEventListener('click', () => {
-    tema_escuro = true
-    alternarTema()
+document.querySelectorAll('#sub-menu-temas > li').forEach(texto => {
+    texto.addEventListener('click', () => {
+        if (texto.textContent == '🌙 Noite') {
+            tema_escuro = true
+            alternarTema()
+        } else if (texto.textContent == '☀️ Dia') {
+            tema_escuro = false
+            alternarTema()
+        }
+    })
 })
 
-// Alterna para o tema "Dia"
-document.getElementById('dia').addEventListener('click', () => {
-    tema_escuro = false
-    alternarTema()
-})
-
-// Opção para o submenu dificuldade
+// Opção para o submenu "Música"
 document.getElementById('botao-musica').addEventListener('mouseenter', evento => {
     sub_menu_temas.transition = '0.2s'
     sub_menu_temas.transform = 'scaleY(0)'
@@ -345,10 +351,12 @@ document.getElementById('botao-musica').addEventListener('mouseenter', evento =>
 
 document.querySelectorAll('#sub-menu-musica > li').forEach(texto => {
     texto.addEventListener('click', () => {
-        if (texto.innerText == '🔊Ativado') {
+        if (texto.textContent == '🔊 Ativada') {
+            musica.muted = false
             musica.play()
-        } else if (texto.innerText == '🔇Desativado') {
-            musica.muted()
+        } else if (texto.textContent == '🔇 Desativada') {
+            musica.muted = true
+            musica.currentTime = 0
         }
     })
 })
@@ -367,8 +375,8 @@ document.getElementById('fechar-sobre').addEventListener('click', () => {
     document.getElementById('sobre').style.display = 'none'
 })
 
-document.getElementById('botao-fechar').addEventListener('click', () =>  {
-    let confirmado = confirm('Tem certeza que deseja fechar?')
+document.getElementById('botao-sair').addEventListener('click', () =>  {
+    let confirmado = confirm('Tem certeza que deseja sair?')
 
     if (confirmado) close()
 })

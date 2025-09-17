@@ -4,7 +4,6 @@
 
 @media (max-width: 750px) {
     #intro {
-        position: absolute;
         top: 14.5%;
         gap: 52px;
     }
@@ -19,17 +18,22 @@
 
     #logomark { width: 410px; }
 
-    #start { font-size: 0.8em; }
+    #start { font-size: .8em; }
 
-    #slider-conteiner { font-size: .75em; }
+    #slider-container button { font-size: .6em; }
 
-    #slider-container p { font-size: 1.55em; }
+    #slider-container p { font-size: 1.15em; }
 
     #slider-container span {
         margin: 0 18px 0 18px;
-        font-size: 1.2em;
+        font-size: .85em;
     }
     
+    #texto-copyright {
+        font-size: .6em;
+        bottom: -170px;
+    }
+
     main {
         width: 420px;
         max-width: 420px;
@@ -38,7 +42,6 @@
     }
 
     #cabecalho-principal {
-        position: relative;
         top: -41px;
         max-height: 55px;
     }
@@ -46,7 +49,6 @@
     #cabecalho-principal img { width: 41px; }
     
     #cabecalho-principal figcaption {
-        position: relative;
         top: -5px;
         font-size: 1.5em;
     }
@@ -67,7 +69,6 @@
     }
 
     #sobre {
-        position: absolute;
         top: 10%;
         line-height: 30px;
         font-size: small;
@@ -75,7 +76,6 @@
     }
 
     #fechar-sobre {
-        position: relative;
         top: -20px;
         left: 52.6%;
         border: none;
@@ -83,7 +83,6 @@
     }
 
     #vida-retirada {
-        position: absolute;
         top: 34.5%;
         font-size: 1.6em;
     }
@@ -93,7 +92,6 @@
 
 @media (max-height: 690px) {
     #intro {
-        position: absolute;
         top: 14.5%;
         gap: 52px;
     }
@@ -110,7 +108,19 @@
 
     #start { font-size: 0.8em; }
     
-    #slider-conteiner { font-size: .75em; }
+    #slider-container button { font-size: .6em; }
+
+    #slider-container p { font-size: 1.15em; }
+
+    #slider-container span {
+        margin: 0 18px 0 18px;
+        font-size: .85em;
+    }
+    
+    #texto-copyright {
+        font-size: .6em;
+        bottom: -170px;
+    }
     
     main {
         width: 420px;
@@ -120,7 +130,6 @@
     }
 
     #cabecalho-principal {
-        position: relative;
         top: -41px;
         max-height: 55px;
     }
@@ -128,7 +137,6 @@
     #cabecalho-principal img { width: 41px; }
     
     #cabecalho-principal figcaption {
-        position: relative;
         top: -5px;
         font-size: 1.5em;
     }
@@ -149,7 +157,6 @@
     }
     
     #sobre {
-        position: absolute;
         top: 10%;
         line-height: 30px;
         font-size: small;
@@ -157,7 +164,6 @@
     }
 
     #fechar-sobre {
-        position: relative;
         top: -20px;
         left: 52.6%;
         border: none;
@@ -165,13 +171,11 @@
     }
 
     #vida-retirada {
-        position: absolute;
         top: 48%;
         font-size: 1.6em;
     }
 
     #game-over-msg { 
-        position: absolute;
         top: 16rem;
         font-size: 4.9em;
     }

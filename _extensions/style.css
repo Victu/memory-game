@@ -30,8 +30,9 @@ body {
     flex-direction: column;
     align-items: center;
     width: max-content;
-    margin-left: 5px;
     row-gap: 70px;
+    padding: 0;
+    margin: 0;
 }
 
 #logomark {
@@ -97,7 +98,8 @@ body {
 #slider-container button {
     cursor: pointer;
     background: linear-gradient(45deg, gray, lightgray);
-    padding: 3px;
+    font-size: .9em;
+    padding: 4px;
     border: 2px groove black;
 }
 
@@ -108,6 +110,19 @@ body {
 #slider-container span {
     margin: 0 18px 0 18px;
     font-size: 1.2em;
+}
+
+#texto-copyright {
+    position: relative;
+    bottom: 6px;
+    display: block;
+    font-size: .8em;
+    font-style: oblique;
+    color: var(--fonte-cor-padrao);
+    text-shadow: 2px 0 1px #000,
+    -2px 0 1px #000,
+    0 2px 1px #000,
+    0 -2px 1px #000;
 }
 
 main {
@@ -318,7 +333,7 @@ main {
     font-family: pixelFont;
 }
 
-#sobre, #botao-fechar p { text-align: center; }
+#sobre, #botao-sair p { text-align: center; }
 
 @keyframes iluminarTexto {
     0%, 100% {
