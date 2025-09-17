@@ -13,6 +13,7 @@ const vida_retirada = document.getElementById('vida-retirada')
 var nivel_atual = 2 // Nível médio, por padrão
 const nivel_dificuldade = document.getElementById('nivel-dificuldade')
 const tema = document.getElementById('tema')
+const musica = new Audio('./_media/_sounds/soundtrack.ogg')
 
 // Adiciona duas vezes os caminhos das imagens ao array, formando pares
 for (let i = 0; i < 2; i++) {
@@ -28,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     caixas.forEach(caixa => { caixa.style.transform = 'translateX(60vw)'})
     const intro = document.getElementById('intro').style
     const slider_container = document.getElementById('slider-container').style
-    const musica = new Audio('_media/_sounds/soundtrack.ogg')
     
     // Ação do botão "Começar"
     document.getElementById('start').addEventListener('click', async botao_start => {
+        musica.play()
         botao_start.target.style.display = 'none'
         slider_container.display = 'none'
         intro.transform = 'scale(4) rotate(-50deg)'
@@ -342,28 +343,13 @@ document.getElementById('botao-musica').addEventListener('mouseenter', evento =>
     })
 })
 
-document.querySelectorAll('#sub-menu-dificuldade > li').forEach(texto => {
+document.querySelectorAll('#sub-menu-musica > li').forEach(texto => {
     texto.addEventListener('click', () => {
-        if (texto.innerText == 'Fácil') {
-            total_vidas = 8
-            numero_de_vidas.innerText = `${total_vidas}`
-        } else if (texto.innerText == 'Médio') {
-            total_vidas = 5
-            numero_de_vidas.innerText = `${total_vidas}`
-        } else {
-            total_vidas = 3
-            numero_de_vidas.innerText = `${total_vidas}`
+        if (texto.innerText == '🔊Ativado') {
+            musica.play()
+        } else if (texto.innerText == '🔇Desativado') {
+            musica.muted()
         }
-
-        menu_visivel = true
-        seta_botao.transform = 'initial'
-        seta_botao.transition = '0.4s'
-        menu_lateral.transform = 'translateX(-100%)'
-        menu_lateral.transition = '0.5s'
-        sub_menu_musica.transition = '0.4s'
-        sub_menu_musica.transform = 'scaleY(0)'
-
-        alert(`Nível ${texto.innerHTML.toUpperCase()}: ${total_vidas} vidas`)
     })
 })
 
