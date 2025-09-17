@@ -36,7 +36,7 @@ body {
 
 #logomark {
     max-width: 620px;
-    animation: piscarLogomark 2s infinite steps(1) alternate;
+    animation: piscarLogomark 1.7s infinite steps(1) alternate;
     filter: brightness(0.3);
 }
 
@@ -47,22 +47,22 @@ body {
 
 #luz-logomark-container {
     position: absolute;
-    top: 14.8%;
-    left: 50.1%;
+    top: 14.55%;
+    left: 50%;
     transform: translateX(-43%);
     width: 570px;
     height: 290px;
     border-radius: 17% 17% 20% 20%;
-    animation: acenderLogomark 2s infinite steps(1) alternate-reverse;
+    animation: acenderLogomark 1.7s infinite steps(1) alternate-reverse;
     transition: none;
 }
 
 @keyframes acenderLogomark {
     0%, 100% {
-        box-shadow: -18px -18px 45px rgb(255, 0, 0, 75),
-        18px -18px 45px rgba(0, 248, 0, 0.85),
-        -18px 18px 45px rgb(38, 173, 218, 0.85),
-        18px 18px 45px rgba(255, 0, 0, 0.75);
+        box-shadow: -20px -20px 45px rgb(255, 0, 0, 0.75),
+        20px -20px 45px rgba(0, 248, 0, 0.85),
+        -20px 20px 45px rgb(38, 173, 218, 0.85),
+        20px 20px 45px rgba(255, 0, 0, 0.75);
     }
     50% { box-shadow: none; }
 }
