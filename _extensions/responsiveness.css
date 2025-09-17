@@ -5,7 +5,7 @@
 @media (max-width: 750px) {
     #intro {
         position: absolute;
-        top: 22.5%;
+        top: 14.5%;
         gap: 52px;
     }
 
@@ -81,7 +81,7 @@
 @media (max-height: 690px) {
     #intro {
         position: absolute;
-        top: 22.5%;
+        top: 14.5%;
     }
 
     #logomark { width: 410px; }

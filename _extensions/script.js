@@ -12,11 +12,12 @@ const game_over_msg = document.getElementById('game-over-msg')
 const vida_retirada = document.getElementById('vida-retirada')
 var nivel_atual = 2 // Nível médio, por padrão
 const nivel_dificuldade = document.getElementById('nivel-dificuldade')
+const tema = document.getElementById('tema')
 
 // Adiciona duas vezes os caminhos das imagens ao array, formando pares
 for (let i = 0; i < 2; i++) {
     for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++)
-        imagens.push(`_media/_images/person-${numero_da_imagem}.png`)
+        imagens.unshift(`_media/_images/person-${numero_da_imagem}.png`)
 }
 
 // Embaralha o array de imagens 
@@ -26,19 +27,20 @@ embaralharVetor(imagens)
 document.addEventListener('DOMContentLoaded', () => {
     caixas.forEach(caixa => { caixa.style.transform = 'translateX(60vw)'})
     const intro = document.getElementById('intro').style
-    const config = document.getElementById('slider-container').style
+    const slider_container = document.getElementById('slider-container').style
     
     // Ação do botão "Começar"
     document.getElementById('start').addEventListener('click', async botao_start => {
         botao_start.target.style.display = 'none'
-        config.display = 'none'
+        slider_container.display = 'none'
         intro.transform = 'scale(4) rotate(-50deg)'
         intro.transition = '1s ease-in-out'
         intro.opacity = '0'
         intro.visibility = 'hidden'
         document.getElementById('caixas').style.display = 'grid'
         await pausar(2)
-        main.backgroundColor = 'rgba(0, 0, 0, 0.45)'
+        main.backgroundColor = 'rgba(0, 0, 0, 0.4)'
+        main.backdropFilter = 'blur(5px)'
         main.transition = '1.5s'
         await pausar(2.5)
 
@@ -55,14 +57,24 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-function nivel(escolha) {
+function escolher(escolha) {
     switch (escolha) {
         case 'aumentar':
             nivel_atual++ // Sobe o nível de dificuldade
-            break;
+            break
         case 'diminuir':
             nivel_atual-- // Reduz o nível de dificuldade
-            break;
+            break
+        case 'claro':
+            tema.innerText = 'Claro'
+            tema_escuro = false
+            alternarTema()
+            break
+        case 'escuro':
+            tema.innerText = 'Escuro'
+            tema_escuro = true
+            alternarTema()
+            break
     }
 
     if (nivel_atual < 1) {
@@ -81,6 +93,7 @@ function nivel(escolha) {
             nivel_dificuldade.innerText = 'Difícil'
         }
     }
+
 }
 
 // Associa o evento de clique a cada caixa
@@ -120,7 +133,7 @@ caixas.forEach((elemento, index) => {
                 setTimeout(() => {
                     for (const caixa_selecionada of caixas_selecionadas) {
                         // Define imagem de fundo conforme o tema
-                        if (!tema_alternado)
+                        if (!tema_escuro)
                             caixa_selecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`
                         else
                             caixa_selecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`
@@ -135,7 +148,7 @@ caixas.forEach((elemento, index) => {
                             evento.target.style.filter = ''
                             evento.target.style.transform = ''
 
-                            if (!tema_alternado)
+                            if (!tema_escuro)
                                 evento.target.style.boxShadow = ''
                             else
                                 evento.target.style.boxShadow = '-10px 0px 30px rgba(0, 60, 255, 0.8), 10px 0px 30px rgba(0, 60, 255, 0.8)',
@@ -248,7 +261,7 @@ const cabecalho_menu_lateral = document.getElementById('cabecalho-menu-lateral')
 const sub_menu_temas = document.getElementById('sub-menu-temas').style
 const sub_menu_dificuldade = document.getElementById('sub-menu-dificuldade').style
 var menu_visivel = true // Variável para controlar a visibilidade do menu lateral     
-var tema_alternado = false // Variável para controlar o tema
+var tema_escuro = false // Variável para controlar o tema escuro/claro
 
 // Mostra ou oculta o menu lateral
 botao_menu_lateral.addEventListener('click', evento => {
@@ -298,10 +311,11 @@ document.getElementById('botao-temas').addEventListener('mouseenter', evento => 
     })
 })
 
-// Ativa o tema escuro
+// Alterna para o tema escuro
 document.getElementById('noite').addEventListener('click', () => {
-    tema_alternado = true
-    body.backgroundImage = "url('_media/_images/bg_night.png')"
+    tema_escuro = true
+    alternarTema()
+/*    body.backgroundImage = "url('_media/_images/bg_night.png')"
     menu_lateral.backgroundImage = "url('_media/_images/bg-3_night.png')"
     cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game_night.png')"
 
@@ -323,31 +337,61 @@ document.getElementById('noite').addEventListener('click', () => {
         })
 
         caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
-    })
+    }) */
 })
 
-// Ativa o tema claro
+function alternarTema() {
+    if (tema_escuro) {
+        body.backgroundImage = "url('_media/_images/bg_night.png')"
+        menu_lateral.backgroundImage = "url('_media/_images/bg-3_night.png')"
+        cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game_night.png')"
+
+        caixas.forEach(caixa => {
+            const imagem_revelada = getComputedStyle(caixa).backgroundImage
+
+            if (!imagem_revelada.includes(`box_blue.png`)) 
+                caixa.style.backgroundImage = "url('_media/_images/box_blue.png')"
+
+            for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
+                if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
+                    caixa.style.backgroundImage = imagem_revelada
+            }
+
+            // Adiciona efeitos de hover específicos do tema escuro
+            caixa.addEventListener('mouseenter', evento => {
+                evento.target.style.boxShadow = '-10px 0px 30px rgba(0, 60, 255, 0.8), 10px 0px 30px rgba(0, 60, 255, 0.8)',
+                '0px -10px 30px rgba(0, 60, 255, 0.8), 0px 10px 30px rgba(0, 60, 255, 0.8)'
+            })
+
+            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
+        })
+    } else {
+        body.backgroundImage = "url('_media/_images/bg.png')"
+        menu_lateral.backgroundImage = "url('_media/_images/bg-3.png')"
+        cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game.png')"
+
+        caixas.forEach(caixa => {
+            const imagem_revelada = getComputedStyle(caixa).backgroundImage
+
+            if (!imagem_revelada.includes('box_yellow.png'))
+                caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')"
+
+            for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
+                if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
+                    caixa.style.backgroundImage = imagem_revelada
+            }
+
+            // Remove efeitos de hover do tema escuro
+            caixa.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '')
+            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
+        })
+    }
+}
+
+// Alterna para o tema claro
 document.getElementById('dia').addEventListener('click', () => {
-    tema_alternado = false
-    body.backgroundImage = "url('_media/_images/bg.png')"
-    menu_lateral.backgroundImage = "url('_media/_images/bg-3.png')"
-    cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game.png')"
-
-    caixas.forEach(caixa => {
-        const imagem_revelada = getComputedStyle(caixa).backgroundImage
-
-        if (!imagem_revelada.includes('box_yellow.png'))
-            caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')"
-
-        for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
-            if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
-                caixa.style.backgroundImage = imagem_revelada
-        }
-
-        // Remove efeitos de hover do tema escuro
-        caixa.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '')
-        caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
-    })
+    tema_escuro = false
+    alternarTema()
 })
 
 // Opção para o submenu dificuldade
