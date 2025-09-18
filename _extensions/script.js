@@ -97,6 +97,7 @@ async function escolher(escolha) {
             alternarTema()
             break
     }
+    
     if (escolha == 'aumentar' || escolha == 'diminuir') {
         if (nivel_atual < 1) {
             nivel_atual = 1
