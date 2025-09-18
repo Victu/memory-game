@@ -27,10 +27,18 @@ embaralharVetor(imagens)
 
 // Animação da introdução
 document.addEventListener('DOMContentLoaded', () => {
-    caixas.forEach(caixa => { caixa.style.transform = 'translateX(60vw)'})
     const intro = document.getElementById('intro').style
     const slider_container = document.getElementById('slider-container').style
+    quantidade_inicial_vidas.style.visibility = 'visible'
+    quantidade_inicial_vidas.style.opacity = '1'
     
+    setTimeout(() => {
+        quantidade_inicial_vidas.style.visibility = 'hidden'
+        quantidade_inicial_vidas.style.opacity = '0'
+    }, 5000)
+
+    caixas.forEach(caixa => caixa.style.transform = 'translateX(60vw)')
+
     // Ação do botão "Começar"
     document.getElementById('start').addEventListener('click', async botao_start => {
         botao_start.target.style.display = 'none'
@@ -89,32 +97,32 @@ async function escolher(escolha) {
             alternarTema()
             break
     }
-
-    if (nivel_atual < 1) {
-        nivel_atual = 1
-    } else if (nivel_atual > 3) {
-        nivel_atual = 3
-    } else {
-        if (nivel_atual == 1) {
-            total_vidas = 8
-            nivel_dificuldade.innerText = 'Fácil'
-        } else if (nivel_atual == 2) {
-            total_vidas = 5
-            nivel_dificuldade.innerText = 'Médio'
-        } else if (nivel_atual == 3) {
-            total_vidas = 3
-            nivel_dificuldade.innerText = 'Difícil'
+    if (escolha == 'aumentar' || escolha == 'diminuir') {
+        if (nivel_atual < 1) {
+            nivel_atual = 1
+        } else if (nivel_atual > 3) {
+            nivel_atual = 3
+        } else {
+            if (nivel_atual == 1) {
+                total_vidas = 8
+                nivel_dificuldade.innerText = 'Fácil'
+            } else if (nivel_atual == 2) {
+                total_vidas = 5
+                nivel_dificuldade.innerText = 'Médio'
+            } else if (nivel_atual == 3) {
+                total_vidas = 3
+                nivel_dificuldade.innerText = 'Difícil'
+            }
+            
+            numero_de_vidas.innerText = total_vidas
+            quantidade_escolhida_vidas.innerText = total_vidas
+            quantidade_inicial_vidas.style.visibility = 'visible'
+            quantidade_inicial_vidas.style.opacity = '1'
+            await pausar(3)
+            quantidade_inicial_vidas.style.visibility = 'hidden'
+            quantidade_inicial_vidas.style.opacity = '0'
         }
     }
-
-    numero_de_vidas.innerText = total_vidas
-    quantidade_inicial_vidas.style.visibility = 'visible'
-    quantidade_inicial_vidas.style.opacity = '1'
-    await pausar(2)
-    quantidade_inicial_vidas.style.transition = '1s ease-out'
-    quantidade_inicial_vidas.style.visibility = 'hidden'
-    quantidade_inicial_vidas.style.opacity = '0'
-    quantidade_escolhida_vidas.innerText = total_vidas
 }
 
 // Associa o evento de clique a cada caixa
@@ -139,6 +147,7 @@ caixas.forEach((elemento, index) => {
             if (imagens_reveladas[0] !== imagens_reveladas[1]) {
                 total_vidas--
                 new Audio('./_media/_sounds/error.mp3').play()
+
                 setTimeout(() => vida_retirada.style.visibility = 'hidden', 300)
                 vida_retirada.style.visibility = 'visible'
                 vida_retirada.style.transform = 'translateY(-150px)'
@@ -202,7 +211,7 @@ caixas.forEach((elemento, index) => {
                         musica.muted = true
 
                         setTimeout(() => {
-                            tocarAudio(total_vidas)
+                            tocarEfeitoSonoro(total_vidas)
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none'
                             game_over_msg.innerHTML = 'Game<br><br>Over'
                             game_over_msg.style.color = 'rgba(255, 50, 50, 0.9)'
@@ -260,7 +269,7 @@ caixas.forEach((elemento, index) => {
                         setTimeout(() => {
                             musica.muted = true
 
-                            tocarAudio(total_vidas)
+                            tocarEfeitoSonoro(total_vidas)
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none'
                             game_over_msg.innerHTML = 'You<br><br>Win!'
                             game_over_msg.style.marginLeft = '4rem'
@@ -462,7 +471,8 @@ function medidaDaTela(medida) {
     return medida_max.matches
 }
 
-function tocarAudio(vidas) {
+// Emite efeitos sonoros
+function tocarEfeitoSonoro(vidas) {
     if (vidas == 0) 
         new Audio('./_media/_sounds/game-over.wav').play()
     else
