@@ -12,6 +12,7 @@ const game_over_msg = document.getElementById('game-over-msg')
 const vida_retirada = document.getElementById('vida-retirada')
 var nivel_atual = 2 // Nível médio, por padrão
 const nivel_dificuldade = document.getElementById('nivel-dificuldade')
+const quantidade_inicial_vidas = document.getElementById('quantidade-inicial-vidas')
 const tema = document.getElementById('tema')
 const musica = new Audio('./_media/_sounds/soundtrack.ogg')
 
@@ -67,7 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 })
 
-function escolher(escolha) {
+async function escolher(escolha) {
+    const quantidade_vidas = document.getElementById('')
     switch (escolha) {
         case 'aumentar':
             nivel_atual++ // Sobe o nível de dificuldade
@@ -93,16 +95,24 @@ function escolher(escolha) {
         nivel_atual = 3
     } else {
         if (nivel_atual == 1) {
-            numero_de_vidas.innerText = total_vidas = 8
+            total_vidas = 8
             nivel_dificuldade.innerText = 'Fácil'
         } else if (nivel_atual == 2) {
-            numero_de_vidas.innerText = total_vidas = 5
-            nivel_dificuldade.innerText = 'Médio'        
+            total_vidas = 5
+            nivel_dificuldade.innerText = 'Médio'
         } else if (nivel_atual == 3) {
-            numero_de_vidas.innerText = total_vidas = 3
+            total_vidas = 3
             nivel_dificuldade.innerText = 'Difícil'
         }
     }
+
+    numero_de_vidas.innerText = total_vidas
+    quantidade_inicial_vidas.style.visibility = 'visible'
+    quantidade_inicial_vidas.style.opacity = '1'
+    await pausar(2)
+    quantidade_inicial_vidas.style.transition = '1s ease-out'
+    quantidade_inicial_vidas.style.visibility = 'hidden'
+    quantidade_inicial_vidas.style.opacity = '0'
 }
 
 // Associa o evento de clique a cada caixa

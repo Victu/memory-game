@@ -97,7 +97,7 @@
     }
 
     #luz-logomark-container {
-        top: 21.5%;
+        top: 22.5%;
         left: 50%;
         transform: translateX(-50%);
         width: 360px;
@@ -119,7 +119,7 @@
     
     #texto-copyright {
         font-size: .6em;
-        top: -767px;
+        top: -717px;
     }
 
     main {
