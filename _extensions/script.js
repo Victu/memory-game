@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Ação do botão "Começar"
     document.getElementById('start').addEventListener('click', async botao_start => {
-        musica.play()
         botao_start.target.style.display = 'none'
         slider_container.display = 'none'
         intro.transform = 'scale(4) rotate(-50deg)'
@@ -45,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('texto-copyright').style.display = 'none'
         document.getElementById('caixas').style.display = 'grid'
         await pausar(2)
+
+        musica.play()
         main.backgroundColor = 'rgba(0, 0, 0, 0.4)'
         main.backdropFilter = 'blur(6px)'
         main.transition = '1.5s'
@@ -107,7 +108,7 @@ function escolher(escolha) {
 // Associa o evento de clique a cada caixa
 caixas.forEach((elemento, index) => {
     elemento.addEventListener('click', caixa => {
-        let reiniciar = null
+        const reiniciar = null
                 
         // Exibe a imagem correspondente à posição embaralhada
         caixa.target.style.backgroundImage = `url('${imagens[index]}')`
@@ -159,8 +160,10 @@ caixas.forEach((elemento, index) => {
                             if (!tema_escuro)
                                 evento.target.style.boxShadow = ''
                             else
-                                evento.target.style.boxShadow = '-10px 0px 30px rgba(0, 60, 255, 0.8), 10px 0px 30px rgba(0, 60, 255, 0.8)',
-                                '0px -10px 30px rgba(0, 60, 255, 0.8), 0px 10px 30px rgba(0, 60, 255, 0.8)'
+                                evento.target.style.boxShadow = '-10px 0px 30px var(--caixa-efeito-noite)',
+                                '10px 0px 30px var(--caixa-efeito-noite)',
+                                '0px -10px 30px var(--caixa-efeito-noite)',
+                                '0px 10px 30px var(--caixa-efeito-noite)'
                         })
 
                         caixa_selecionada.addEventListener('mouseleave', evento => {
