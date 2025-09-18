@@ -69,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 async function escolher(escolha) {
-    const quantidade_vidas = document.getElementById('')
+    const quantidade_escolhida_vidas = document.querySelector('#quantidade-inicial-vidas > span')
+
     switch (escolha) {
         case 'aumentar':
             nivel_atual++ // Sobe o nível de dificuldade
@@ -113,6 +114,7 @@ async function escolher(escolha) {
     quantidade_inicial_vidas.style.transition = '1s ease-out'
     quantidade_inicial_vidas.style.visibility = 'hidden'
     quantidade_inicial_vidas.style.opacity = '0'
+    quantidade_escolhida_vidas.innerText = total_vidas
 }
 
 // Associa o evento de clique a cada caixa
@@ -145,7 +147,7 @@ caixas.forEach((elemento, index) => {
                 // Se forem diferentes, desativa temporariamente os cliques
                 caixas.forEach(objeto => objeto.style.pointerEvents = 'none')
                 caixas_selecionadas[1].style.transform = 'initial'
-                numero_de_vidas.innerHTML = `${total_vidas}`
+                numero_de_vidas.innerText = total_vidas
                 numero_de_vidas.style.animation = 'mudaCor 0.3s linear 3'
 
                 // Após um tempo, reseta as caixas para o estado inicial
