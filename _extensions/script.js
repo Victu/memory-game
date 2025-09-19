@@ -1,417 +1,423 @@
 // --------------------------- Configurações do conteúdo principal ---------------------------------
 
-const body = document.body.style // Seleciona o elemento <body> do documento
-const caixas = document.querySelectorAll('.caixa') // Seleciona todas as botões com a classe 'caixa'
-const imagens = Array() // Array que armazenará os caminhos das imagens dos personagens
-var imagens_reveladas = Array() // Array para armazenar imagens reveladas no clique
-var caixas_selecionadas = Array() // Array para armazenar as caixas que foram clicadas
-var numero_de_vidas = document.getElementById('numero-de-vidas') // Quantidade de vidas sendo exibidas ao usuário
-var total_vidas = 5 // Quantidade total de vidas
-var acertos = 0 // Variável para contar os acertos  
-const game_over_msg = document.getElementById('game-over-msg')
-const vida_retirada = document.getElementById('vida-retirada')
-var nivel_atual = 2 // Nível médio, por padrão
-const nivel_dificuldade = document.getElementById('nivel-dificuldade')
-const quantidade_inicial_vidas = document.getElementById('quantidade-inicial-vidas')
-const tema = document.getElementById('tema')
-const musica = new Audio('./_media/_sounds/soundtrack.ogg')
+const BODY = document.body.style; // Seleciona o elemento <body> do documento
+const CAIXAS = document.querySelectorAll('.caixa'); // Seleciona todas as botões com a classe 'caixa'
+const IMAGENS = []; // Array que armazenará os caminhos das imagens dos personagens
+var imagensReveladas = []; // Array para armazenar imagens reveladas no clique
+var caixasSelecionadas = []; // Array para armazenar as caixas que foram clicadas
+var numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário
+var totalVidas = 5; // Quantidade total de vidas
+var acertos = 0; // Variável para contar os acertos  
+const GAME_OVER_MSG = document.getElementById('game-over-msg');
+const VIDA_RETIRADA = document.getElementById('vida-retirada');
+var nivelAtual = 2; // Nível médio, por padrão
+const NIVEL_DIFICULDADE = document.getElementById('nivel-dificuldade');
+const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vidas').style;
+const TEMA = document.getElementById('tema');
+const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg');
 
 // Adiciona duas vezes os caminhos das imagens ao array, formando pares
 for (let i = 0; i < 2; i++) {
-    for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++)
-        imagens.unshift(`_media/_images/person-${numero_da_imagem}.png`)
+    for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++)
+        IMAGENS.unshift(`_media/_images/person-${numeroDaImagem}.png`);
 }
 
 // Embaralha o array de imagens 
-embaralharVetor(imagens)
+embaralharVetor(IMAGENS);
 
 // Animação da introdução
 document.addEventListener('DOMContentLoaded', () => {
-    const intro = document.getElementById('intro').style
-    const slider_container = document.getElementById('slider-container').style
-    quantidade_inicial_vidas.style.visibility = 'visible'
-    quantidade_inicial_vidas.style.opacity = '1'
-    
-    setTimeout(() => {
-        quantidade_inicial_vidas.style.transition = '1s ease-out'
-        quantidade_inicial_vidas.style.visibility = 'hidden'
-        quantidade_inicial_vidas.style.opacity = '0'
-    }, 5000)
+    const INTRO = document.getElementById('intro').style;
+    const SLIDER_CONTAINER = document.getElementById('slider-container').style;
 
-    caixas.forEach(caixa => caixa.style.transform = 'translateX(60vw)')
+    setTimeout(() => {
+        QUANTIDADE_INICIAL_VIDAS.transition = '0.7s ease-in'
+        QUANTIDADE_INICIAL_VIDAS.visibility = 'visible';
+        QUANTIDADE_INICIAL_VIDAS.opacity = '1';
+    }, 1500);
+
+    setTimeout(() => {
+        QUANTIDADE_INICIAL_VIDAS.transition = '0.7s ease-out';
+        QUANTIDADE_INICIAL_VIDAS.visibility = 'hidden';
+        QUANTIDADE_INICIAL_VIDAS.opacity = '0';
+    }, 5000);
+
+    CAIXAS.forEach(caixa => caixa.style.transform = 'translateX(60vw)');
 
     // Ação do botão "Começar"
-    document.getElementById('start').addEventListener('click', async botao_start => {
-        botao_start.target.style.display = 'none'
-        slider_container.display = 'none'
-        intro.transform = 'scale(4) rotate(-50deg)'
-        intro.transition = '1s ease-in-out'
-        intro.opacity = '0'
-        intro.visibility = 'hidden'
+    document.getElementById('start').addEventListener('click', async botaoStart => {
+        botaoStart.target.style.display = 'none';
+        SLIDER_CONTAINER.display = 'none';
+        INTRO.transform = 'scale(4) rotate(-50deg)';
+        INTRO.transition = '1s ease-in-out';
+        INTRO.opacity = '0';
+        INTRO.visibility = 'hidden';
         
-        document.getElementById('logomark').style.animation = 'none'
-        document.getElementById('luz-logomark-container').style.display = 'none'
-        document.getElementById('texto-copyright').style.display = 'none'
-        document.getElementById('caixas').style.display = 'grid'
-        await pausar(2)
+        document.getElementById('logomark').style.animation = 'none';
+        document.getElementById('luz-logomark-container').style.display = 'none';
+        document.getElementById('texto-copyright').style.display = 'none';
+        document.getElementById('caixas').style.display = 'grid';
+        await pausar(2);
 
-        musica.play()
-        main.backgroundColor = 'rgba(0, 0, 0, 0.4)'
-        main.backdropFilter = 'blur(6px)'
-        main.transition = '1.5s'
-        botao_menu_lateral.style.transform = 'translate(60px, 50px)'
-        botao_menu_lateral.style.transition = '1s'
-        seta_botao.animation = 'apontar 0.6s linear 5'
-        await pausar(2.5)
+        MUSICA.play();
+        MAIN.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+        MAIN.backdropFilter = 'blur(6px)';
+        MAIN.transition = '1.5s';
+        BOTAO_MENU_LATERAL.style.transform = 'translate(60px, 50px)';
+        BOTAO_MENU_LATERAL.style.transition = '1s';
+        SETA_BOTAO.animation = 'apontar 0.6s linear 5';
+        await pausar(2.5);
 
-        for (const caixa of caixas) {
-            document.getElementById('cabecalho-principal').style.visibility = 'visible'
-            caixa.style.visibility = 'visible'
-            caixa.style.opacity = '1'
-            caixa.style.transform = ''
-            caixa.style.pointerEvents = 'none'
-            await pausar(0.20)
+        for (const caixa of CAIXAS) {
+            document.getElementById('cabecalho-principal').style.visibility = 'visible';
+            caixa.style.visibility = 'visible';
+            caixa.style.opacity = '1';
+            caixa.style.transform = '';
+            caixa.style.pointerEvents = 'none';
+            await pausar(0.20);
         }
 
-        caixas.forEach(caixa => caixa.style.pointerEvents = 'auto') 
-    })
-})
+        CAIXAS.forEach(caixa => caixa.style.pointerEvents = 'auto'); 
+    });
+});
 
 async function escolher(escolha) {
-    const quantidade_escolhida_vidas = document.getElementById('quantidade-escolhida-vidas')
-    const nivel_escolhido = document.getElementById('nivel-escolhido')
+    const QUANTIDADE_ESCOLHIDA_VIDAS = document.getElementById('quantidade-escolhida-vidas');
+    const NIVEL_ESCOLHIDO = document.getElementById('nivel-escolhido');
 
     switch (escolha) {
         case 'aumentar':
-            nivel_atual++ // Sobe o nível de dificuldade
-            break
+            nivelAtual++; // Mostra o próximo nível de dificuldade
+            break;
         case 'diminuir':
-            nivel_atual-- // Reduz o nível de dificuldade
-            break
+            nivelAtual--; // Mostra o nível de dificuldade anterior
+            break;
         case 'dia':
-            tema.innerText = 'Dia'
-            tema_escuro = false
-            alternarTema()
-            break
+            TEMA.innerText = 'Dia';
+            temaEscuro = false;
+            alternarTema();
+            break;
         case 'noite':
-            tema.innerText = 'Noite'
-            tema_escuro = true
-            alternarTema()
-            break
+            TEMA.innerText = 'Noite';
+            temaEscuro = true;
+            alternarTema();
+            break;
     }
     
     if (escolha == 'aumentar' || escolha == 'diminuir') {
-        if (nivel_atual < 1) {
-            nivel_atual = 1
-        } else if (nivel_atual > 3) {
-            nivel_atual = 3
+        if (nivelAtual < 1) {
+            nivelAtual = 1;
+        } else if (nivelAtual > 3) {
+            nivelAtual = 3;
         } else {
-            if (nivel_atual == 1) {
-                total_vidas = 8
-                nivel_dificuldade.innerText = 'Fácil'
-                nivel_escolhido.innerText = 'fácil'
-            } else if (nivel_atual == 2) {
-                total_vidas = 5
-                nivel_dificuldade.innerText = 'Médio'
-                nivel_escolhido.innerText = 'médio'
-            } else if (nivel_atual == 3) {
-                total_vidas = 3
-                nivel_dificuldade.innerText = 'Difícil'
-                nivel_escolhido.innerText = 'difícil'
+            if (nivelAtual == 1) {
+                totalVidas = 8;
+                NIVEL_DIFICULDADE.innerText = 'Fácil';
+                NIVEL_ESCOLHIDO.innerText = 'fácil';
+            } else if (nivelAtual == 2) {
+                totalVidas = 5;
+                NIVEL_DIFICULDADE.innerText = 'Médio';
+                NIVEL_ESCOLHIDO.innerText = 'médio';
+            } else if (nivelAtual == 3) {
+                totalVidas = 3;
+                NIVEL_DIFICULDADE.innerText = 'Difícil';
+                NIVEL_ESCOLHIDO.innerText = 'difícil';
             }
             
-            numero_de_vidas.innerText = total_vidas
-            quantidade_escolhida_vidas.innerText = total_vidas
-            quantidade_inicial_vidas.style.transition = 'none'
-            quantidade_inicial_vidas.style.visibility = 'visible'
-            quantidade_inicial_vidas.style.opacity = '1'
-            await pausar(3)
-            quantidade_inicial_vidas.style.transition = '1s ease-out'
-            quantidade_inicial_vidas.style.visibility = 'hidden'
-            quantidade_inicial_vidas.style.opacity = '0'
+            numeroDeVidas.innerText = totalVidas;
+            QUANTIDADE_ESCOLHIDA_VIDAS.innerText = totalVidas;
+            QUANTIDADE_INICIAL_VIDAS.transition = 'none';
+            QUANTIDADE_INICIAL_VIDAS.visibility = 'visible';
+            QUANTIDADE_INICIAL_VIDAS.opacity = '1';
+            await pausar(3);
+            QUANTIDADE_INICIAL_VIDAS.transition = '0.7s ease-out';
+            QUANTIDADE_INICIAL_VIDAS.visibility = 'hidden';
+            QUANTIDADE_INICIAL_VIDAS.opacity = '0';
         }
     }
 }
 
 // Associa o evento de clique a cada caixa
-caixas.forEach((elemento, index) => {
+CAIXAS.forEach((elemento, index) => {
     elemento.addEventListener('click', caixa => {
-        let reiniciar = null
+        let reiniciar = null;
                 
         // Exibe a imagem correspondente à posição embaralhada
-        caixa.target.style.backgroundImage = `url('${imagens[index]}')`
-        caixa.target.style.filter = 'initial'
-        caixa.target.style.transform = 'initial'
-        caixa.target.style.pointerEvents = 'none'
-        caixa.target.style.border = '5px silver groove'
-        vida_retirada.style.transform = ''
+        caixa.target.style.backgroundImage = `url('${IMAGENS[index]}')`;
+        caixa.target.style.filter = 'initial';
+        caixa.target.style.transform = 'initial';
+        caixa.target.style.pointerEvents = 'none';
+        caixa.target.style.border = '5px silver groove';
+        VIDA_RETIRADA.style.transform = '';
         
         // Guarda imagem e caixa selecionada
-        imagens_reveladas.unshift(imagens[index])
-        caixas_selecionadas.unshift(caixa.target)
+        imagensReveladas.unshift(IMAGENS[index]);
+        caixasSelecionadas.unshift(caixa.target);
 
         // Quando duas imagens são reveladas
-        if (imagens_reveladas.length == 2) {
-            if (imagens_reveladas[0] !== imagens_reveladas[1]) {
-                total_vidas--
-                new Audio('./_media/_sounds/error.mp3').play()
+        if (imagensReveladas.length == 2) {
+            if (imagensReveladas[0] !== imagensReveladas[1]) {
+                totalVidas--;
+                new Audio('./_media/_sounds/error.mp3').play();
 
-                setTimeout(() => vida_retirada.style.visibility = 'hidden', 300)
-                vida_retirada.style.visibility = 'visible'
-                vida_retirada.style.transform = 'translateY(-150px)'
-                vida_retirada.innerText = '-1 vida'
+                setTimeout(() => VIDA_RETIRADA.style.visibility = 'hidden', 300);
+                VIDA_RETIRADA.style.visibility = 'visible';
+                VIDA_RETIRADA.style.transform = 'translateY(-150px)';
+                VIDA_RETIRADA.innerText = '-1 vida';
                 
                 // Se forem diferentes, desativa temporariamente os cliques
-                caixas.forEach(objeto => objeto.style.pointerEvents = 'none')
-                caixas_selecionadas[1].style.transform = 'initial'
-                numero_de_vidas.innerText = total_vidas
-                numero_de_vidas.style.animation = 'mudaCor 0.3s linear 3'
+                CAIXAS.forEach(objeto => objeto.style.pointerEvents = 'none');
+                caixasSelecionadas[1].style.transform = 'initial';
+                numeroDeVidas.innerText = totalVidas;
+                numeroDeVidas.style.animation = 'mudaCor 0.3s linear 3';
 
                 // Após um tempo, reseta as caixas para o estado inicial
                 setTimeout(() => {
-                    for (const caixa_selecionada of caixas_selecionadas) {
+                    for (const caixaSelecionada of caixasSelecionadas) {
                         // Define imagem de fundo conforme o tema
-                        if (!tema_escuro)
-                            caixa_selecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`
+                        if (!temaEscuro)
+                            caixaSelecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`;
                         else
-                            caixa_selecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`
+                            caixaSelecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`;
 
-                        caixa_selecionada.style.cursor = 'pointer'
-                        setTimeout(() => caixa_selecionada.style.pointerEvents = 'auto', 450)
-                        caixa_selecionada.style.transform = 'rotate(-360deg)'
-                        caixa_selecionada.style.boxShadow = 'none'
+                        caixaSelecionada.style.cursor = 'pointer';
+                        setTimeout(() => caixaSelecionada.style.pointerEvents = 'auto', 450);
+                        caixaSelecionada.style.transform = 'rotate(-360deg)';
+                        caixaSelecionada.style.boxShadow = 'none';
                         
                         // Restaura efeitos de hover
-                        caixa_selecionada.addEventListener('mouseenter', evento => {
-                            evento.target.style.filter = ''
-                            evento.target.style.transform = ''
+                        caixaSelecionada.addEventListener('mouseenter', evento => {
+                            evento.target.style.filter = '';
+                            evento.target.style.transform = '';
 
-                            if (!tema_escuro)
-                                evento.target.style.boxShadow = ''
+                            if (!temaEscuro)
+                                evento.target.style.boxShadow = '';
                             else
                                 evento.target.style.boxShadow = '-10px 0px 30px var(--caixa-efeito-noite)',
                                 '10px 0px 30px var(--caixa-efeito-noite)',
                                 '0px -10px 30px var(--caixa-efeito-noite)',
-                                '0px 10px 30px var(--caixa-efeito-noite)'
-                        })
+                                '0px 10px 30px var(--caixa-efeito-noite)';
+                        });
 
-                        caixa_selecionada.addEventListener('mouseleave', evento => {
-                            evento.target.style.filter = ''
-                            evento.target.style.transform = ''
-                        })
+                        caixaSelecionada.addEventListener('mouseleave', evento => {
+                            evento.target.style.filter = '';
+                            evento.target.style.transform = '';
+                        });
                     }
 
                     // Reativa o clique nas caixas que ainda não foram resolvidas
-                    caixas.forEach(objeto => {
-                        objeto.style.border = 'none'
-                        const cor_da_caixa = getComputedStyle(objeto).backgroundImage
+                    CAIXAS.forEach(objeto => {
+                        objeto.style.border = 'none';
+                        const corDaCaixa = getComputedStyle(objeto).backgroundImage;
 
-                        if (cor_da_caixa.includes('box_yellow.png') || cor_da_caixa.includes('box_blue.png'))
-                            objeto.style.pointerEvents = 'auto'
-                    })
+                        if (corDaCaixa.includes('box_yellow.png') || corDaCaixa.includes('box_blue.png'))
+                            objeto.style.pointerEvents = 'auto';
+                    });
 
                     // Limpa os arrays
-                    imagens_reveladas = Array()
-                    caixas_selecionadas = Array()
-                    numero_de_vidas.style.animation = 'initial'
+                    imagensReveladas = [];
+                    caixasSelecionadas = [];
+                    numeroDeVidas.style.animation = 'initial';
 
-                    if (total_vidas == 0) {
-                        musica.muted = true
-
-                        setTimeout(() => {
-                            tocarEfeitoSonoro(total_vidas)
-                            document.querySelector('#cabecalho-principal > figure').style.display = 'none'
-                            game_over_msg.innerHTML = 'Game<br><br>Over'
-                            game_over_msg.style.color = 'rgba(255, 50, 50, 0.9)'
-                            game_over_msg.style.visibility = 'visible'
-                            game_over_msg.style.opacity = 1
-                            game_over_msg.style.animation = 'piscarMsg 0.6s ease-in-out infinite'
-                        }, 1100)
-
-                        caixas.forEach(objeto => {
-                            objeto.style.opacity = '0'
-                            objeto.style.visibility = 'hidden'
-                            objeto.style.transform = 'rotate(-360deg)'
-                        })      
+                    if (totalVidas == 0) {
+                        MUSICA.muted = true;
 
                         setTimeout(() => {
-                            reiniciar = confirm('Deseja voltar para a tela inicial?')
+                            tocarEfeitoSonoro(totalVidas);
+                            document.querySelector('#cabecalho-principal > figure').style.display = 'none';
+                            GAME_OVER_MSG.innerHTML = 'Game<br><br>Over';
+                            GAME_OVER_MSG.style.color = 'rgba(255, 50, 50, 0.9)';
+                            GAME_OVER_MSG.style.visibility = 'visible';
+                            GAME_OVER_MSG.style.opacity = 1;
+                            GAME_OVER_MSG.style.animation = 'piscarMsg 0.6s ease-in-out infinite';
+                        }, 1100);
 
-                            if (reiniciar) location.reload()
-                        }, 3600)
+                        CAIXAS.forEach(objeto => {
+                            objeto.style.opacity = '0';
+                            objeto.style.visibility = 'hidden';
+                            objeto.style.transform = 'rotate(-360deg)';
+                        });      
+
+                        setTimeout(() => {
+                            reiniciar = confirm('Deseja voltar para a tela inicial?');
+
+                            if (reiniciar) location.reload();
+                        }, 3600);
                     }        
-                }, 800)
+                }, 800);
             } else {
-                acertos++
-                new Audio('./_media/_sounds/success.mp3').play()
+                acertos++;
+                new Audio('./_media/_sounds/success.mp3').play();
 
                 // Se as imagens forem iguais (par encontrado), esconde as caixas
-                caixas.forEach(objeto => objeto.style.pointerEvents = 'none')
-                caixas_selecionadas[0].style.transform = 'initial'
-                caixas_selecionadas[1].style.transform = 'initial'
+                CAIXAS.forEach(objeto => objeto.style.pointerEvents = 'none');
+                caixasSelecionadas[0].style.transform = 'initial';
+                caixasSelecionadas[1].style.transform = 'initial';
 
                 // Após um tempo, faz as caixas desaparecerem
                 setTimeout(() => {
-                    for (const caixa_selecionada of caixas_selecionadas) {
-                        caixa_selecionada.style.transform = 'translateY(-160px)'
-                        caixa_selecionada.style.transition = '0.7s'
-                        caixa_selecionada.style.opacity = '0'
-                        caixa_selecionada.style.visibility = 'hidden'
+                    for (const caixaSelecionada of caixasSelecionadas) {
+                        caixaSelecionada.style.transform = 'translateY(-160px)';
+                        caixaSelecionada.style.transition = '0.7s';
+                        caixaSelecionada.style.opacity = '0';
+                        caixaSelecionada.style.visibility = 'hidden';
                     }
 
                     // Reativa cliques nas caixas não resolvidas
-                    caixas.forEach(objeto => {
-                        const cor_da_caixa = getComputedStyle(objeto).backgroundImage
+                    CAIXAS.forEach(objeto => {
+                        const corDaCaixa = getComputedStyle(objeto).backgroundImage;
 
-                        if (cor_da_caixa.includes('box_yellow.png') || cor_da_caixa.includes('box_blue.png'))
-                            objeto.style.pointerEvents = 'auto'
-                    })
+                        if (corDaCaixa.includes('box_yellow.png') || corDaCaixa.includes('box_blue.png'))
+                            objeto.style.pointerEvents = 'auto';
+                    });
 
                     // Limpa os arrays
-                    imagens_reveladas = Array()
-                    caixas_selecionadas = Array()
+                    imagensReveladas = [];
+                    caixasSelecionadas = [];
 
                     if (acertos == 8) {
-                        acertos = 0
+                        acertos = 0;
 
                         setTimeout(() => {
-                            musica.muted = true
+                            MUSICA.muted = true;
 
-                            tocarEfeitoSonoro(total_vidas)
-                            document.querySelector('#cabecalho-principal > figure').style.display = 'none'
-                            game_over_msg.innerHTML = 'You<br><br>Win!'
-                            game_over_msg.style.marginLeft = '4rem'
-                            game_over_msg.style.color = 'lime'
-                            game_over_msg.style.visibility = 'visible'
-                            game_over_msg.style.opacity = 1
-                            game_over_msg.style.animation = 'piscarMsg 0.6s ease-in-out infinite'
-                        }, 1100)
+                            tocarEfeitoSonoro(totalVidas);
+                            document.querySelector('#cabecalho-principal > figure').style.display = 'none';
+                            GAME_OVER_MSG.innerHTML = 'You<br><br>Win!';
+                            GAME_OVER_MSG.style.marginLeft = '4rem';
+                            GAME_OVER_MSG.style.color = 'lime';
+                            GAME_OVER_MSG.style.visibility = 'visible';
+                            GAME_OVER_MSG.style.opacity = 1;
+                            GAME_OVER_MSG.style.animation = 'piscarMsg 0.6s ease-in-out infinite';
+                        }, 1100);
 
                         setTimeout(() => alert('Você conseguiu finalizar!'), 3600);
                     }
-                }, 1000)
+                }, 1000);
             }
         }
-    })
-})
+    });
+});
 
 // ------------------------------- Menu lateral e submenus -------------------------------------
 
-const botao_menu_lateral = document.getElementById('botao-menu-lateral') // Seleciona o botão responsável por mostrar/ocultar o menu lateral
-const main = document.getElementsByTagName('main')[0].style // Seleciona o elemento <main> do documento
-const seta_botao = document.getElementById('seta-botao').style // Seleciona o estilo da seta do botão de menu
-const menu_lateral = document.getElementById('menu-lateral').style // Seleciona o menu lateral
-const cabecalho_menu_lateral = document.getElementById('cabecalho-menu-lateral').style
-const sub_menu_temas = document.getElementById('sub-menu-temas').style
-const sub_menu_musica = document.getElementById('sub-menu-musica').style
-var menu_visivel = true // Variável para controlar a visibilidade do menu lateral     
-var tema_escuro = false // Variável para controlar o tema escuro/claro
+const BOTAO_MENU_LATERAL = document.getElementById('botao-menu-lateral'); // Seleciona o botão responsável por mostrar/ocultar o menu lateral
+const MAIN = document.getElementsByTagName('main')[0].style; // Seleciona o elemento <main> do documento
+const SETA_BOTAO = document.getElementById('seta-botao').style; // Seleciona o estilo da seta do botão de menu
+const MENU_LATERAL = document.getElementById('menu-lateral').style; // Seleciona o menu lateral
+const CABECALHO_MENU_LATERAL = document.getElementById('cabecalho-menu-lateral').style;
+const SUB_MENU_TEMAS = document.getElementById('sub-menu-temas').style;
+const SUB_MENU_MUSICA = document.getElementById('sub-menu-musica').style;
+var menuVisivel = true; // Variável para controlar a visibilidade do menu lateral     
+var temaEscuro = false; // Variável para controlar o tema escuro/claro
 
 // Mostra ou oculta o menu lateral
-botao_menu_lateral.addEventListener('click', evento => {
-    if (!menu_visivel) {
+BOTAO_MENU_LATERAL.addEventListener('click', evento => {
+    if (!menuVisivel) {
         // Ao fechar o menu
         if (medidaDaTela(1230)) {
-            main.transform = 'initial'
-            main.transition = '0.5s'
+            MAIN.transform = 'initial';
+            MAIN.transition = '0.5s';
         }
     
-        menu_lateral.transform = 'translateX(-100%)'
-        menu_lateral.transition = '0.5s'
-        evento.target.style.transform = 'translate(60px, 50px)'
-        evento.target.style.transition = '0.5s'
-        evento.target.title = 'Abrir menu'
-        seta_botao.transform = 'initial'
-        seta_botao.transition = '0.4s'
-        menu_visivel = true  
+        MENU_LATERAL.transform = 'translateX(-100%)';
+        MENU_LATERAL.transition = '0.5s';
+        evento.target.style.transform = 'translate(60px, 50px)';
+        evento.target.style.transition = '0.5s';
+        evento.target.title = 'Abrir menu';
+        SETA_BOTAO.transform = 'initial';
+        SETA_BOTAO.transition = '0.4s';
+        menuVisivel = true;  
     } else {
         // Ao abrir o menu
         if (medidaDaTela(1230)){
-            main.transform = 'translateX(215px)'
-            main.transition = '0.5s'
+            MAIN.transform = 'translateX(215px)';
+            MAIN.transition = '0.5s';
         }
         
-        menu_lateral.transform = 'initial'
-        menu_lateral.transition = '0.5s'
-        evento.target.style.transform = 'translate(60px, 50px)'
-        evento.target.style.transition = '0.5s'
-        evento.target.title = 'Fechar menu'
-        seta_botao.transform = 'rotate(180deg)'
-        seta_botao.transition = '0.4s'
-        menu_visivel = false
+        MENU_LATERAL.transform = 'initial';
+        MENU_LATERAL.transition = '0.5s';
+        evento.target.style.transform = 'translate(60px, 50px)';
+        evento.target.style.transition = '0.5s';
+        evento.target.title = 'Fechar menu';
+        SETA_BOTAO.transform = 'rotate(180deg)';
+        SETA_BOTAO.transition = '0.4s';
+        menuVisivel = false;
     }
-})
+});
 
 // Botão para o submenu de temas
 document.getElementById('botao-temas').addEventListener('mouseenter', evento => {
-    sub_menu_musica.transition = '0.2s'
-    sub_menu_musica.transform = 'scaleY(0)'
-    sub_menu_temas.transition = '0.2s'
-    sub_menu_temas.transform = 'scaleY(1)'
+    SUB_MENU_MUSICA.transition = '0.2s';
+    SUB_MENU_MUSICA.transform = 'scaleY(0)';
+    SUB_MENU_TEMAS.transition = '0.2s';
+    SUB_MENU_TEMAS.transform = 'scaleY(1)';
 
     evento.target.addEventListener('mouseleave', () => {
-        sub_menu_temas.transition = '0.2s'
-        sub_menu_temas.transform = 'scaleY(0)'
-    })
-})
+        SUB_MENU_TEMAS.transition = '0.2s';
+        SUB_MENU_TEMAS.transform = 'scaleY(0)';
+    });
+});
 
-// Alterna para o tema "Noite"
+// Alterna para os temas "Noite"/"Dia"
 document.querySelectorAll('#sub-menu-temas > li').forEach(texto => {
     texto.addEventListener('click', () => {
         if (texto.textContent == '🌙 Noite') {
-            tema_escuro = true
-            alternarTema()
+            temaEscuro = true;
+            alternarTema();
         } else if (texto.textContent == '☀️ Dia') {
-            tema_escuro = false
-            alternarTema()
+            temaEscuro = false;
+            alternarTema();
         }
-    })
-})
+    });
+});
 
 // Opção para o submenu "Música"
 document.getElementById('botao-musica').addEventListener('mouseenter', evento => {
-    sub_menu_temas.transition = '0.2s'
-    sub_menu_temas.transform = 'scaleY(0)'
-    sub_menu_musica.transition = '0.2s'
-    sub_menu_musica.transform = 'scaleY(1)'
+    SUB_MENU_TEMAS.transition = '0.2s';
+    SUB_MENU_TEMAS.transform = 'scaleY(0)';
+    SUB_MENU_MUSICA.transition = '0.2s';
+    SUB_MENU_MUSICA.transform = 'scaleY(1)';
 
     evento.target.addEventListener('mouseleave', () => {
-        sub_menu_musica.transition = '0.2s'
-        sub_menu_musica.transform = 'scaleY(0)'
-    })
-})
+        SUB_MENU_MUSICA.transition = '0.2s';
+        SUB_MENU_MUSICA.transform = 'scaleY(0)';
+    });
+});
 
 document.querySelectorAll('#sub-menu-musica > li').forEach(texto => {
     texto.addEventListener('click', () => {
-        if (texto.textContent == '🔊 Ativada') {
-            musica.muted = false
-            musica.play()
-        } else if (texto.textContent == '🔇 Desativada') {
-            musica.muted = true
-            musica.currentTime = 0
+        if (totalVidas > 0) {
+            if (texto.textContent == '🔊 Ativada') {
+                MUSICA.muted = false;
+                MUSICA.play();
+            } else if (texto.textContent == '🔇 Desativada') {
+                MUSICA.muted = true;
+                MUSICA.currentTime = 0;
+            }
         }
-    })
-})
+    });
+});
 
 // Ação da opção "Sobre"
 document.getElementById('botao-sobre').addEventListener('click', () => {
-    const sobre = document.getElementById('sobre').style
+    const SOBRE = document.getElementById('sobre').style;
 
-    if (sobre.display != 'block')
-        sobre.display = 'block'
+    if (SOBRE.display != 'block')
+        SOBRE.display = 'block';
     else
-        sobre.display = 'none'
-})
+        SOBRE.display = 'none';
+});
 
 document.getElementById('fechar-sobre').addEventListener('click', () => {
-    document.getElementById('sobre').style.display = 'none'
-})
+    document.getElementById('sobre').style.display = 'none';
+});
 
 document.getElementById('botao-sair').addEventListener('click', () =>  {
-    let confirmado = confirm('Tem certeza que deseja sair?')
+    let confirmado = confirm('Tem certeza que deseja sair?');
 
-    if (confirmado) close()
-})
+    if (confirmado) close();
+});
 
 // --------------------------------------------------------------------------------------------------
 
@@ -419,25 +425,47 @@ document.getElementById('botao-sair').addEventListener('click', () =>  {
 function embaralharVetor(vetor) {
     for (let y = vetor.length - 1; y > 0; y--) {
         const x = Math.floor(Math.random() * (y + 1));
-        [vetor[y], vetor[x]] = [vetor[x], vetor[y]] 
+        [vetor[y], vetor[x]] = [vetor[x], vetor[y]]; 
     }
 }
 
+// Verifica a largura da tela
+function medidaDaTela(medida) {
+    const medidaMax = matchMedia(`(max-width: ${medida}px)`);
+
+    return medidaMax.matches;
+}
+
+// Emite apenas os efeitos sonoros
+function tocarEfeitoSonoro(vidas) {
+    if (vidas == 0) 
+        new Audio('./_media/_sounds/game-over.wav').play();
+    else
+        new Audio('./_media/_sounds/victory.wav').play();
+}
+
+function pausar(seg) {
+    seg *= 1000;
+
+    return new Promise(resolve => setTimeout(resolve, seg));
+}
+
+// Algoritmo para a alternância dos temas "Noite"/"Dia"
 function alternarTema() {
-    if (tema_escuro) {
-        body.backgroundImage = "url('_media/_images/bg_night.png')"
-        menu_lateral.backgroundImage = "url('_media/_images/bg-3_night.png')"
-        cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game_night.png')"
+    if (temaEscuro) {
+        BODY.backgroundImage = "url('_media/_images/bg_night.png')";
+        MENU_LATERAL.backgroundImage = "url('_media/_images/bg-3_night.png')";
+        CABECALHO_MENU_LATERAL.backgroundImage = "url('_media/_images/title-memory-game_night.png')";
 
-        caixas.forEach(caixa => {
-            const imagem_revelada = getComputedStyle(caixa).backgroundImage
+        CAIXAS.forEach(caixa => {
+            const imagemRevelada = getComputedStyle(caixa).backgroundImage;
 
-            if (!imagem_revelada.includes(`box_blue.png`)) 
-                caixa.style.backgroundImage = "url('_media/_images/box_blue.png')"
+            if (!imagemRevelada.includes(`box_blue.png`)) 
+                caixa.style.backgroundImage = "url('_media/_images/box_blue.png')";
 
-            for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
-                if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
-                    caixa.style.backgroundImage = imagem_revelada
+            for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
+                if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
+                    caixa.style.backgroundImage = imagemRevelada;
             }
 
             // Adiciona efeitos de hover específicos do tema escuro
@@ -445,50 +473,30 @@ function alternarTema() {
                 evento.target.style.boxShadow = '-10px 0px 30px var(--caixa-efeito-noite)',
                 '10px 0px 30px var(--caixa-efeito-noite)',
                 '0px -10px 30px var(--caixa-efeito-noite)',
-                '0px 10px 30px var(--caixa-efeito-noite)'
-            })
+                '0px 10px 30px var(--caixa-efeito-noite)';
+            });
 
-            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
-        })
+            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
+        });
     } else {
-        body.backgroundImage = "url('_media/_images/bg.png')"
-        menu_lateral.backgroundImage = "url('_media/_images/bg-3.png')"
-        cabecalho_menu_lateral.backgroundImage = "url('_media/_images/title-memory-game.png')"
+        BODY.backgroundImage = "url('_media/_images/bg.png')";
+        MENU_LATERAL.backgroundImage = "url('_media/_images/bg-3.png')";
+        CABECALHO_MENU_LATERAL.backgroundImage = "url('_media/_images/title-memory-game.png')";
 
-        caixas.forEach(caixa => {
-            const imagem_revelada = getComputedStyle(caixa).backgroundImage
+        CAIXAS.forEach(caixa => {
+            const imagemRevelada = getComputedStyle(caixa).backgroundImage;
 
-            if (!imagem_revelada.includes('box_yellow.png'))
-                caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')"
+            if (!imagemRevelada.includes('box_yellow.png'))
+                caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')";
 
-            for (let numero_da_imagem = 0; numero_da_imagem < 8; numero_da_imagem++) {
-                if (imagem_revelada.includes(`person-${numero_da_imagem}.png`))
-                    caixa.style.backgroundImage = imagem_revelada
+            for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
+                if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
+                    caixa.style.backgroundImage = imagemRevelada;
             }
 
             // Remove efeitos de hover do tema escuro
-            caixa.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '')
-            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none')
-        })
+            caixa.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '');
+            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
+        });
     }
-}
-
-function medidaDaTela(medida) {
-    const medida_max = matchMedia(`(max-width: ${medida}px)`)
-
-    return medida_max.matches
-}
-
-// Emite efeitos sonoros
-function tocarEfeitoSonoro(vidas) {
-    if (vidas == 0) 
-        new Audio('./_media/_sounds/game-over.wav').play()
-    else
-        new Audio('./_media/_sounds/victory.wav').play()
-}
-
-function pausar(seg) {
-    seg *= 1000
-
-    return new Promise(resolve => setTimeout(resolve, seg))
 }

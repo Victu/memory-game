@@ -61,10 +61,10 @@ body {
 @keyframes acenderLogomark {
     0%, 100% { box-shadow: initial; }
     50% {
-        box-shadow: -25px -25px 55px rgba(255, 70, 70, 0.5),
-        25px -25px 55px rgba(70, 255, 70, 0.5),
-        -25px 25px 55px rgba(70, 199, 255, 0.5),
-        25px 25px 55px rgba(255, 70, 70, 0.5);
+        box-shadow: -25px -25px 58px rgba(255, 70, 70, 0.5),
+        25px -25px 58px rgba(70, 255, 70, 0.5),
+        -25px 25px 58px rgba(70, 199, 255, 0.5),
+        25px 25px 58px rgba(255, 70, 70, 0.5);
     }
 }
 
