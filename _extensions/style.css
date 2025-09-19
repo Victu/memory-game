@@ -119,7 +119,6 @@ body {
     bottom: 20pc;
     font-size: .95em;
     color: yellow;
-    transition: 1s ease-out;
     min-width: max-content;
 }
 

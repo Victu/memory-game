@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     quantidade_inicial_vidas.style.opacity = '1'
     
     setTimeout(() => {
+        quantidade_inicial_vidas.style.transition = '1s ease-out'
         quantidade_inicial_vidas.style.visibility = 'hidden'
         quantidade_inicial_vidas.style.opacity = '0'
     }, 5000)
@@ -77,7 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 async function escolher(escolha) {
-    const quantidade_escolhida_vidas = document.querySelector('#quantidade-inicial-vidas > span')
+    const quantidade_escolhida_vidas = document.getElementById('quantidade-escolhida-vidas')
+    const nivel_escolhido = document.getElementById('nivel-escolhido')
 
     switch (escolha) {
         case 'aumentar':
@@ -107,19 +109,24 @@ async function escolher(escolha) {
             if (nivel_atual == 1) {
                 total_vidas = 8
                 nivel_dificuldade.innerText = 'Fácil'
+                nivel_escolhido.innerText = 'fácil'
             } else if (nivel_atual == 2) {
                 total_vidas = 5
                 nivel_dificuldade.innerText = 'Médio'
+                nivel_escolhido.innerText = 'médio'
             } else if (nivel_atual == 3) {
                 total_vidas = 3
                 nivel_dificuldade.innerText = 'Difícil'
+                nivel_escolhido.innerText = 'difícil'
             }
             
             numero_de_vidas.innerText = total_vidas
             quantidade_escolhida_vidas.innerText = total_vidas
+            quantidade_inicial_vidas.style.transition = 'none'
             quantidade_inicial_vidas.style.visibility = 'visible'
             quantidade_inicial_vidas.style.opacity = '1'
             await pausar(3)
+            quantidade_inicial_vidas.style.transition = '1s ease-out'
             quantidade_inicial_vidas.style.visibility = 'hidden'
             quantidade_inicial_vidas.style.opacity = '0'
         }
@@ -129,7 +136,7 @@ async function escolher(escolha) {
 // Associa o evento de clique a cada caixa
 caixas.forEach((elemento, index) => {
     elemento.addEventListener('click', caixa => {
-        const reiniciar = null
+        let reiniciar = null
                 
         // Exibe a imagem correspondente à posição embaralhada
         caixa.target.style.backgroundImage = `url('${imagens[index]}')`
@@ -220,18 +227,18 @@ caixas.forEach((elemento, index) => {
                             game_over_msg.style.opacity = 1
                             game_over_msg.style.animation = 'piscarMsg 0.6s ease-in-out infinite'
                         }, 1100)
-                        
+
+                        caixas.forEach(objeto => {
+                            objeto.style.opacity = '0'
+                            objeto.style.visibility = 'hidden'
+                            objeto.style.transform = 'rotate(-360deg)'
+                        })      
+
                         setTimeout(() => {
                             reiniciar = confirm('Deseja voltar para a tela inicial?')
 
                             if (reiniciar) location.reload()
                         }, 3600)
-                        
-                        caixas.forEach(objeto => {
-                            objeto.style.opacity = '0'
-                            objeto.style.visibility = 'hidden'
-                            objeto.style.transform = 'rotate(-360deg)'
-                        })
                     }        
                 }, 800)
             } else {
