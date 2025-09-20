@@ -1,13 +1,13 @@
 // --------------------------- Configurações do conteúdo principal ---------------------------------
 
-const BODY = document.body.style; // Seleciona o elemento <body> do documento
+const BODY = document.body.style;
 const CAIXAS = document.querySelectorAll('.caixa'); // Seleciona todas as botões com a classe 'caixa'
 const IMAGENS = []; // Array que armazenará os caminhos das imagens dos personagens
 var imagensReveladas = []; // Array para armazenar imagens reveladas no clique
 var caixasSelecionadas = []; // Array para armazenar as caixas que foram clicadas
-var numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário
-var totalVidas = 5; // Quantidade total de vidas
-var acertos = 0; // Variável para contar os acertos  
+var numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
+var totalVidas = 5;
+var acertos = 0;
 const GAME_OVER_MSG = document.getElementById('game-over-msg');
 const VIDA_RETIRADA = document.getElementById('vida-retirada');
 var nivelAtual = 2; // Nível médio, por padrão
@@ -16,14 +16,7 @@ const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vid
 const TEMA = document.getElementById('tema');
 const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg');
 
-// Adiciona duas vezes os caminhos das imagens ao array, formando pares
-for (let i = 0; i < 2; i++) {
-    for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++)
-        IMAGENS.unshift(`_media/_images/person-${numeroDaImagem}.png`);
-}
-
-// Embaralha o array de imagens 
-embaralharVetor(IMAGENS);
+embaralharImagens(IMAGENS);
 
 // Animação da introdução
 document.addEventListener('DOMContentLoaded', () => {
@@ -95,12 +88,12 @@ async function escolher(escolha) {
         case 'dia':
             TEMA.innerText = 'Dia';
             temaEscuro = false;
-            alternarTema();
+            alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
             break;
         case 'noite':
             TEMA.innerText = 'Noite';
             temaEscuro = true;
-            alternarTema();
+            alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
             break;
     }
     
@@ -301,10 +294,10 @@ CAIXAS.forEach((elemento, index) => {
 
 // ------------------------------- Menu lateral e submenus -------------------------------------
 
-const BOTAO_MENU_LATERAL = document.getElementById('botao-menu-lateral'); // Seleciona o botão responsável por mostrar/ocultar o menu lateral
-const MAIN = document.getElementsByTagName('main')[0].style; // Seleciona o elemento <main> do documento
-const SETA_BOTAO = document.getElementById('seta-botao').style; // Seleciona o estilo da seta do botão de menu
-const MENU_LATERAL = document.getElementById('menu-lateral').style; // Seleciona o menu lateral
+const BOTAO_MENU_LATERAL = document.getElementById('botao-menu-lateral');
+const MAIN = document.getElementsByTagName('main')[0].style; 
+const SETA_BOTAO = document.getElementById('seta-botao').style; // Seleciona o estilo da seta do botão de menu lateral
+const MENU_LATERAL = document.getElementById('menu-lateral').style;
 const CABECALHO_MENU_LATERAL = document.getElementById('cabecalho-menu-lateral').style;
 const SUB_MENU_TEMAS = document.getElementById('sub-menu-temas').style;
 const SUB_MENU_MUSICA = document.getElementById('sub-menu-musica').style;
@@ -364,10 +357,10 @@ document.querySelectorAll('#sub-menu-temas > li').forEach(texto => {
     texto.addEventListener('click', () => {
         if (texto.textContent == '🌙 Noite') {
             temaEscuro = true;
-            alternarTema();
+            alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
         } else if (texto.textContent == '☀️ Dia') {
             temaEscuro = false;
-            alternarTema();
+            alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
         }
     });
 });
@@ -418,85 +411,3 @@ document.getElementById('botao-sair').addEventListener('click', () =>  {
 
     if (confirmado) close();
 });
-
-// --------------------------------------------------------------------------------------------------
-
-// Algoritmo para embaralhar vetor
-function embaralharVetor(vetor) {
-    for (let y = vetor.length - 1; y > 0; y--) {
-        const x = Math.floor(Math.random() * (y + 1));
-        [vetor[y], vetor[x]] = [vetor[x], vetor[y]]; 
-    }
-}
-
-// Verifica a largura da tela
-function medidaDaTela(medida) {
-    const medidaMax = matchMedia(`(max-width: ${medida}px)`);
-
-    return medidaMax.matches;
-}
-
-// Emite apenas os efeitos sonoros
-function tocarEfeitoSonoro(vidas) {
-    if (vidas == 0) 
-        new Audio('./_media/_sounds/game-over.wav').play();
-    else
-        new Audio('./_media/_sounds/victory.wav').play();
-}
-
-function pausar(seg) {
-    seg *= 1000;
-
-    return new Promise(resolve => setTimeout(resolve, seg));
-}
-
-// Algoritmo para a alternância dos temas "Noite"/"Dia"
-function alternarTema() {
-    if (temaEscuro) {
-        BODY.backgroundImage = "url('_media/_images/bg_night.png')";
-        MENU_LATERAL.backgroundImage = "url('_media/_images/bg-3_night.png')";
-        CABECALHO_MENU_LATERAL.backgroundImage = "url('_media/_images/title-memory-game_night.png')";
-
-        CAIXAS.forEach(caixa => {
-            const imagemRevelada = getComputedStyle(caixa).backgroundImage;
-
-            if (!imagemRevelada.includes(`box_blue.png`)) 
-                caixa.style.backgroundImage = "url('_media/_images/box_blue.png')";
-
-            for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
-                if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
-                    caixa.style.backgroundImage = imagemRevelada;
-            }
-
-            // Adiciona efeitos de hover específicos do tema escuro
-            caixa.addEventListener('mouseenter', evento => {
-                evento.target.style.boxShadow = '-10px 0px 30px var(--caixa-efeito-noite)',
-                '10px 0px 30px var(--caixa-efeito-noite)',
-                '0px -10px 30px var(--caixa-efeito-noite)',
-                '0px 10px 30px var(--caixa-efeito-noite)';
-            });
-
-            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
-        });
-    } else {
-        BODY.backgroundImage = "url('_media/_images/bg.png')";
-        MENU_LATERAL.backgroundImage = "url('_media/_images/bg-3.png')";
-        CABECALHO_MENU_LATERAL.backgroundImage = "url('_media/_images/title-memory-game.png')";
-
-        CAIXAS.forEach(caixa => {
-            const imagemRevelada = getComputedStyle(caixa).backgroundImage;
-
-            if (!imagemRevelada.includes('box_yellow.png'))
-                caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')";
-
-            for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
-                if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
-                    caixa.style.backgroundImage = imagemRevelada;
-            }
-
-            // Remove efeitos de hover do tema escuro
-            caixa.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '');
-            caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
-        });
-    }
-}

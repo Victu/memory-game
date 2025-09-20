@@ -366,7 +366,7 @@ main {
     top: 30%;
     font-size: 6em;
     font-family: pixelFont;
-    text-shadow: 2px 2px 1px #0a0a0a;;
+    text-shadow: 2px 2px 1px #0a0a0a;
     visibility: hidden;
     opacity: 0;
     animation: none;
