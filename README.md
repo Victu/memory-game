@@ -54,19 +54,20 @@ JavaScript (ES6+): Responsável por toda a lógica do jogo, incluindo o embaralh
 
 📁 <strong>Estrutura do Projeto</strong>
 
-`|-- _extensions/`<br>
-`|   |-- script.js`<br>
-`|   |-- style.css`      
+`|-- _complements/`<br>
+`|   |-- resources.js`<br>      
 `|   |-- responsiveness.css`<br>
 `|-- _font/`           
 `|-- _media/`            
 `|   |-- _images/`       
-`|   |-- _sounds/`       
-`-- main.html`
+`|   |-- _sounds/`
+`-- main.css`
+`-- main.html`      
+`-- main.js`
 
 ⌨️ <strong>Como Executar o Projeto</strong>
 
-Para executar o jogo, basta clonar este repositório e abrir o arquivo mainContent.html em seu navegador de preferência.
+Para executar o jogo, basta clonar este repositório e abrir o arquivo main.html em seu navegador de preferência.
 
 `git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio` # Abra o arquivo mainContent.html no navegador
+cd seu-repositorio` # Abra o arquivo main.html no navegador
