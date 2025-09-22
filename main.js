@@ -295,7 +295,7 @@ CAIXAS.forEach((elemento, index) => {
 // ------------------------------- Menu lateral e submenus -------------------------------------
 
 const BOTAO_MENU_LATERAL = document.getElementById('botao-menu-lateral');
-const MAIN = document.getElementsByTagName('main')[0].style; 
+const MAIN = document.querySelector('main').style; 
 const SETA_BOTAO = document.getElementById('seta-botao').style; // Seleciona o estilo da seta do botão de menu lateral
 const MENU_LATERAL = document.getElementById('menu-lateral').style;
 const CABECALHO_MENU_LATERAL = document.getElementById('cabecalho-menu-lateral').style;
