@@ -353,12 +353,12 @@ document.getElementById('botao-temas').addEventListener('mouseenter', evento => 
 });
 
 // Alterna para os temas "Noite"/"Dia"
-document.querySelectorAll('#sub-menu-temas > li').forEach(texto => {
-    texto.addEventListener('click', () => {
-        if (texto.textContent == '🌙 Noite') {
+document.querySelectorAll('#sub-menu-temas > li').forEach(opcao => {
+    opcao.addEventListener('click', () => {
+        if (opcao.textContent == '🌙 Noite') {
             temaEscuro = true;
             alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
-        } else if (texto.textContent == '☀️ Dia') {
+        } else if (opcao.textContent == '☀️ Dia') {
             temaEscuro = false;
             alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
         }
@@ -378,13 +378,14 @@ document.getElementById('botao-musica').addEventListener('mouseenter', evento =>
     });
 });
 
-document.querySelectorAll('#sub-menu-musica > li').forEach(texto => {
-    texto.addEventListener('click', () => {
+// Ativar ou desativar a música de fundo
+document.querySelectorAll('#sub-menu-musica > li').forEach(opcao => {
+    opcao.addEventListener('click', () => {
         if (totalVidas > 0) {
-            if (texto.textContent == '🔊 Ativada') {
+            if (opcao.textContent == '🔊 Ativada') {
                 MUSICA.muted = false;
                 MUSICA.play();
-            } else if (texto.textContent == '🔇 Desativada') {
+            } else if (opcao.textContent == '🔇 Desativada') {
                 MUSICA.muted = true;
                 MUSICA.currentTime = 0;
             }

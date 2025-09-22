@@ -5,7 +5,7 @@ function embaralharImagens(vetor) {
         for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++)
             vetor.unshift(`_media/_images/person-${numeroDaImagem}.png`);
     }
-
+    
     for (let y = vetor.length - 1; y > 0; y--) {
         const x = Math.floor(Math.random() * (y + 1));
         [vetor[y], vetor[x]] = [vetor[x], vetor[y]]; 
@@ -27,6 +27,7 @@ function tocarEfeitoSonoro(vidas) {
         new Audio('./_media/_sounds/victory.wav').play();
 }
 
+// Pausa o andamento do código por um tempo determinado
 function pausar(seg) {
     seg *= 1000;
 
