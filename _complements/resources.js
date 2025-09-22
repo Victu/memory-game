@@ -1,14 +1,14 @@
-// Algoritmo para embaralhar vetor
-function embaralharImagens(vetor) {
+// Algoritmo para embaralhar as imagens
+function embaralharImagens(imagens) {
     // Adiciona duas vezes os caminhos das imagens ao array, formando pares
     for (let i = 0; i < 2; i++) {
         for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++)
-            vetor.unshift(`_media/_images/person-${numeroDaImagem}.png`);
+            imagens.unshift(`_media/_images/person-${numeroDaImagem}.png`);
     }
-    
-    for (let y = vetor.length - 1; y > 0; y--) {
+
+    for (let y = imagens.length - 1; y > 0; y--) {
         const x = Math.floor(Math.random() * (y + 1));
-        [vetor[y], vetor[x]] = [vetor[x], vetor[y]]; 
+        [imagens[y], imagens[x]] = [imagens[x], imagens[y]]; 
     }
 }
 
