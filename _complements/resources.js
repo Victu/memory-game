@@ -19,7 +19,7 @@ function medidaDaTela(medida) {
     return medidaMax.matches;
 }
 
-// Emite apenas os efeitos sonoros
+// Emite apenas os efeitos sonoros em caso de derrota ou vitória
 function tocarEfeitoSonoro(vidas) {
     if (vidas == 0) 
         new Audio('./_media/_sounds/game-over.wav').play();
