@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         MAIN.transition = '1.5s';
         BOTAO_MENU_LATERAL.style.transform = 'translate(60px, 50px)';
         BOTAO_MENU_LATERAL.style.transition = '1s';
-        SETA_BOTAO.animation = 'apontar 0.6s linear 5';
+        SETA_BOTAO_MENU_LATERAL.animation = 'apontar 0.6s linear 5';
         await pausar(2.5);
 
         for (const caixa of CAIXAS) {
@@ -297,7 +297,7 @@ CAIXAS.forEach((elemento, index) => {
 
 const BOTAO_MENU_LATERAL = document.getElementById('botao-menu-lateral');
 const MAIN = document.querySelector('main').style; 
-const SETA_BOTAO = document.getElementById('seta-botao').style; // Seleciona o estilo da seta do botão de menu lateral
+const SETA_BOTAO_MENU_LATERAL = document.getElementById('seta-botao').style; // Seleciona o estilo da seta do botão de menu lateral
 const MENU_LATERAL = document.getElementById('menu-lateral').style;
 const CABECALHO_MENU_LATERAL = document.getElementById('cabecalho-menu-lateral').style;
 const SUB_MENU_TEMAS = document.getElementById('sub-menu-temas').style;
@@ -319,8 +319,8 @@ BOTAO_MENU_LATERAL.addEventListener('click', evento => {
         evento.target.style.transform = 'translate(60px, 50px)';
         evento.target.style.transition = '0.5s';
         evento.target.title = 'Abrir menu';
-        SETA_BOTAO.transform = 'initial';
-        SETA_BOTAO.transition = '0.4s';
+        SETA_BOTAO_MENU_LATERAL.transform = 'initial';
+        SETA_BOTAO_MENU_LATERAL.transition = '0.4s';
         menuVisivel = true;  
     } else {
         // Ao abrir o menu
@@ -334,8 +334,8 @@ BOTAO_MENU_LATERAL.addEventListener('click', evento => {
         evento.target.style.transform = 'translate(60px, 50px)';
         evento.target.style.transition = '0.5s';
         evento.target.title = 'Fechar menu';
-        SETA_BOTAO.transform = 'rotate(180deg)';
-        SETA_BOTAO.transition = '0.4s';
+        SETA_BOTAO_MENU_LATERAL.transform = 'rotate(180deg)';
+        SETA_BOTAO_MENU_LATERAL.transition = '0.4s';
         menuVisivel = false;
     }
 });
@@ -388,7 +388,7 @@ document.querySelectorAll('#sub-menu-musica > li').forEach(opcao => {
                 MUSICA.play();
             } else if (opcao.textContent == '🔇 Desativada') {
                 MUSICA.muted = true;
-                MUSICA.currentTime = 0;
+                MUSICA.currentTime = 0; // Recomeça a música
             }
         }
     });
