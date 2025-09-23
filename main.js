@@ -13,6 +13,7 @@ const VIDA_RETIRADA = document.getElementById('vida-retirada');
 let nivelAtual = 2; // Nível médio, por padrão (5 vidas)
 const NIVEL_DIFICULDADE = document.getElementById('nivel-dificuldade');
 const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vidas').style;
+let jogoFinalizado = false;
 const TEMA = document.getElementById('tema');
 const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música tocada durante o jogo
 
@@ -217,6 +218,7 @@ CAIXAS.forEach((elemento, index) => {
 
                     if (totalVidas == 0) {
                         MUSICA.muted = true;
+                        jogoFinalizado = true;
 
                         setTimeout(() => {
                             tocarEfeitoSonoro(null, false);
@@ -273,10 +275,10 @@ CAIXAS.forEach((elemento, index) => {
 
                     if (acertos == 8) {
                         acertos = 0;
+                        MUSICA.muted = true;
+                        jogoFinalizado = true;
 
                         setTimeout(() => {
-                            MUSICA.muted = true;
-
                             tocarEfeitoSonoro(null, true);
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none';
                             GAME_OVER_MSG.innerHTML = 'You<br><br>Win!';
@@ -304,8 +306,8 @@ const MENU_LATERAL = document.getElementById('menu-lateral').style;
 const CABECALHO_MENU_LATERAL = document.getElementById('cabecalho-menu-lateral').style;
 const SUB_MENU_TEMAS = document.getElementById('sub-menu-temas').style;
 const SUB_MENU_MUSICA = document.getElementById('sub-menu-musica').style;
-var menuVisivel = true; // Variável para controlar a visibilidade do menu lateral     
-var temaEscuro = false; // Variável para controlar o tema escuro/claro
+let menuVisivel = true; // Variável para controlar a visibilidade do menu lateral     
+let temaEscuro = false; // Variável para controlar o tema escuro/claro
 
 // Mostra ou oculta o menu lateral
 BOTAO_MENU_LATERAL.addEventListener('click', evento => {
@@ -384,11 +386,11 @@ document.getElementById('opcao-musica').addEventListener('mouseenter', evento =>
 // Ativar ou desativar a música de fundo
 document.querySelectorAll('#sub-menu-musica > li').forEach(opcao => {
     opcao.addEventListener('click', () => {
-        if (totalVidas > 0) {
-            if (opcao.textContent == '🔊 Ativada') {
+        if (!jogoFinalizado) {
+            if (opcao.textContent === '🔊 Ativada') {
                 MUSICA.muted = false;
                 MUSICA.play();
-            } else if (opcao.textContent == '🔇 Desativada') {
+            } else if (opcao.textContent === '🔇 Desativada') {
                 MUSICA.muted = true;
                 MUSICA.currentTime = 0;
             }
@@ -411,7 +413,7 @@ document.getElementById('fechar-sobre').addEventListener('click', () => {
 });
 
 document.getElementById('opcao-sair').addEventListener('click', () =>  {
-    let confirmado = confirm('Tem certeza que deseja sair?');
+    var confirmado = confirm('Tem certeza que deseja sair?');
 
     if (confirmado) close();
 });

@@ -20,13 +20,16 @@ function medidaDaTela(medida) {
     return MEDIDA_MAXIMA.matches;
 }
 
-// Emite apenas os efeitos sonoros em caso de derrota ou vitória
+// Emite os efeitos sonoros no caso de erro, acerto, derrota ou vitória
 function tocarEfeitoSonoro(acertou, venceu) {
     if (acertou != null) {
+        const SOM_DE_ERRO = new Audio('./_media/_sounds/error.mp3');
+        SOM_DE_ERRO.volume = 0.6;
+
         if (acertou)
             new Audio('./_media/_sounds/success.mp3').play();
         else
-            new Audio('./_media/_sounds/error.mp3').play();
+            SOM_DE_ERRO.play();
     }
 
     if (venceu != null) {
