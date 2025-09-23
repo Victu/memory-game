@@ -3,14 +3,14 @@
 const BODY = document.body.style;
 const CAIXAS = document.querySelectorAll('.caixa'); // Seleciona todas as botões com a classe 'caixa'
 const IMAGENS = []; // Array que armazenará os caminhos das imagens dos personagens
-var imagensReveladas = []; // Array para armazenar imagens reveladas no clique
-var caixasSelecionadas = []; // Array para armazenar as caixas que foram clicadas
-var numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
-var totalVidas = 5;
-var acertos = 0;
+let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
+let caixasSelecionadas = []; // Array para armazenar as caixas que foram clicadas
+let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
+let totalVidas = 5;
+let acertos = 0;
 const GAME_OVER_MSG = document.getElementById('game-over-msg');
 const VIDA_RETIRADA = document.getElementById('vida-retirada');
-var nivelAtual = 2; // Nível médio, por padrão
+let nivelAtual = 2; // Nível médio, por padrão (5 vidas)
 const NIVEL_DIFICULDADE = document.getElementById('nivel-dificuldade');
 const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vidas').style;
 const TEMA = document.getElementById('tema');
@@ -62,12 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
         SETA_BOTAO_MENU_LATERAL.animation = 'apontar 0.6s linear 5';
         await pausar(2.5);
 
-        for (const caixa of CAIXAS) {
+        for (const CAIXA of CAIXAS) {
             document.getElementById('cabecalho-principal').style.visibility = 'visible';
-            caixa.style.visibility = 'visible';
-            caixa.style.opacity = '1';
-            caixa.style.transform = '';
-            caixa.style.pointerEvents = 'none';
+            CAIXA.style.visibility = 'visible';
+            CAIXA.style.opacity = '1';
+            CAIXA.style.transform = '';
+            CAIXA.style.pointerEvents = 'none';
             await pausar(0.20);
         }
 
@@ -104,6 +104,8 @@ async function escolher(escolha) {
         } else if (nivelAtual > 3) {
             nivelAtual = 3;
         } else {
+            /* O jogo irá começar com uma determinada quantidade de vidas
+            de acordo com a escolha do nível de dificuldade */
             if (nivelAtual == 1) {
                 totalVidas = 8;
                 NIVEL_DIFICULDADE.innerText = 'Fácil';
@@ -134,7 +136,7 @@ async function escolher(escolha) {
 // Associa o evento de clique a cada caixa
 CAIXAS.forEach((elemento, index) => {
     elemento.addEventListener('click', caixa => {
-        let reiniciar = null;
+        var reiniciar = false;
                 
         // Exibe a imagem correspondente à posição embaralhada
         caixa.target.style.backgroundImage = `url('${IMAGENS[index]}')`;
@@ -152,9 +154,9 @@ CAIXAS.forEach((elemento, index) => {
         if (imagensReveladas.length == 2) {
             if (imagensReveladas[0] !== imagensReveladas[1]) {
                 totalVidas--;
-                new Audio('./_media/_sounds/error.mp3').play();
 
-                setTimeout(() => VIDA_RETIRADA.style.visibility = 'hidden', 300);
+                tocarEfeitoSonoro(false, null);
+                setTimeout(() => VIDA_RETIRADA.style.visibility = 'hidden', 400);
                 VIDA_RETIRADA.style.visibility = 'visible';
                 VIDA_RETIRADA.style.transform = 'translateY(-150px)';
                 VIDA_RETIRADA.innerText = '-1 vida';
@@ -167,20 +169,20 @@ CAIXAS.forEach((elemento, index) => {
 
                 // Após um tempo, reseta as caixas para o estado inicial
                 setTimeout(() => {
-                    for (const caixaSelecionada of caixasSelecionadas) {
+                    for (const CAIXA_SELECIONADA of caixasSelecionadas) {
                         // Define imagem de fundo conforme o tema
                         if (!temaEscuro)
-                            caixaSelecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`;
+                            CAIXA_SELECIONADA.style.backgroundImage = `url('_media/_images/box_yellow.png')`;
                         else
-                            caixaSelecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`;
+                            CAIXA_SELECIONADA.style.backgroundImage = `url('_media/_images/box_blue.png')`;
 
-                        caixaSelecionada.style.cursor = 'pointer';
-                        setTimeout(() => caixaSelecionada.style.pointerEvents = 'auto', 450);
-                        caixaSelecionada.style.transform = 'rotate(-360deg)';
-                        caixaSelecionada.style.boxShadow = 'none';
+                        CAIXA_SELECIONADA.style.cursor = 'pointer';
+                        setTimeout(() => CAIXA_SELECIONADA.style.pointerEvents = 'auto', 450);
+                        CAIXA_SELECIONADA.style.transform = 'rotate(-360deg)';
+                        CAIXA_SELECIONADA.style.boxShadow = 'none';
                         
                         // Restaura efeitos de hover
-                        caixaSelecionada.addEventListener('mouseenter', evento => {
+                        CAIXA_SELECIONADA.addEventListener('mouseenter', evento => {
                             evento.target.style.filter = '';
                             evento.target.style.transform = '';
 
@@ -193,7 +195,7 @@ CAIXAS.forEach((elemento, index) => {
                                 '0px 10px 30px var(--caixa-efeito-noite)';
                         });
 
-                        caixaSelecionada.addEventListener('mouseleave', evento => {
+                        CAIXA_SELECIONADA.addEventListener('mouseleave', evento => {
                             evento.target.style.filter = '';
                             evento.target.style.transform = '';
                         });
@@ -202,9 +204,9 @@ CAIXAS.forEach((elemento, index) => {
                     // Reativa o clique nas caixas que ainda não foram resolvidas
                     CAIXAS.forEach(objeto => {
                         objeto.style.border = 'none';
-                        const corDaCaixa = getComputedStyle(objeto).backgroundImage;
+                        const COR_DA_CAIXA = getComputedStyle(objeto).backgroundImage;
 
-                        if (corDaCaixa.includes('box_yellow.png') || corDaCaixa.includes('box_blue.png'))
+                        if (COR_DA_CAIXA.includes('box_yellow.png') || COR_DA_CAIXA.includes('box_blue.png'))
                             objeto.style.pointerEvents = 'auto';
                     });
 
@@ -217,7 +219,7 @@ CAIXAS.forEach((elemento, index) => {
                         MUSICA.muted = true;
 
                         setTimeout(() => {
-                            tocarEfeitoSonoro(totalVidas);
+                            tocarEfeitoSonoro(null, false);
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none';
                             GAME_OVER_MSG.innerHTML = 'Game<br><br>Over';
                             GAME_OVER_MSG.style.color = 'rgba(255, 50, 50, 0.9)';
@@ -238,11 +240,11 @@ CAIXAS.forEach((elemento, index) => {
                             if (reiniciar) location.reload();
                         }, 3600);
                     }        
-                }, 800);
+                }, 1200);
             } else {
                 acertos++;
-                new Audio('./_media/_sounds/success.mp3').play();
 
+                tocarEfeitoSonoro(true, null);
                 // Se as imagens forem iguais (par encontrado), esconde as caixas
                 CAIXAS.forEach(objeto => objeto.style.pointerEvents = 'none');
                 caixasSelecionadas[0].style.transform = 'initial';
@@ -250,18 +252,18 @@ CAIXAS.forEach((elemento, index) => {
 
                 // Após um tempo, faz as caixas desaparecerem
                 setTimeout(() => {
-                    for (const caixaSelecionada of caixasSelecionadas) {
-                        caixaSelecionada.style.transform = 'translateY(-160px)';
-                        caixaSelecionada.style.transition = '0.7s';
-                        caixaSelecionada.style.opacity = '0';
-                        caixaSelecionada.style.visibility = 'hidden';
+                    for (const CAIXA_SELECIONADA of caixasSelecionadas) {
+                        CAIXA_SELECIONADA.style.transform = 'translateY(-160px)';
+                        CAIXA_SELECIONADA.style.transition = '0.7s';
+                        CAIXA_SELECIONADA.style.opacity = '0';
+                        CAIXA_SELECIONADA.style.visibility = 'hidden';
                     }
 
                     // Reativa cliques nas caixas não resolvidas
                     CAIXAS.forEach(objeto => {
-                        const corDaCaixa = getComputedStyle(objeto).backgroundImage;
+                        const COR_DA_CAIXA = getComputedStyle(objeto).backgroundImage;
 
-                        if (corDaCaixa.includes('box_yellow.png') || corDaCaixa.includes('box_blue.png'))
+                        if (COR_DA_CAIXA.includes('box_yellow.png') || COR_DA_CAIXA.includes('box_blue.png'))
                             objeto.style.pointerEvents = 'auto';
                     });
 
@@ -275,7 +277,7 @@ CAIXAS.forEach((elemento, index) => {
                         setTimeout(() => {
                             MUSICA.muted = true;
 
-                            tocarEfeitoSonoro(totalVidas);
+                            tocarEfeitoSonoro(null, true);
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none';
                             GAME_OVER_MSG.innerHTML = 'You<br><br>Win!';
                             GAME_OVER_MSG.style.marginLeft = '4rem';
@@ -287,7 +289,7 @@ CAIXAS.forEach((elemento, index) => {
 
                         setTimeout(() => alert('Você conseguiu finalizar!'), 3600);
                     }
-                }, 1000);
+                }, 1200);
             }
         }
     });
@@ -313,7 +315,7 @@ BOTAO_MENU_LATERAL.addEventListener('click', evento => {
             MAIN.transform = 'initial';
             MAIN.transition = '0.5s';
         }
-    
+
         MENU_LATERAL.transform = 'translateX(-100%)';
         MENU_LATERAL.transition = '0.5s';
         evento.target.style.transform = 'translate(60px, 50px)';
@@ -341,7 +343,7 @@ BOTAO_MENU_LATERAL.addEventListener('click', evento => {
 });
 
 // Botão para o submenu de temas
-document.getElementById('botao-temas').addEventListener('mouseenter', evento => {
+document.getElementById('opcao-temas').addEventListener('mouseenter', evento => {
     SUB_MENU_MUSICA.transition = '0.2s';
     SUB_MENU_MUSICA.transform = 'scaleY(0)';
     SUB_MENU_TEMAS.transition = '0.2s';
@@ -367,7 +369,7 @@ document.querySelectorAll('#sub-menu-temas > li').forEach(opcao => {
 });
 
 // Opção para o submenu "Música"
-document.getElementById('botao-musica').addEventListener('mouseenter', evento => {
+document.getElementById('opcao-musica').addEventListener('mouseenter', evento => {
     SUB_MENU_TEMAS.transition = '0.2s';
     SUB_MENU_TEMAS.transform = 'scaleY(0)';
     SUB_MENU_MUSICA.transition = '0.2s';
@@ -395,7 +397,7 @@ document.querySelectorAll('#sub-menu-musica > li').forEach(opcao => {
 });
 
 // Ação da opção "Sobre"
-document.getElementById('botao-sobre').addEventListener('click', () => {
+document.getElementById('opcao-sobre').addEventListener('click', () => {
     const SOBRE = document.getElementById('sobre').style;
 
     if (SOBRE.display != 'block')
@@ -408,7 +410,7 @@ document.getElementById('fechar-sobre').addEventListener('click', () => {
     document.getElementById('sobre').style.display = 'none';
 });
 
-document.getElementById('botao-sair').addEventListener('click', () =>  {
+document.getElementById('opcao-sair').addEventListener('click', () =>  {
     let confirmado = confirm('Tem certeza que deseja sair?');
 
     if (confirmado) close();

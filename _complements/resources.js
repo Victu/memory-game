@@ -6,25 +6,35 @@ function embaralharImagens(imagens) {
             imagens.unshift(`_media/_images/person-${numeroDaImagem}.png`);
     }
 
+    // Randomiza a posição de cada imagem do array
     for (let y = imagens.length - 1; y > 0; y--) {
-        const x = Math.floor(Math.random() * (y + 1));
-        [imagens[y], imagens[x]] = [imagens[x], imagens[y]]; 
+        const X = Math.floor(Math.random() * (y + 1));
+        [imagens[y], imagens[X]] = [imagens[X], imagens[y]]; 
     }
 }
 
 // Verifica a largura da tela
 function medidaDaTela(medida) {
-    const medidaMax = matchMedia(`(max-width: ${medida}px)`);
+    const MEDIDA_MAXIMA = matchMedia(`(max-width: ${medida}px)`);
 
-    return medidaMax.matches;
+    return MEDIDA_MAXIMA.matches;
 }
 
 // Emite apenas os efeitos sonoros em caso de derrota ou vitória
-function tocarEfeitoSonoro(vidas) {
-    if (vidas == 0) 
-        new Audio('./_media/_sounds/game-over.wav').play();
-    else
-        new Audio('./_media/_sounds/victory.wav').play();
+function tocarEfeitoSonoro(acertou, venceu) {
+    if (acertou != null) {
+        if (acertou)
+            new Audio('./_media/_sounds/success.mp3').play();
+        else
+            new Audio('./_media/_sounds/error.mp3').play();
+    }
+
+    if (venceu != null) {
+        if (venceu) 
+            new Audio('./_media/_sounds/victory.wav').play();
+        else
+            new Audio('./_media/_sounds/game-over.wav').play();
+    }
 }
 
 // Pausa o andamento do código por um tempo determinado
@@ -42,14 +52,14 @@ function alternarTema(temaStatus, body, vetorDeElementos, menu, cabecalho) {
         cabecalho.backgroundImage = "url('_media/_images/title-memory-game_night.png')";
 
         vetorDeElementos.forEach(caixa => {
-            const imagemRevelada = getComputedStyle(caixa).backgroundImage;
+            const IMAGEM_REVELADA = getComputedStyle(caixa).backgroundImage;
 
-            if (!imagemRevelada.includes(`box_blue.png`)) 
+            if (!IMAGEM_REVELADA.includes(`box_blue.png`)) 
                 caixa.style.backgroundImage = "url('_media/_images/box_blue.png')";
 
             for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
-                if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
-                    caixa.style.backgroundImage = imagemRevelada;
+                if (IMAGEM_REVELADA.includes(`person-${numeroDaImagem}.png`))
+                    caixa.style.backgroundImage = IMAGEM_REVELADA;
             }
 
             // Adiciona efeitos de hover específicos do tema escuro
@@ -68,14 +78,14 @@ function alternarTema(temaStatus, body, vetorDeElementos, menu, cabecalho) {
         cabecalho.backgroundImage = "url('_media/_images/title-memory-game.png')";
 
         vetorDeElementos.forEach(caixa => {
-            const imagemRevelada = getComputedStyle(caixa).backgroundImage;
+            const IMAGEM_REVELADA = getComputedStyle(caixa).backgroundImage;
 
-            if (!imagemRevelada.includes('box_yellow.png'))
+            if (!IMAGEM_REVELADA.includes('box_yellow.png'))
                 caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')";
 
             for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
-                if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
-                    caixa.style.backgroundImage = imagemRevelada;
+                if (IMAGEM_REVELADA.includes(`person-${numeroDaImagem}.png`))
+                    caixa.style.backgroundImage = IMAGEM_REVELADA;
             }
 
             // Remove efeitos de hover do tema escuro

@@ -343,7 +343,7 @@ main {
     font-family: pixelFont;
 }
 
-#sobre, #botao-sair p { text-align: center; }
+#sobre, #opcao-sair p { text-align: center; }
 
 @keyframes iluminarTexto {
     0%, 100% {
