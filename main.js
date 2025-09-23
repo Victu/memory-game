@@ -297,7 +297,7 @@ CAIXAS.forEach((elemento, index) => {
 
 const BOTAO_MENU_LATERAL = document.getElementById('botao-menu-lateral');
 const MAIN = document.querySelector('main').style; 
-const SETA_BOTAO_MENU_LATERAL = document.getElementById('seta-botao').style; // Seleciona o estilo da seta do botão de menu lateral
+const SETA_BOTAO_MENU_LATERAL = document.getElementById('seta-botao-menu-lateral').style; // Seleciona o estilo da seta do botão de menu lateral
 const MENU_LATERAL = document.getElementById('menu-lateral').style;
 const CABECALHO_MENU_LATERAL = document.getElementById('cabecalho-menu-lateral').style;
 const SUB_MENU_TEMAS = document.getElementById('sub-menu-temas').style;
@@ -388,7 +388,7 @@ document.querySelectorAll('#sub-menu-musica > li').forEach(opcao => {
                 MUSICA.play();
             } else if (opcao.textContent == '🔇 Desativada') {
                 MUSICA.muted = true;
-                MUSICA.currentTime = 0; // Recomeça a música
+                MUSICA.currentTime = 0;
             }
         }
     });
