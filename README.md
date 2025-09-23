@@ -55,14 +55,14 @@ JavaScript (ES6+): Responsável por toda a lógica do jogo, incluindo o embaralh
 📁 <strong>Estrutura do Projeto</strong>
 
 `|-- _complements/`<br>
-`|   |-- resources.js`<br>      
+`|   |-- resources.js`<br>
 `|   |-- responsiveness.css`<br>
-`|-- _font/`           
-`|-- _media/`            
-`|   |-- _images/`       
-`|   |-- _sounds/`
-`-- main.css`
-`-- main.html`      
+`|-- _font/`<br>
+`|-- _media/`<br>
+`|   |-- _images/`<br>
+`|   |-- _sounds/`<br>
+`-- main.css`<br>
+`-- main.html`<br>
 `-- main.js`
 
 ⌨️ <strong>Como Executar o Projeto</strong>
