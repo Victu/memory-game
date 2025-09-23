@@ -14,8 +14,9 @@ var nivelAtual = 2; // Nível médio, por padrão
 const NIVEL_DIFICULDADE = document.getElementById('nivel-dificuldade');
 const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vidas').style;
 const TEMA = document.getElementById('tema');
-const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg');
+const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música tocada durante o jogo
 
+// Embaralhamento das imagens
 embaralharImagens(IMAGENS);
 
 // Animação da introdução
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start').addEventListener('click', async botaoStart => {
         botaoStart.target.style.display = 'none';
         SLIDER_CONTAINER.display = 'none';
-        INTRO.transform = 'scale(4) rotate(-50deg)';
+        INTRO.transform = 'scale(5) rotate(-65deg)';
         INTRO.transition = '1s ease-in-out';
         INTRO.opacity = '0';
         INTRO.visibility = 'hidden';
