@@ -137,8 +137,6 @@ async function escolher(escolha) {
 // Associa o evento de clique a cada caixa
 CAIXAS.forEach((elemento, index) => {
     elemento.addEventListener('click', caixa => {
-        var reiniciar = false;
-                
         // Exibe a imagem correspondente à posição embaralhada
         caixa.target.style.backgroundImage = `url('${IMAGENS[index]}')`;
         caixa.target.style.filter = 'initial';
@@ -237,7 +235,7 @@ CAIXAS.forEach((elemento, index) => {
                         });      
 
                         setTimeout(() => {
-                            reiniciar = confirm('Deseja voltar para a tela inicial?');
+                            var reiniciar = confirm('Deseja voltar para a tela inicial?');
 
                             if (reiniciar) location.reload();
                         }, 3600);
