@@ -11,10 +11,10 @@ let acertos = 0;
 const GAME_OVER_MSG = document.getElementById('game-over-msg');
 const VIDA_RETIRADA = document.getElementById('vida-retirada');
 let nivelAtual = 2; // Nível médio, por padrão (5 vidas)
-const SLIDER_CONTAINER = document.getElementById('slider-container').style;
 const NIVEL_DIFICULDADE = document.getElementById('nivel-dificuldade');
 const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vidas').style;
 const TEMA = document.getElementById('tema');
+const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 let jogoFinalizado = false;
 
 // Embaralhamento das imagens
@@ -23,7 +23,7 @@ embaralharImagens(IMAGENS);
 // Interatividade e animações da introdução
 document.addEventListener('DOMContentLoaded', () => {
     const INTRO = document.getElementById('intro').style;
-    const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
+    const SLIDER_CONTAINER = document.getElementById('slider-container').style;
 
     setTimeout(() => {
         QUANTIDADE_INICIAL_VIDAS.transition = '0.7s ease-in'
