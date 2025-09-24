@@ -1,4 +1,4 @@
-// --------------------------- Configurações do conteúdo principal ---------------------------------
+// ----------------------------------- Configurações do conteúdo principal -----------------------------------
 
 const BODY = document.body.style;
 const CAIXAS = document.querySelectorAll('.caixa'); // Seleciona todas as botões com a classe 'caixa'
@@ -13,9 +13,9 @@ const VIDA_RETIRADA = document.getElementById('vida-retirada');
 let nivelAtual = 2; // Nível médio, por padrão (5 vidas)
 const NIVEL_DIFICULDADE = document.getElementById('nivel-dificuldade');
 const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vidas').style;
-let jogoFinalizado = false;
 const TEMA = document.getElementById('tema');
 const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música tocada durante o jogo
+let jogoFinalizado = false;
 
 // Embaralhamento das imagens
 embaralharImagens(IMAGENS);
@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start').addEventListener('click', async botaoStart => {
         botaoStart.target.style.display = 'none';
         SLIDER_CONTAINER.display = 'none';
-        INTRO.transform = 'scale(5) rotate(-65deg)';
-        INTRO.transition = '1s ease-in-out';
+        INTRO.transform = 'scale(6) rotate(-65deg)';
+        INTRO.transition = '1.6s ease-in-out';
         INTRO.opacity = '0';
         INTRO.visibility = 'hidden';
         
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         MUSICA.play();
         MAIN.backgroundColor = 'rgba(0, 0, 0, 0.4)';
-        MAIN.backdropFilter = 'blur(6px)';
+        MAIN.backdropFilter = 'blur(7px)';
         MAIN.transition = '1.5s';
         BOTAO_MENU_LATERAL.style.transform = 'translate(60px, 50px)';
         BOTAO_MENU_LATERAL.style.transition = '1s';
@@ -89,13 +89,13 @@ async function escolher(escolha) {
             break;
         case 'dia':
             TEMA.innerText = 'Dia';
-            temaEscuro = false;
-            alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
+            temaAlternado = false;
+            alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
             break;
         case 'noite':
             TEMA.innerText = 'Noite';
-            temaEscuro = true;
-            alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
+            temaAlternado = true;
+            alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
             break;
     }
     
@@ -155,11 +155,10 @@ CAIXAS.forEach((elemento, index) => {
                 totalVidas--;
 
                 tocarEfeitoSonoro(false, null);
-                setTimeout(() => VIDA_RETIRADA.style.visibility = 'hidden', 400);
+                setTimeout(() => VIDA_RETIRADA.style.visibility = 'hidden', 350);
                 VIDA_RETIRADA.style.visibility = 'visible';
                 VIDA_RETIRADA.style.transform = 'translateY(-150px)';
                 VIDA_RETIRADA.innerText = '-1 vida';
-                
                 // Se forem diferentes, desativa temporariamente os cliques
                 CAIXAS.forEach(objeto => objeto.style.pointerEvents = 'none');
                 caixasSelecionadas[1].style.transform = 'initial';
@@ -170,7 +169,7 @@ CAIXAS.forEach((elemento, index) => {
                 setTimeout(() => {
                     for (const CAIXA_SELECIONADA of caixasSelecionadas) {
                         // Define imagem de fundo conforme o tema
-                        if (!temaEscuro)
+                        if (!temaAlternado)
                             CAIXA_SELECIONADA.style.backgroundImage = `url('_media/_images/box_yellow.png')`;
                         else
                             CAIXA_SELECIONADA.style.backgroundImage = `url('_media/_images/box_blue.png')`;
@@ -185,7 +184,7 @@ CAIXAS.forEach((elemento, index) => {
                             evento.target.style.filter = '';
                             evento.target.style.transform = '';
 
-                            if (!temaEscuro)
+                            if (!temaAlternado)
                                 evento.target.style.boxShadow = '';
                             else
                                 evento.target.style.boxShadow = '-10px 0px 30px var(--caixa-efeito-noite)',
@@ -295,7 +294,7 @@ CAIXAS.forEach((elemento, index) => {
     });
 });
 
-// ------------------------------- Menu lateral e submenus -------------------------------------
+// ----------------------------------------- Menu lateral e submenus -----------------------------------------
 
 const BOTAO_MENU_LATERAL = document.getElementById('botao-menu-lateral');
 const MAIN = document.querySelector('main').style; 
@@ -304,28 +303,12 @@ const MENU_LATERAL = document.getElementById('menu-lateral').style;
 const CABECALHO_MENU_LATERAL = document.getElementById('cabecalho-menu-lateral').style;
 const SUB_MENU_TEMAS = document.getElementById('sub-menu-temas').style;
 const SUB_MENU_MUSICA = document.getElementById('sub-menu-musica').style;
-let menuVisivel = true; // Variável para controlar a visibilidade do menu lateral     
-let temaEscuro = false; // Variável para controlar o tema escuro/claro
+let menuAberto = true; // Variável para controlar a visibilidade do menu lateral     
+let temaAlternado = false; // Variável para controlar o tema "Dia"/"Noite"
 
 // Mostra ou oculta o menu lateral
 BOTAO_MENU_LATERAL.addEventListener('click', evento => {
-    if (!menuVisivel) {
-        // Ao fechar o menu
-        if (medidaDaTela(1230)) {
-            MAIN.transform = 'initial';
-            MAIN.transition = '0.5s';
-        }
-
-        MENU_LATERAL.transform = 'translateX(-100%)';
-        MENU_LATERAL.transition = '0.5s';
-        evento.target.style.transform = 'translate(60px, 50px)';
-        evento.target.style.transition = '0.5s';
-        evento.target.title = 'Abrir menu';
-        SETA_BOTAO_MENU_LATERAL.transform = 'initial';
-        SETA_BOTAO_MENU_LATERAL.transition = '0.4s';
-        menuVisivel = true;  
-    } else {
-        // Ao abrir o menu
+    if (menuAberto) { // Ao abrir o menu
         if (medidaDaTela(1230)){
             MAIN.transform = 'translateX(215px)';
             MAIN.transition = '0.5s';
@@ -338,7 +321,21 @@ BOTAO_MENU_LATERAL.addEventListener('click', evento => {
         evento.target.title = 'Fechar menu';
         SETA_BOTAO_MENU_LATERAL.transform = 'rotate(180deg)';
         SETA_BOTAO_MENU_LATERAL.transition = '0.4s';
-        menuVisivel = false;
+        menuAberto = false;
+    } else { // Ao fechar o menu
+        if (medidaDaTela(1230)) {
+            MAIN.transform = 'initial';
+            MAIN.transition = '0.5s';
+        }
+
+        MENU_LATERAL.transform = 'translateX(-100%)';
+        MENU_LATERAL.transition = '0.5s';
+        evento.target.style.transform = 'translate(60px, 50px)';
+        evento.target.style.transition = '0.5s';
+        evento.target.title = 'Abrir menu';
+        SETA_BOTAO_MENU_LATERAL.transform = 'initial';
+        SETA_BOTAO_MENU_LATERAL.transition = '0.4s';
+        menuAberto = true;  
     }
 });
 
@@ -358,12 +355,12 @@ document.getElementById('opcao-temas').addEventListener('mouseenter', evento => 
 // Alterna para os temas "Noite"/"Dia"
 document.querySelectorAll('#sub-menu-temas > li').forEach(opcao => {
     opcao.addEventListener('click', () => {
-        if (opcao.textContent == '🌙 Noite') {
-            temaEscuro = true;
-            alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
-        } else if (opcao.textContent == '☀️ Dia') {
-            temaEscuro = false;
-            alternarTema(temaEscuro, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
+        if (opcao.textContent === '🌙 Noite') {
+            temaAlternado = true;
+            alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
+        } else if (opcao.textContent === '☀️ Dia') {
+            temaAlternado = false;
+            alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
         }
     });
 });
