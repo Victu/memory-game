@@ -403,12 +403,10 @@ document.getElementById('opcao-sobre').addEventListener('click', () => {
         SOBRE.display = 'none';
 });
 
-document.getElementById('fechar-sobre').addEventListener('click', () => {
-    document.getElementById('sobre').style.display = 'none';
-});
+document.getElementById('fechar-sobre').addEventListener('click', () => document.getElementById('sobre').style.display = 'none');
 
-document.getElementById('opcao-sair').addEventListener('click', () =>  {
-    var confirmado = confirm('Tem certeza que deseja sair?');
+document.getElementById('opcao-sair').addEventListener('click', () => {
+    var sair = confirm('Tem certeza que deseja sair?');
 
-    if (confirmado) close();
+    if (sair) close();
 });
