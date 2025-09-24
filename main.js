@@ -6,24 +6,24 @@ const IMAGENS = []; // Array que armazenará os caminhos das imagens dos persona
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
 let caixasSelecionadas = []; // Array para armazenar as caixas que foram clicadas
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
-let totalVidas = 5;
+let totalVidas = 5; // Quantidade atual de vidas
 let acertos = 0;
 const GAME_OVER_MSG = document.getElementById('game-over-msg');
 const VIDA_RETIRADA = document.getElementById('vida-retirada');
 let nivelAtual = 2; // Nível médio, por padrão (5 vidas)
+const SLIDER_CONTAINER = document.getElementById('slider-container').style;
 const NIVEL_DIFICULDADE = document.getElementById('nivel-dificuldade');
 const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vidas').style;
 const TEMA = document.getElementById('tema');
-const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música tocada durante o jogo
 let jogoFinalizado = false;
 
 // Embaralhamento das imagens
 embaralharImagens(IMAGENS);
 
-// Animação da introdução
+// Interatividade e animações da introdução
 document.addEventListener('DOMContentLoaded', () => {
     const INTRO = document.getElementById('intro').style;
-    const SLIDER_CONTAINER = document.getElementById('slider-container').style;
+    const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 
     setTimeout(() => {
         QUANTIDADE_INICIAL_VIDAS.transition = '0.7s ease-in'
@@ -41,10 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ação do botão "Começar"
     document.getElementById('start').addEventListener('click', async botaoStart => {
+        MUSICA.loop = true;
         botaoStart.target.style.display = 'none';
         SLIDER_CONTAINER.display = 'none';
         INTRO.transform = 'scale(6) rotate(-65deg)';
-        INTRO.transition = '1.6s ease-in-out';
+        INTRO.transition = '1.2s ease-in-out';
         INTRO.opacity = '0';
         INTRO.visibility = 'hidden';
         
