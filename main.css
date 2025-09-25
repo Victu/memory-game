@@ -126,7 +126,7 @@ body {
 
 #texto-copyright {
     position: relative;
-    top: -928px;
+    top: -927px;
     display: block;
     font-size: .8em;
     color: var(--fonte-cor-padrao);
@@ -138,12 +138,10 @@ body {
 
 main {
     width: max-content;
-    min-height: 584px;
+    min-height: 585px;
     height: max-content;
-    background-color: transparent;
     margin: 80px auto;
-    padding-top: 12px;
-    padding-bottom: 25px;
+    padding: 12px 0;
     box-sizing: border-box;
 }
 

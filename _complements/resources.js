@@ -2,7 +2,7 @@
 function embaralharImagens(imagens) {
     // Adiciona duas vezes os caminhos das imagens ao array, formando pares
     for (let i = 0; i < 2; i++) {
-        for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++)
+        for (let numeroDaImagem = 0; numeroDaImagem < 10; numeroDaImagem++)
             imagens.unshift(`_media/_images/person-${numeroDaImagem}.png`);
     }
 
