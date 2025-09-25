@@ -38,16 +38,11 @@
     }
 
     main {
-        width: 420px;
-        max-width: 420px;
-        height: 520px;
-        margin: 120px auto;
+        margin-top: 120px;
+        padding: 10px 0;
     }
 
-    #cabecalho-principal {
-        top: -41px;
-        max-height: 55px;
-    }
+    #cabecalho-principal { max-height: 45px; }
 
     #cabecalho-principal img { width: 41px; }
     
@@ -58,12 +53,8 @@
 
     #caixas {
         padding: 20px;
-        margin: -30px auto;
-        display: grid;
-        grid-template-columns: auto auto auto auto;
-        grid-template-rows: repeat(3, 90px);
-        justify-items: center;
-        gap: 18px;
+        margin: -30px 0;
+        gap: 20px;
     }
 
     .caixa {
@@ -87,10 +78,13 @@
 
     #vida-retirada {
         top: 36.5%;
-        font-size: 1.6em;
+        font-size: 1.4em;
     }
 
-    #game-over-msg { font-size: 4.9em; }
+    #game-over-msg { 
+        font-size: 4.8em;
+        top: 26%;
+    }
 }
 
 @media (max-height: 690px) {
@@ -100,7 +94,7 @@
     }
 
     #luz-logomark-container {
-        top: 22.5%;
+        top: 21.5%;
         width: 360px;
         height: 180px;
     }
@@ -125,20 +119,15 @@
 
     #texto-copyright {
         font-size: .6em;
-        top: -717px;
+        top: -767px;
     }
 
     main {
-        width: 420px;
-        max-width: 420px;
-        height: 520px;
-        margin: 120px auto;
+        margin-top: 120px;
+        padding: 10px 0;
     }
 
-    #cabecalho-principal {
-        top: -41px;
-        max-height: 55px;
-    }
+    #cabecalho-principal { max-height: 45px; }
 
     #cabecalho-principal img { width: 41px; }
     
@@ -149,12 +138,8 @@
 
     #caixas {
         padding: 20px;
-        margin: -30px auto;
-        display: grid;
-        grid-template-columns: auto auto auto auto;
-        grid-template-rows: repeat(3, 90px);
-        justify-items: center;
-        gap: 18px;
+        margin: -30px 0;
+        gap: 20px;
     }
 
     .caixa {
@@ -178,8 +163,11 @@
 
     #vida-retirada {
         top: 36.5%;
-        font-size: 1.6em;
+        font-size: 1.4em;
     }
 
-    #game-over-msg { font-size: 4.9em; }
+    #game-over-msg { 
+        font-size: 4.8em;
+        top: 26%;
+    }
 }

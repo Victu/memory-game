@@ -158,8 +158,13 @@ CAIXAS.forEach((elemento, index) => {
                 tocarEfeitoSonoro(false, null);
                 setTimeout(() => VIDA_RETIRADA.style.visibility = 'hidden', 350);
                 VIDA_RETIRADA.style.visibility = 'visible';
-                VIDA_RETIRADA.style.transform = 'translateY(-150px)';
                 VIDA_RETIRADA.innerText = '-1 vida';
+
+                if (medidaDaTela(750))
+                    VIDA_RETIRADA.style.transform = 'translateY(-150px)';
+                else
+                    VIDA_RETIRADA.style.transform = 'translateY(-170px)';
+                
                 // Se forem diferentes, desativa temporariamente os cliques
                 CAIXAS.forEach(objeto => objeto.style.pointerEvents = 'none');
                 caixasSelecionadas[1].style.transform = 'initial';
@@ -218,6 +223,12 @@ CAIXAS.forEach((elemento, index) => {
                         MUSICA.muted = true;
                         jogoFinalizado = true;
 
+                        CAIXAS.forEach(objeto => {
+                            objeto.style.transform = 'rotate(-360deg)';
+                            objeto.style.opacity = '0';
+                            objeto.style.visibility = 'hidden';
+                        });
+
                         setTimeout(() => {
                             tocarEfeitoSonoro(null, false);
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none';
@@ -228,15 +239,9 @@ CAIXAS.forEach((elemento, index) => {
                             GAME_OVER_MSG.style.animation = 'piscarMsg 0.6s ease-in-out infinite';
                         }, 1100);
 
-                        CAIXAS.forEach(objeto => {
-                            objeto.style.opacity = '0';
-                            objeto.style.visibility = 'hidden';
-                            objeto.style.transform = 'rotate(-360deg)';
-                        });      
-
                         setTimeout(() => {
                             var reiniciar = confirm('Deseja voltar para a tela inicial?');
-
+                            
                             if (reiniciar) location.reload();
                         }, 3600);
                     }        
