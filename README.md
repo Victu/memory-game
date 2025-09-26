@@ -32,11 +32,11 @@ Temas Visuais: Personalize sua experiência de jogo escolhendo entre os temas "D
 
 Níveis de Dificuldade: Ajuste o desafio do jogo selecionando um dos três níveis de dificuldade, que alteram o número inicial de vidas.
 
-<em>Fácil: 8 vidas
+<em>Fácil: 10 vidas
 
-Médio: 5 vidas
+Médio: 8 vidas
 
-Difícil: 3 vidas</em>
+Difícil: 6 vidas</em>
 
 Animações e Efeitos Visuais: O jogo é enriquecido com diversas animações, como o giro das cartas, efeitos de brilho ao passar o mouse e transições suaves, tornando a jogabilidade mais fluida e agradável.
 
