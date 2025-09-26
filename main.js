@@ -6,7 +6,7 @@ const IMAGENS = []; // Array que armazenará os caminhos das imagens dos persona
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
 let caixasSelecionadas = []; // Array para armazenar as caixas que foram clicadas
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
-let totalVidas = 5; // Quantidade atual de vidas
+let totalVidas = 8; // Quantidade atual de vidas
 let acertos = 0;
 const GAME_OVER_MSG = document.getElementById('game-over-msg');
 const VIDA_RETIRADA = document.getElementById('vida-retirada');
@@ -17,13 +17,12 @@ const TEMA = document.getElementById('tema');
 const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 let jogoFinalizado = false;
 
-// Embaralhamento das imagens
-embaralharImagens(IMAGENS);
-
 // Interatividade e animações da introdução
 document.addEventListener('DOMContentLoaded', () => {
     const INTRO = document.getElementById('intro').style;
-    const SLIDER_CONTAINER = document.getElementById('slider-container').style;
+    const SLIDES_CONTAINER = document.getElementById('slides-container').style;
+    numeroDeVidas.innerText = 8;
+    embaralharImagens(IMAGENS); // Embaralhamento das imagens
 
     setTimeout(() => {
         QUANTIDADE_INICIAL_VIDAS.transition = '0.7s ease-in'
@@ -43,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start').addEventListener('click', async botaoStart => {
         MUSICA.loop = true;
         botaoStart.target.style.display = 'none';
-        SLIDER_CONTAINER.display = 'none';
+        SLIDES_CONTAINER.display = 'none';
         INTRO.transform = 'scale(6) rotate(-65deg)';
         INTRO.transition = '1.2s ease-in-out';
         INTRO.opacity = '0';
@@ -77,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Funcionalidade dos slides de opções na introdução
 async function escolher(escolha) {
     const QUANTIDADE_ESCOLHIDA_VIDAS = document.getElementById('quantidade-escolhida-vidas');
     const NIVEL_ESCOLHIDO = document.getElementById('nivel-escolhido');
@@ -109,15 +109,15 @@ async function escolher(escolha) {
             /* O jogo irá começar com uma determinada quantidade de vidas
             de acordo com a escolha do nível de dificuldade */
             if (nivelAtual == 1) {
-                totalVidas = 8;
+                totalVidas = 10;
                 NIVEL_DIFICULDADE.innerText = 'Fácil';
                 NIVEL_ESCOLHIDO.innerText = 'fácil';
             } else if (nivelAtual == 2) {
-                totalVidas = 5;
+                totalVidas = 8;
                 NIVEL_DIFICULDADE.innerText = 'Médio';
                 NIVEL_ESCOLHIDO.innerText = 'médio';
             } else if (nivelAtual == 3) {
-                totalVidas = 3;
+                totalVidas = 6;
                 NIVEL_DIFICULDADE.innerText = 'Difícil';
                 NIVEL_ESCOLHIDO.innerText = 'difícil';
             }
@@ -135,7 +135,7 @@ async function escolher(escolha) {
     }
 }
 
-// Associa o evento de clique a cada caixa
+// Associa o evento de clique a cada "caixa"
 CAIXAS.forEach((elemento, index) => {
     elemento.addEventListener('click', caixa => {
         // Exibe a imagem correspondente à posição embaralhada
@@ -146,7 +146,7 @@ CAIXAS.forEach((elemento, index) => {
         caixa.target.style.border = '5px silver groove';
         VIDA_RETIRADA.style.transform = '';
         
-        // Guarda imagem e caixa selecionada
+        // Guarda imagem e "caixa" selecionada
         imagensReveladas.unshift(IMAGENS[index]);
         caixasSelecionadas.unshift(caixa.target);
 

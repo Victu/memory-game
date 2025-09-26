@@ -7,8 +7,8 @@
     <script defer src="main.js"></script>
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="_complements/responsiveness.css" media="screen">
-    <link rel="shortcut icon" href="_media/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="_media/favicon.png" type="image/x-icon">
     <title>Jogo da Memória</title>
 </head>
 
@@ -43,7 +43,7 @@
         <header id="cabecalho-principal">
             <figure>
                 <img src="_media/_images/life.png" alt="Ícone de vidas" width="55">
-                <figcaption>Vidas: <span id="numero-de-vidas">5</span></figcaption>
+                <figcaption>Vidas: <span id="numero-de-vidas"></span></figcaption>
             </figure>
         </header>
 
@@ -52,8 +52,8 @@
             <img id="logomark" src="_media/_images/logomark.png" alt="Logomarca do Jogo da Memória">
             <button id="start">Começar</button>
 
-            <div id="slider-container">
-                <div id="quantidade-inicial-vidas">No nível<span id="nivel-escolhido">médio</span>o jogo começa com<span id="quantidade-escolhida-vidas">5</span>vidas</div>
+            <div id="slides-container">
+                <div id="quantidade-inicial-vidas">No nível<span id="nivel-escolhido">médio</span>o jogo começa com<span id="quantidade-escolhida-vidas">8</span>vidas</div>
                 <p>Nível</p>
                 <div>
                     <button onclick="escolher('diminuir')">&larr;</button><span id="nivel-dificuldade">Médio</span><button onclick="escolher('aumentar')">&rarr;</button>
@@ -68,26 +68,26 @@
 
         <section id="caixas">
             <!-- Cada botão representa uma "caixa com interrogação" -->
-            <button class="caixa 1"></button>
-            <button class="caixa 2"></button>
-            <button class="caixa 3"></button>
-            <button class="caixa 4"></button>
-            <button class="caixa 5"></button>
-            <button class="caixa 6"></button>
-            <button class="caixa 7"></button>
-            <button class="caixa 8"></button>
-            <button class="caixa 9"></button>
-            <button class="caixa 10"></button>
-            <button class="caixa 11"></button>
-            <button class="caixa 12"></button>
-            <button class="caixa 13"></button>
-            <button class="caixa 14"></button>
-            <button class="caixa 15"></button>
-            <button class="caixa 16"></button>
-            <button class="caixa 17"></button>
-            <button class="caixa 18"></button>
-            <button class="caixa 19"></button>
-            <button class="caixa 20"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
+            <button class="caixa"></button>
             <span id="vida-retirada"> <!-- Aqui haverá uma mensagem sempre que perder uma vida --> </span>
         </section>
         <div id="game-over-msg"> <!-- Aqui haverá uma mensagem após o fim do jogo --> </div>

@@ -82,7 +82,7 @@ body {
 
 #start:hover { background: linear-gradient(45deg, lightgray, gray); }
 
-#slider-container { 
+#slides-container { 
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -97,7 +97,7 @@ body {
     max-width: 250px;
 }
 
-#slider-container button {
+#slides-container button {
     cursor: pointer;
     background: linear-gradient(45deg, gray, lightgray);
     font-size: .9em;
@@ -105,11 +105,11 @@ body {
     border: 2px groove black;
 }
 
-#slider-container button:hover { background: linear-gradient(45deg, lightgray, gray); }
+#slides-container button:hover { background: linear-gradient(45deg, lightgray, gray); }
 
-#slider-container p { font-size: 1.55em; }
+#slides-container p { font-size: 1.55em; }
 
-#slider-container span {
+#slides-container span {
     margin: 0 18px 0 18px;
     font-size: 1.2em;
 }
@@ -121,7 +121,7 @@ body {
     bottom: 20pc;
     font-size: .95em;
     color: yellow;
-    min-width: max-content;
+    width: max-content;
 }
 
 #texto-copyright {

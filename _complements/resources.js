@@ -23,20 +23,20 @@ function medidaDaTela(medida) {
 // Emite os efeitos sonoros no caso de erro, acerto, derrota ou vitória
 function tocarEfeitoSonoro(acertou, venceu) {
     if (acertou != null) {
-        const SOM_DE_ERRO = new Audio('./_media/_sounds/error.mp3');
+        const SOM_DE_ERRO = new Audio('./_media/_sounds/error.ogg');
         SOM_DE_ERRO.volume = 0.6;
 
         if (acertou)
-            new Audio('./_media/_sounds/success.mp3').play();
+            new Audio('./_media/_sounds/success.ogg').play();
         else
             SOM_DE_ERRO.play();
     }
 
     if (venceu != null) {
         if (venceu) 
-            new Audio('./_media/_sounds/victory.wav').play();
+            new Audio('./_media/_sounds/victory.ogg').play();
         else
-            new Audio('./_media/_sounds/game-over.wav').play();
+            new Audio('./_media/_sounds/game-over.ogg').play();
     }
 }
 

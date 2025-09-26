@@ -18,11 +18,11 @@
 
     #start { font-size: .8em; }
 
-    #slider-container button { font-size: .6em; }
+    #slides-container button { font-size: .6em; }
 
-    #slider-container p { font-size: 1.15em; }
+    #slides-container p { font-size: 1.15em; }
 
-    #slider-container span {
+    #slides-container span {
         margin: 0 18px 0 18px;
         font-size: .85em;
     }
@@ -103,11 +103,11 @@
 
     #start { font-size: .8em; }
 
-    #slider-container button { font-size: .6em; }
+    #slides-container button { font-size: .6em; }
 
-    #slider-container p { font-size: 1.15em; }
+    #slides-container p { font-size: 1.15em; }
 
-    #slider-container span {
+    #slides-container span {
         margin: 0 18px 0 18px;
         font-size: .85em;
     }
@@ -119,11 +119,11 @@
 
     #texto-copyright {
         font-size: .6em;
-        top: -715px;
+        top: -718px;
     }
 
     main {
-        margin-top: 65px;
+        margin-top: 50px;
         padding: 10px 0;
     }
 
