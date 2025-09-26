@@ -1,27 +1,27 @@
 // ----------------------------------- Configurações do conteúdo principal -----------------------------------
 
 const BODY = document.body.style;
-const CAIXAS = document.querySelectorAll('.caixa'); // Seleciona todas as botões com a classe 'caixa'
+const CAIXAS = caixas(); // Retorna todos os botões com a classe 'caixa'
 const IMAGENS = []; // Array que armazenará os caminhos das imagens dos personagens
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
 let caixasSelecionadas = []; // Array para armazenar as caixas que foram clicadas
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
 let totalVidas = 8; // Quantidade atual de vidas
 let acertos = 0;
-const GAME_OVER_MSG = document.getElementById('game-over-msg');
 const VIDA_RETIRADA = document.getElementById('vida-retirada');
-let nivelAtual = 2; // Nível médio, por padrão (8 vidas)
+const SLIDES_CONTAINER = document.getElementById('slides-container').style;
+let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
 const NIVEL_DIFICULDADE = document.getElementById('nivel-dificuldade');
 const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vidas').style;
 const TEMA = document.getElementById('tema');
 const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
+const GAME_OVER_MSG = document.getElementById('game-over-msg');
 let jogoFinalizado = false;
 
 // Interatividade e animações da introdução
 document.addEventListener('DOMContentLoaded', () => {
     const INTRO = document.getElementById('intro').style;
-    const SLIDES_CONTAINER = document.getElementById('slides-container').style;
-    numeroDeVidas.innerText = 8;
+    numeroDeVidas.innerText = totalVidas;
     embaralharImagens(IMAGENS); // Embaralhamento das imagens
 
     setTimeout(() => {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('luz-logomark-container').style.display = 'none';
         document.getElementById('texto-copyright').style.display = 'none';
         document.getElementById('caixas').style.display = 'grid';
-        await pausar(2);
+        await pausar(1.5);
 
         MUSICA.play();
         MAIN.backgroundColor = 'rgba(0, 0, 0, 0.4)';
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         BOTAO_MENU_LATERAL.style.transform = 'translate(60px, 50px)';
         BOTAO_MENU_LATERAL.style.transition = '1s';
         SETA_BOTAO_MENU_LATERAL.animation = 'apontar 0.6s linear 5';
-        await pausar(2.5);
+        await pausar(1.7);
 
         for (const CAIXA of CAIXAS) {
             document.getElementById('cabecalho-principal').style.visibility = 'visible';
@@ -99,7 +99,7 @@ async function escolher(escolha) {
             alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
             break;
     }
-    
+
     if (escolha == 'aumentar' || escolha == 'diminuir') {
         if (nivelAtual < 1) {
             nivelAtual = 1;
@@ -361,6 +361,7 @@ document.getElementById('opcao-temas').addEventListener('mouseenter', evento => 
 // Alterna para os temas "Noite"/"Dia"
 document.querySelectorAll('#sub-menu-temas > li').forEach(opcao => {
     opcao.addEventListener('click', () => {
+        // Por padrão, o tema "Dia" fica ativado
         if (opcao.textContent === '🌙 Noite') {
             temaAlternado = true;
             alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);

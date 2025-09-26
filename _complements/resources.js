@@ -1,3 +1,16 @@
+// Cria os elementos <button> com a classe 'caixa'
+function caixas() {
+    const CAIXAS_CONTAINER = document.getElementById('caixas');
+    
+    for (let iter = 0; iter < 20; iter++) {
+        const ELEMENTO_BUTTON = document.createElement('button');
+        ELEMENTO_BUTTON.className = 'caixa';
+        CAIXAS_CONTAINER.appendChild(ELEMENTO_BUTTON);
+    }
+
+    return document.querySelectorAll('.caixa'); // Seleciona todos as "caixas" criadas
+}
+
 // Algoritmo para embaralhar as imagens
 function embaralharImagens(imagens) {
     // Adiciona duas vezes os caminhos das imagens ao array, formando pares
@@ -24,7 +37,7 @@ function medidaDaTela(medida) {
 function tocarEfeitoSonoro(acertou, venceu) {
     if (acertou != null) {
         const SOM_DE_ERRO = new Audio('./_media/_sounds/error.ogg');
-        SOM_DE_ERRO.volume = 0.6;
+        SOM_DE_ERRO.volume = 0.7;
 
         if (acertou)
             new Audio('./_media/_sounds/success.ogg').play();
