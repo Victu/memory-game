@@ -1,6 +1,6 @@
 <h1 align="center">🎮 Jogo da Memória 🎮</h1><br>
-Um pequeno projeto desenvolvido para testar e aprimorar suas habilidades de memorização de uma forma divertida e interativa. Este jogo foi criado utilizando tecnologias web fundamentais: HTML, CSS e JavaScript puro.<br>
-Esta é uma versão inicial do jogo. Ainda há alguns elementos a serem implementados e pequenas correções a serem feitas.<br><br>
+Um pequeno projeto desenvolvido para testar e aprimorar suas habilidades de memorização de uma forma divertida e interativa. Este jogo contém figuras mundialmente conhecidas; foi criado utilizando as tecnologias web fundamentais: HTML, CSS e JavaScript puro.<br>
+Ainda há alguns elementos a serem implementados e pequenas correções a serem feitas.<br><br>
 
 ℹ️ <strong>Manual</strong>
 
