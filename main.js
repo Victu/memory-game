@@ -1,7 +1,7 @@
 // ----------------------------------- Configurações do conteúdo principal -----------------------------------
 
 const BODY = document.body.style;
-const CAIXAS = caixas(); // Retorna todos os botões com a classe 'caixa'
+const CAIXAS = caixas(); // Retorna todos os elementos <button> de classe 'caixa'
 const IMAGENS = []; // Array que armazenará os caminhos das imagens dos personagens
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
 let caixasSelecionadas = []; // Array para armazenar as caixas que foram clicadas
