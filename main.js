@@ -1,52 +1,52 @@
 // ----------------------------------- Configurações do conteúdo principal -----------------------------------
 
-const BODY = document.body.style;
-const CAIXAS = caixas(); // Retorna todos os elementos <button> de classe 'caixa'
-const IMAGENS = []; // Array que armazenará os caminhos das imagens dos personagens
+const body = document.body.style;
+const caixas = criarCaixas(); // Retorna todos os elementos <button> de classe 'caixa'
+const imagens = []; // Array que armazenará os caminhos das imagens dos personagens
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
-let caixasSelecionadas = []; // Array para armazenar as caixas que foram clicadas
+let caixasSelecionadas = []; // Array para armazenar as "caixas" que foram selecionadas
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
 let totalVidas = 8; // Quantidade atual de vidas
 let acertos = 0;
-const VIDA_RETIRADA = document.getElementById('vida-retirada');
-const SLIDES_CONTAINER = document.getElementById('slides-container').style;
+const vidaRetirada = document.getElementById('vida-retirada');
+const slidesContainer = document.getElementById('slides-container').style;
 let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
-const NIVEL_DIFICULDADE = document.getElementById('nivel-dificuldade');
-const QUANTIDADE_INICIAL_VIDAS = document.getElementById('quantidade-inicial-vidas').style;
-const TEMA = document.getElementById('tema');
-const MUSICA = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
-const GAME_OVER_MSG = document.getElementById('game-over-msg');
+const nivelDificuldade = document.getElementById('nivel-dificuldade');
+const quantidadeInicialVidas = document.getElementById('quantidade-inicial-vidas').style;
+const tema = document.getElementById('tema');
+const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
+const gameOverMsg = document.getElementById('game-over-msg');
 let jogoFinalizado = false;
 
 // Interatividade e animações da introdução
 document.addEventListener('DOMContentLoaded', () => {
-    const INTRO = document.getElementById('intro').style;
+    const intro = document.getElementById('intro').style;
     numeroDeVidas.innerText = totalVidas;
-    embaralharImagens(IMAGENS); // Embaralhamento das imagens
+    embaralharImagens(imagens); // Embaralhamento das imagens
 
     setTimeout(() => {
-        QUANTIDADE_INICIAL_VIDAS.transition = '0.7s ease-in'
-        QUANTIDADE_INICIAL_VIDAS.visibility = 'visible';
-        QUANTIDADE_INICIAL_VIDAS.opacity = '1';
+        quantidadeInicialVidas.transition = '0.7s ease-in'
+        quantidadeInicialVidas.visibility = 'visible';
+        quantidadeInicialVidas.opacity = '1';
     }, 1500);
 
     setTimeout(() => {
-        QUANTIDADE_INICIAL_VIDAS.transition = '0.7s ease-out';
-        QUANTIDADE_INICIAL_VIDAS.visibility = 'hidden';
-        QUANTIDADE_INICIAL_VIDAS.opacity = '0';
+        quantidadeInicialVidas.transition = '0.7s ease-out';
+        quantidadeInicialVidas.visibility = 'hidden';
+        quantidadeInicialVidas.opacity = '0';
     }, 5000);
 
-    CAIXAS.forEach(caixa => caixa.style.transform = 'translateX(60vw)');
+    caixas.forEach(caixa => caixa.style.transform = 'translateX(60vw)');
 
     // Ação do botão "Começar"
     document.getElementById('start').addEventListener('click', async botaoStart => {
-        MUSICA.loop = true;
+        musica.loop = true;
         botaoStart.target.style.display = 'none';
-        SLIDES_CONTAINER.display = 'none';
-        INTRO.transform = 'scale(6) rotate(-65deg)';
-        INTRO.transition = '1.2s ease-in-out';
-        INTRO.opacity = '0';
-        INTRO.visibility = 'hidden';
+        slidesContainer.display = 'none';
+        intro.transform = 'scale(6) rotate(-65deg)';
+        intro.transition = '1.2s ease-in-out';
+        intro.opacity = '0';
+        intro.visibility = 'hidden';
         
         document.getElementById('logomark').style.animation = 'none';
         document.getElementById('luz-logomark-container').style.display = 'none';
@@ -54,32 +54,32 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('caixas').style.display = 'grid';
         await pausar(1.5);
 
-        MUSICA.play();
-        MAIN.backgroundColor = 'rgba(0, 0, 0, 0.4)';
-        MAIN.backdropFilter = 'blur(7px)';
-        MAIN.transition = '1.5s';
-        BOTAO_MENU_LATERAL.style.transform = 'translate(60px, 50px)';
-        BOTAO_MENU_LATERAL.style.transition = '1s';
-        SETA_BOTAO_MENU_LATERAL.animation = 'apontar 0.6s linear 5';
+        musica.play();
+        main.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+        main.backdropFilter = 'blur(7px)';
+        main.transition = '1.5s';
+        botaoMenuLateral.style.transform = 'translate(60px, 50px)';
+        botaoMenuLateral.style.transition = '1s';
+        setaBotaoMenuLateral.animation = 'apontar 0.6s linear 5';
         await pausar(1.7);
 
-        for (const CAIXA of CAIXAS) {
+        for (const caixa of caixas) {
             document.getElementById('cabecalho-principal').style.visibility = 'visible';
-            CAIXA.style.visibility = 'visible';
-            CAIXA.style.opacity = '1';
-            CAIXA.style.transform = '';
-            CAIXA.style.pointerEvents = 'none';
+            caixa.style.visibility = 'visible';
+            caixa.style.opacity = '1';
+            caixa.style.transform = '';
+            caixa.style.pointerEvents = 'none';
             await pausar(0.20);
         }
 
-        CAIXAS.forEach(caixa => caixa.style.pointerEvents = 'auto'); 
+        caixas.forEach(caixa => caixa.style.pointerEvents = 'auto'); 
     });
 });
 
 // Funcionalidade dos slides de opções na introdução
 async function escolher(escolha) {
-    const QUANTIDADE_ESCOLHIDA_VIDAS = document.getElementById('quantidade-escolhida-vidas');
-    const NIVEL_ESCOLHIDO = document.getElementById('nivel-escolhido');
+    const quantiadeEscolhidaVidas = document.getElementById('quantidade-escolhida-vidas');
+    const nivelEscolhido = document.getElementById('nivel-escolhido');
 
     switch (escolha) {
         case 'aumentar':
@@ -89,14 +89,14 @@ async function escolher(escolha) {
             nivelAtual--; // Mostra o nível de dificuldade anterior
             break;
         case 'dia':
-            TEMA.innerText = 'Dia';
+            tema.innerText = 'Dia';
             temaAlternado = false;
-            alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
+            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);
             break;
         case 'noite':
-            TEMA.innerText = 'Noite';
+            tema.innerText = 'Noite';
             temaAlternado = true;
-            alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
+            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);
             break;
     }
 
@@ -110,44 +110,44 @@ async function escolher(escolha) {
             de acordo com a escolha do nível de dificuldade */
             if (nivelAtual == 1) {
                 totalVidas = 10;
-                NIVEL_DIFICULDADE.innerText = 'Fácil';
-                NIVEL_ESCOLHIDO.innerText = 'fácil';
+                nivelDificuldade.innerText = 'Fácil';
+                nivelEscolhido.innerText = 'fácil';
             } else if (nivelAtual == 2) {
                 totalVidas = 8;
-                NIVEL_DIFICULDADE.innerText = 'Médio';
-                NIVEL_ESCOLHIDO.innerText = 'médio';
+                nivelDificuldade.innerText = 'Médio';
+                nivelEscolhido.innerText = 'médio';
             } else if (nivelAtual == 3) {
                 totalVidas = 6;
-                NIVEL_DIFICULDADE.innerText = 'Difícil';
-                NIVEL_ESCOLHIDO.innerText = 'difícil';
+                nivelDificuldade.innerText = 'Difícil';
+                nivelEscolhido.innerText = 'difícil';
             }
             
             numeroDeVidas.innerText = totalVidas;
-            QUANTIDADE_ESCOLHIDA_VIDAS.innerText = totalVidas;
-            QUANTIDADE_INICIAL_VIDAS.transition = 'none';
-            QUANTIDADE_INICIAL_VIDAS.visibility = 'visible';
-            QUANTIDADE_INICIAL_VIDAS.opacity = '1';
+            quantiadeEscolhidaVidas.innerText = totalVidas;
+            quantidadeInicialVidas.transition = 'none';
+            quantidadeInicialVidas.visibility = 'visible';
+            quantidadeInicialVidas.opacity = '1';
             await pausar(3);
-            QUANTIDADE_INICIAL_VIDAS.transition = '0.7s ease-out';
-            QUANTIDADE_INICIAL_VIDAS.visibility = 'hidden';
-            QUANTIDADE_INICIAL_VIDAS.opacity = '0';
+            quantidadeInicialVidas.transition = '0.7s ease-out';
+            quantidadeInicialVidas.visibility = 'hidden';
+            quantidadeInicialVidas.opacity = '0';
         }
     }
 }
 
 // Associa o evento de clique a cada "caixa"
-CAIXAS.forEach((elemento, index) => {
+caixas.forEach((elemento, index) => {
     elemento.addEventListener('click', caixa => {
         // Exibe a imagem correspondente à posição embaralhada
-        caixa.target.style.backgroundImage = `url('${IMAGENS[index]}')`;
+        caixa.target.style.backgroundImage = `url('${imagens[index]}')`;
         caixa.target.style.filter = 'initial';
         caixa.target.style.transform = 'initial';
         caixa.target.style.pointerEvents = 'none';
         caixa.target.style.border = '5px silver groove';
-        VIDA_RETIRADA.style.transform = '';
+        vidaRetirada.style.transform = '';
         
         // Guarda imagem e "caixa" selecionada
-        imagensReveladas.unshift(IMAGENS[index]);
+        imagensReveladas.unshift(imagens[index]);
         caixasSelecionadas.unshift(caixa.target);
 
         // Quando duas imagens são reveladas
@@ -156,37 +156,37 @@ CAIXAS.forEach((elemento, index) => {
                 totalVidas--;
 
                 tocarEfeitoSonoro(false, null);
-                setTimeout(() => VIDA_RETIRADA.style.visibility = 'hidden', 350);
-                VIDA_RETIRADA.style.visibility = 'visible';
-                VIDA_RETIRADA.innerText = '-1 vida';
+                setTimeout(() => vidaRetirada.style.visibility = 'hidden', 350);
+                vidaRetirada.style.visibility = 'visible';
+                vidaRetirada.innerText = '-1 vida';
 
                 if (medidaDaTela(750))
-                    VIDA_RETIRADA.style.transform = 'translateY(-150px)';
+                    vidaRetirada.style.transform = 'translateY(-150px)';
                 else
-                    VIDA_RETIRADA.style.transform = 'translateY(-170px)';
+                    vidaRetirada.style.transform = 'translateY(-170px)';
                 
                 // Se forem diferentes, desativa temporariamente os cliques
-                CAIXAS.forEach(objeto => objeto.style.pointerEvents = 'none');
+                caixas.forEach(objeto => objeto.style.pointerEvents = 'none');
                 caixasSelecionadas[1].style.transform = 'initial';
                 numeroDeVidas.innerText = totalVidas;
                 numeroDeVidas.style.animation = 'mudaCor 0.3s linear 3';
 
                 // Após um tempo, reseta as caixas para o estado inicial
                 setTimeout(() => {
-                    for (const CAIXA_SELECIONADA of caixasSelecionadas) {
+                    for (const caixaSelecionada of caixasSelecionadas) {
                         // Define imagem de fundo conforme o tema
                         if (!temaAlternado)
-                            CAIXA_SELECIONADA.style.backgroundImage = `url('_media/_images/box_yellow.png')`;
+                            caixaSelecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`;
                         else
-                            CAIXA_SELECIONADA.style.backgroundImage = `url('_media/_images/box_blue.png')`;
+                            caixaSelecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`;
 
-                        CAIXA_SELECIONADA.style.cursor = 'pointer';
-                        setTimeout(() => CAIXA_SELECIONADA.style.pointerEvents = 'auto', 450);
-                        CAIXA_SELECIONADA.style.transform = 'rotate(-360deg)';
-                        CAIXA_SELECIONADA.style.boxShadow = 'none';
+                        caixaSelecionada.style.cursor = 'pointer';
+                        setTimeout(() => caixaSelecionada.style.pointerEvents = 'auto', 450);
+                        caixaSelecionada.style.transform = 'rotate(-360deg)';
+                        caixaSelecionada.style.boxShadow = 'none';
                         
                         // Restaura efeitos de hover
-                        CAIXA_SELECIONADA.addEventListener('mouseenter', evento => {
+                        caixaSelecionada.addEventListener('mouseenter', evento => {
                             evento.target.style.filter = '';
                             evento.target.style.transform = '';
 
@@ -199,18 +199,18 @@ CAIXAS.forEach((elemento, index) => {
                                 '0px 10px 30px var(--caixa-efeito-noite)';
                         });
 
-                        CAIXA_SELECIONADA.addEventListener('mouseleave', evento => {
+                        caixaSelecionada.addEventListener('mouseleave', evento => {
                             evento.target.style.filter = '';
                             evento.target.style.transform = '';
                         });
                     }
 
                     // Reativa o clique nas caixas que ainda não foram resolvidas
-                    CAIXAS.forEach(objeto => {
+                    caixas.forEach(objeto => {
                         objeto.style.border = 'none';
-                        const COR_DA_CAIXA = getComputedStyle(objeto).backgroundImage;
+                        const corDaCaixa = getComputedStyle(objeto).backgroundImage;
 
-                        if (COR_DA_CAIXA.includes('box_yellow.png') || COR_DA_CAIXA.includes('box_blue.png'))
+                        if (corDaCaixa.includes('box_yellow.png') || corDaCaixa.includes('box_blue.png'))
                             objeto.style.pointerEvents = 'auto';
                     });
 
@@ -220,10 +220,10 @@ CAIXAS.forEach((elemento, index) => {
                     numeroDeVidas.style.animation = 'initial';
 
                     if (totalVidas == 0) {
-                        MUSICA.muted = true;
+                        musica.muted = true;
                         jogoFinalizado = true;
 
-                        CAIXAS.forEach(objeto => {
+                        caixas.forEach(objeto => {
                             objeto.style.transform = 'rotate(-360deg)';
                             objeto.style.opacity = '0';
                             objeto.style.visibility = 'hidden';
@@ -232,11 +232,11 @@ CAIXAS.forEach((elemento, index) => {
                         setTimeout(() => {
                             tocarEfeitoSonoro(null, false);
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none';
-                            GAME_OVER_MSG.innerHTML = 'Game<br><br>Over';
-                            GAME_OVER_MSG.style.color = 'rgba(255, 50, 50, 0.9)';
-                            GAME_OVER_MSG.style.visibility = 'visible';
-                            GAME_OVER_MSG.style.opacity = 1;
-                            GAME_OVER_MSG.style.animation = 'piscarMsg 0.6s ease-in-out infinite';
+                            gameOverMsg.innerHTML = 'Game<br><br>Over';
+                            gameOverMsg.style.color = 'rgba(255, 50, 50, 0.9)';
+                            gameOverMsg.style.visibility = 'visible';
+                            gameOverMsg.style.opacity = 1;
+                            gameOverMsg.style.animation = 'piscarMsg 0.6s ease-in-out infinite';
                         }, 1100);
 
                         setTimeout(() => {
@@ -251,24 +251,24 @@ CAIXAS.forEach((elemento, index) => {
 
                 tocarEfeitoSonoro(true, null);
                 // Se as imagens forem iguais (par encontrado), esconde as caixas
-                CAIXAS.forEach(objeto => objeto.style.pointerEvents = 'none');
+                caixas.forEach(objeto => objeto.style.pointerEvents = 'none');
                 caixasSelecionadas[0].style.transform = 'initial';
                 caixasSelecionadas[1].style.transform = 'initial';
 
                 // Após um tempo, faz as caixas desaparecerem
                 setTimeout(() => {
-                    for (const CAIXA_SELECIONADA of caixasSelecionadas) {
-                        CAIXA_SELECIONADA.style.transform = 'translateY(-160px)';
-                        CAIXA_SELECIONADA.style.transition = '0.7s';
-                        CAIXA_SELECIONADA.style.opacity = '0';
-                        CAIXA_SELECIONADA.style.visibility = 'hidden';
+                    for (const caixaSelecionada of caixasSelecionadas) {
+                        caixaSelecionada.style.transform = 'translateY(-160px)';
+                        caixaSelecionada.style.transition = '0.7s';
+                        caixaSelecionada.style.opacity = '0';
+                        caixaSelecionada.style.visibility = 'hidden';
                     }
 
                     // Reativa cliques nas caixas não resolvidas
-                    CAIXAS.forEach(objeto => {
-                        const COR_DA_CAIXA = getComputedStyle(objeto).backgroundImage;
+                    caixas.forEach(objeto => {
+                        const corDaCaixa = getComputedStyle(objeto).backgroundImage;
 
-                        if (COR_DA_CAIXA.includes('box_yellow.png') || COR_DA_CAIXA.includes('box_blue.png'))
+                        if (corDaCaixa.includes('box_yellow.png') || corDaCaixa.includes('box_blue.png'))
                             objeto.style.pointerEvents = 'auto';
                     });
 
@@ -278,18 +278,18 @@ CAIXAS.forEach((elemento, index) => {
 
                     if (acertos == 8) {
                         acertos = 0;
-                        MUSICA.muted = true;
+                        musica.muted = true;
                         jogoFinalizado = true;
 
                         setTimeout(() => {
                             tocarEfeitoSonoro(null, true);
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none';
-                            GAME_OVER_MSG.innerHTML = 'You<br><br>Win!';
-                            GAME_OVER_MSG.style.marginLeft = '4rem';
-                            GAME_OVER_MSG.style.color = 'lime';
-                            GAME_OVER_MSG.style.visibility = 'visible';
-                            GAME_OVER_MSG.style.opacity = 1;
-                            GAME_OVER_MSG.style.animation = 'piscarMsg 0.6s ease-in-out infinite';
+                            gameOverMsg.innerHTML = 'You<br><br>Win!';
+                            gameOverMsg.style.marginLeft = '4rem';
+                            gameOverMsg.style.color = 'lime';
+                            gameOverMsg.style.visibility = 'visible';
+                            gameOverMsg.style.opacity = 1;
+                            gameOverMsg.style.animation = 'piscarMsg 0.6s ease-in-out infinite';
                         }, 1100);
 
                         setTimeout(() => alert('Você conseguiu finalizar!'), 3600);
@@ -302,59 +302,59 @@ CAIXAS.forEach((elemento, index) => {
 
 // ----------------------------------------- Menu lateral e submenus -----------------------------------------
 
-const BOTAO_MENU_LATERAL = document.getElementById('botao-menu-lateral');
-const MAIN = document.querySelector('main').style; 
-const SETA_BOTAO_MENU_LATERAL = document.getElementById('seta-botao-menu-lateral').style; // Seleciona o estilo da seta do botão de menu lateral
-const MENU_LATERAL = document.getElementById('menu-lateral').style;
-const CABECALHO_MENU_LATERAL = document.getElementById('cabecalho-menu-lateral').style;
-const SUB_MENU_TEMAS = document.getElementById('sub-menu-temas').style;
-const SUB_MENU_MUSICA = document.getElementById('sub-menu-musica').style;
+const botaoMenuLateral = document.getElementById('botao-menu-lateral');
+const main = document.querySelector('main').style; 
+const setaBotaoMenuLateral = document.getElementById('seta-botao-menu-lateral').style; // Seleciona o estilo da seta do botão de menu lateral
+const menuLateral = document.getElementById('menu-lateral').style;
+const cabecalhoMenuLateral = document.getElementById('cabecalho-menu-lateral').style;
+const subMenuTemas = document.getElementById('sub-menu-temas').style;
+const subMenuMusica = document.getElementById('sub-menu-musica').style;
 let menuAberto = true; // Variável para controlar a visibilidade do menu lateral     
 let temaAlternado = false; // Variável para controlar o tema "Dia"/"Noite"
 
 // Mostra ou oculta o menu lateral
-BOTAO_MENU_LATERAL.addEventListener('click', evento => {
+botaoMenuLateral.addEventListener('click', evento => {
     if (menuAberto) { // Ao abrir o menu
         if (medidaDaTela(1230)){
-            MAIN.transform = 'translateX(215px)';
-            MAIN.transition = '0.5s';
+            main.transform = 'translateX(215px)';
+            main.transition = '0.5s';
         }
         
-        MENU_LATERAL.transform = 'initial';
-        MENU_LATERAL.transition = '0.5s';
+        menuLateral.transform = 'initial';
+        menuLateral.transition = '0.5s';
         evento.target.style.transform = 'translate(60px, 50px)';
         evento.target.style.transition = '0.5s';
         evento.target.title = 'Fechar menu';
-        SETA_BOTAO_MENU_LATERAL.transform = 'rotate(180deg)';
-        SETA_BOTAO_MENU_LATERAL.transition = '0.4s';
+        setaBotaoMenuLateral.transform = 'rotate(180deg)';
+        setaBotaoMenuLateral.transition = '0.4s';
         menuAberto = false;
     } else { // Ao fechar o menu
         if (medidaDaTela(1230)) {
-            MAIN.transform = 'initial';
-            MAIN.transition = '0.5s';
+            main.transform = 'initial';
+            main.transition = '0.5s';
         }
 
-        MENU_LATERAL.transform = 'translateX(-100%)';
-        MENU_LATERAL.transition = '0.5s';
+        menuLateral.transform = 'translateX(-100%)';
+        menuLateral.transition = '0.5s';
         evento.target.style.transform = 'translate(60px, 50px)';
         evento.target.style.transition = '0.5s';
         evento.target.title = 'Abrir menu';
-        SETA_BOTAO_MENU_LATERAL.transform = 'initial';
-        SETA_BOTAO_MENU_LATERAL.transition = '0.4s';
+        setaBotaoMenuLateral.transform = 'initial';
+        setaBotaoMenuLateral.transition = '0.4s';
         menuAberto = true;  
     }
 });
 
 // Botão para o submenu de temas
 document.getElementById('opcao-temas').addEventListener('mouseenter', evento => {
-    SUB_MENU_MUSICA.transition = '0.2s';
-    SUB_MENU_MUSICA.transform = 'scaleY(0)';
-    SUB_MENU_TEMAS.transition = '0.2s';
-    SUB_MENU_TEMAS.transform = 'scaleY(1)';
+    subMenuMusica.transition = '0.2s';
+    subMenuMusica.transform = 'scaleY(0)';
+    subMenuTemas.transition = '0.2s';
+    subMenuTemas.transform = 'scaleY(1)';
 
     evento.target.addEventListener('mouseleave', () => {
-        SUB_MENU_TEMAS.transition = '0.2s';
-        SUB_MENU_TEMAS.transform = 'scaleY(0)';
+        subMenuTemas.transition = '0.2s';
+        subMenuTemas.transform = 'scaleY(0)';
     });
 });
 
@@ -364,24 +364,24 @@ document.querySelectorAll('#sub-menu-temas > li').forEach(opcao => {
         // Por padrão, o tema "Dia" fica ativado
         if (opcao.textContent === '🌙 Noite') {
             temaAlternado = true;
-            alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
+            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);  
         } else if (opcao.textContent === '☀️ Dia') {
             temaAlternado = false;
-            alternarTema(temaAlternado, BODY, CAIXAS, MENU_LATERAL, CABECALHO_MENU_LATERAL);
+            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);
         }
     });
 });
 
 // Opção para o submenu "Música"
 document.getElementById('opcao-musica').addEventListener('mouseenter', evento => {
-    SUB_MENU_TEMAS.transition = '0.2s';
-    SUB_MENU_TEMAS.transform = 'scaleY(0)';
-    SUB_MENU_MUSICA.transition = '0.2s';
-    SUB_MENU_MUSICA.transform = 'scaleY(1)';
+    subMenuTemas.transition = '0.2s';
+    subMenuTemas.transform = 'scaleY(0)';
+    subMenuMusica.transition = '0.2s';
+    subMenuMusica.transform = 'scaleY(1)';
 
     evento.target.addEventListener('mouseleave', () => {
-        SUB_MENU_MUSICA.transition = '0.2s';
-        SUB_MENU_MUSICA.transform = 'scaleY(0)';
+        subMenuMusica.transition = '0.2s';
+        subMenuMusica.transform = 'scaleY(0)';
     });
 });
 
@@ -390,11 +390,11 @@ document.querySelectorAll('#sub-menu-musica > li').forEach(opcao => {
     opcao.addEventListener('click', () => {
         if (!jogoFinalizado) {
             if (opcao.textContent === '🔊 Ativada') {
-                MUSICA.muted = false;
-                MUSICA.play();
+                musica.muted = false;
+                musica.play();
             } else if (opcao.textContent === '🔇 Desativada') {
-                MUSICA.muted = true;
-                MUSICA.currentTime = 0;
+                musica.muted = true;
+                musica.currentTime = 0;
             }
         }
     });
@@ -402,12 +402,12 @@ document.querySelectorAll('#sub-menu-musica > li').forEach(opcao => {
 
 // Ação da opção "Sobre"
 document.getElementById('opcao-sobre').addEventListener('click', () => {
-    const SOBRE = document.getElementById('sobre').style;
+    const sobre = document.getElementById('sobre').style;
 
-    if (SOBRE.display != 'block')
-        SOBRE.display = 'block';
+    if (sobre.display != 'block')
+        sobre.display = 'block';
     else
-        SOBRE.display = 'none';
+        sobre.display = 'none';
 });
 
 document.getElementById('fechar-sobre').addEventListener('click', () => document.getElementById('sobre').style.display = 'none');
