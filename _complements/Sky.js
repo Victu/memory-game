@@ -13,8 +13,8 @@ class Sky {
         }
 
         for (let iter = 5; iter <= this.totalDeEstrelas; iter++) {
-            const img = document.createElement('img');
             const estrelaRandomizada = numRandom(1, 2);
+            const img = document.createElement('img');
             img.src = `_media/_images/star-${estrelaRandomizada}.png`;
 
             const estrelaContainer = document.createElement('div');
@@ -29,7 +29,6 @@ class Sky {
 
             const atrasoRandomizado = numRandom(1, 10);
             estrelaContainer.style.pointerEvents = 'none';
-            estrelaContainer.style.userSelect = 'none';
             estrelaContainer.style.animationDelay = `${atrasoRandomizado}s`;
             estrelaContainer.style.animation = 'flutuarEstrela 10s ease-in-out infinite';
             img.style.animation = `piscarEstrela ${numRandom(3, 6)}s ease infinite alternate, girarEstrela ${numRandom(10, 20)}s ease-in-out infinite alternate-reverse`;

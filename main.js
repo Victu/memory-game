@@ -90,13 +90,13 @@ async function escolher(escolha) {
             break;
         case 'dia':
             tema.innerText = 'Dia';
-            temaAlternado = false;
-            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);
+            temaNoturno = false;
+            alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
             break;
         case 'noite':
             tema.innerText = 'Noite';
-            temaAlternado = true;
-            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);
+            temaNoturno = true;
+            alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
             break;
     }
 
@@ -145,6 +145,8 @@ caixas.forEach((elemento, index) => {
         caixa.target.style.pointerEvents = 'none';
         caixa.target.style.border = '5px silver groove';
         vidaRetirada.style.transform = '';
+        vidaRetirada.style.userSelect = 'none';
+        gameOverMsg.style.userSelect = 'none';
         
         // Guarda imagem e "caixa" selecionada
         imagensReveladas.unshift(imagens[index]);
@@ -175,7 +177,7 @@ caixas.forEach((elemento, index) => {
                 setTimeout(() => {
                     for (const caixaSelecionada of caixasSelecionadas) {
                         // Define imagem de fundo conforme o tema
-                        if (!temaAlternado)
+                        if (!temaNoturno)
                             caixaSelecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`;
                         else
                             caixaSelecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`;
@@ -190,7 +192,7 @@ caixas.forEach((elemento, index) => {
                             evento.target.style.filter = '';
                             evento.target.style.transform = '';
 
-                            if (!temaAlternado)
+                            if (!temaNoturno)
                                 evento.target.style.boxShadow = '';
                             else
                                 evento.target.style.boxShadow = '-10px 0px 30px var(--caixa-efeito-noite)',
@@ -310,7 +312,7 @@ const cabecalhoMenuLateral = document.getElementById('cabecalho-menu-lateral').s
 const subMenuTemas = document.getElementById('sub-menu-temas').style;
 const subMenuMusica = document.getElementById('sub-menu-musica').style;
 let menuAberto = true; // Variável para controlar a visibilidade do menu lateral     
-let temaAlternado = false; // Variável para controlar o tema "Dia"/"Noite"
+let temaNoturno = false; // Variável para controlar o tema "Dia"/"Noite"
 
 // Mostra ou oculta o menu lateral
 botaoMenuLateral.addEventListener('click', evento => {
@@ -363,11 +365,11 @@ document.querySelectorAll('#sub-menu-temas > li').forEach(opcao => {
     opcao.addEventListener('click', () => {
         // Por padrão, o tema "Dia" fica ativado
         if (opcao.textContent === '🌙 Noite') {
-            temaAlternado = true;
-            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);
+            temaNoturno = true;
+            alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
         } else if (opcao.textContent === '☀️ Dia') {
-            temaAlternado = false;
-            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);
+            temaNoturno = false;
+            alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
         }
     });
 });
