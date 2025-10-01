@@ -60,9 +60,18 @@ function pausar(seg) {
     return new Promise(resolve => setTimeout(resolve, seg));
 }
 
+function numRandom(min=0, max=1) {
+    const numero = Math.floor(Math.random() * max) + min;
+
+    return numero;
+}
+
 // Algoritmo para a alternância dos temas "Noite"/"Dia"
 function alternarTema(temaStatus, body, vetorDeElementos, menu, cabecalho) {
+    const sky = new Sky();
+
     if (temaStatus) {
+        sky.starlit();
         body.backgroundImage = "url('_media/_images/bg_night.png')";
         menu.backgroundImage = "url('_media/_images/bg-3_night.png')";
         cabecalho.backgroundImage = "url('_media/_images/title-memory-game_night.png')";
@@ -89,6 +98,7 @@ function alternarTema(temaStatus, body, vetorDeElementos, menu, cabecalho) {
             caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
         });
     } else {
+        sky.daytime();
         body.backgroundImage = "url('_media/_images/bg.png')";
         menu.backgroundImage = "url('_media/_images/bg-3.png')";
         cabecalho.backgroundImage = "url('_media/_images/title-memory-game.png')";

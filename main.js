@@ -364,7 +364,7 @@ document.querySelectorAll('#sub-menu-temas > li').forEach(opcao => {
         // Por padrão, o tema "Dia" fica ativado
         if (opcao.textContent === '🌙 Noite') {
             temaAlternado = true;
-            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);  
+            alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);
         } else if (opcao.textContent === '☀️ Dia') {
             temaAlternado = false;
             alternarTema(temaAlternado, body, caixas, menuLateral, cabecalhoMenuLateral);

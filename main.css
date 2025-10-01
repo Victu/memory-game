@@ -18,9 +18,17 @@
     font-family: pixel-font;
 }
 
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
 body {
     background-image: url('_media/_images/bg.png');
     overflow: hidden;
+    height: 100vh;
+    width: 100vw;
 }
 
 #intro {
@@ -285,10 +293,12 @@ main {
     border-radius: 0 10px 10px 0;
     transform: scaleY(0);
     text-indent: initial;
-    z-index: inherit;
 }
 
-.sub-menu li { padding: 0 3px 0 6px; }
+.sub-menu li {
+    padding: 0 3px 0 6px;
+    background-color: inherit;
+ }
 
 .sub-menu li:hover { background-color: #444; }
 
@@ -372,7 +382,6 @@ main {
 }
 
 #vida-retirada {
-    visibility: hidden;
     position: absolute;
     top: 33%;
     left: 30%;
@@ -395,4 +404,33 @@ main {
         opacity: 0;
         visibility: hidden;
     }
+}
+
+.estrela-container {
+    position: fixed;
+    width: max-content;
+    height: max-content;
+    transform: scale(1.4);
+}
+
+.estrela-container img {
+    display: block;
+    padding: 0;
+    width: 15px;
+    height: 15px;
+}
+
+@keyframes piscarEstrela {
+    0%, 100% { filter: brightness(1.5); }
+    50% { filter: brightness(0.7); }
+}
+
+@keyframes girarEstrela {
+    from { transform: initial; }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes flutuarEstrela {
+    0%, 100% { transform: initial; }
+    50% { transform: translateY(10px); }
 }

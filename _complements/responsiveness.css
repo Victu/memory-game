@@ -85,6 +85,11 @@
         font-size: 4.8em;
         top: 26%;
     }
+
+    .estrela-container img { 
+        width: 10px;
+        height: 10px;
+    }
 }
 
 @media (max-height: 915px) {
@@ -169,5 +174,10 @@
     #game-over-msg { 
         font-size: 4.8em;
         top: 26%;
+    }
+
+    .estrela-container img { 
+        width: 10px;
+        height: 10px;
     }
 }
