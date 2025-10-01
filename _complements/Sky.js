@@ -25,6 +25,15 @@ class Sky {
             estrelaContainer.appendChild(img);
             estrelaContainer.appendChild(estrela)
 
+            const tamanhoRandomizado = numRandom(12, 20);
+            estrela.style.height = `${tamanhoRandomizado - 6}px`;
+            estrela.style.width = `${tamanhoRandomizado - 6}px`;
+            img.style.height = `${tamanhoRandomizado}px`;
+            img.style.width = `${tamanhoRandomizado}px`;
+
+            const zIndexRandomizado = numRandom(-1, 0);
+            estrelaContainer.style.zIndex = `${zIndexRandomizado}`;
+
             const topRandomizado = numRandom(1, 98);
             estrelaContainer.style.top = `${topRandomizado}%`;
 
@@ -40,7 +49,8 @@ class Sky {
             estrela.style.animationDelay = `${atrasoRandomizado}s`;
             img.style.animationDelay = `${atrasoRandomizado}s`;
             estrela.style.animation = `iluminarEstrela ${tempoEfeitoLuz}s ease infinite alternate`;
-            img.style.animation = `piscarEstrela ${tempoEfeitoLuz}s ease infinite alternate, girarEstrela ${numRandom(10, 20)}s ease-in-out infinite alternate-reverse`;
+            img.style.animation = `piscarEstrela ${tempoEfeitoLuz}s ease infinite alternate, 
+            girarEstrela ${numRandom(10, 20)}s ease-in-out infinite alternate-reverse`;
             this.body.appendChild(estrelaContainer);
         }
     }
