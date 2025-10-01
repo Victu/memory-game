@@ -22,6 +22,7 @@ html {
     height: 100%;
     width: 100%;
     overflow: hidden;
+    user-select: none;
 }
 
 body {
@@ -43,13 +44,14 @@ body {
     gap: 70px;
     padding: 0;
     margin: 0;
-    z-index: 10;
+    z-index: 100;
 }
 
 #logomark {
     max-width: 620px;
     animation: piscarLogomark 2.5s infinite steps(1);
     filter: brightness(0.3);
+    pointer-events: none;
 }
 
 @keyframes piscarLogomark {
@@ -164,6 +166,7 @@ main {
     padding: 14px;
     margin-bottom: 30px;
     visibility: hidden;
+    pointer-events: none;
 }
 
 #cabecalho-principal img, figcaption { display: inline; }
@@ -407,11 +410,27 @@ main {
     }
 }
 
+.estrela {
+    position: absolute;
+    top: 1px;
+    left: 0px;
+    /* border: 1px solid white;*/
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, .3);
+    box-shadow: 1px 1px 12px rgba(255, 255, 255, .3),
+    -1px -1px 12px rgba(255, 255, 255, .3),
+    0px 0px 18px rgba(255, 255, 255, .3),
+    0px 0px 18px rgba(255, 255, 255, .3);
+    z-index: -1;
+}
+
 .estrela-container {
     position: fixed;
     width: max-content;
     height: max-content;
-    transform: scale(1.4);
+    z-index: 10;
 }
 
 .estrela-container img {
@@ -422,8 +441,13 @@ main {
 }
 
 @keyframes piscarEstrela {
-    0%, 100% { filter: brightness(1.5); }
-    50% { filter: brightness(0.7); }
+    0%, 100% { filter: brightness(0.7); }
+    50% { filter: brightness(1.5); }
+}
+
+@keyframes iluminarEstrela {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
 }
 
 @keyframes girarEstrela {

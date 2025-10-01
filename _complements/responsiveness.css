@@ -85,6 +85,11 @@
         font-size: 4.8em;
         top: 26%;
     }
+    
+    .estrela {
+        width: 10px;
+        height: 10px;
+    }
 
     .estrela-container img { 
         width: 10px;
@@ -174,6 +179,11 @@
     #game-over-msg { 
         font-size: 4.8em;
         top: 26%;
+    }
+
+    .estrela {
+        width: 10px;
+        height: 10px;
     }
 
     .estrela-container img { 

@@ -145,8 +145,6 @@ caixas.forEach((elemento, index) => {
         caixa.target.style.pointerEvents = 'none';
         caixa.target.style.border = '5px silver groove';
         vidaRetirada.style.transform = '';
-        vidaRetirada.style.userSelect = 'none';
-        gameOverMsg.style.userSelect = 'none';
         
         // Guarda imagem e "caixa" selecionada
         imagensReveladas.unshift(imagens[index]);
