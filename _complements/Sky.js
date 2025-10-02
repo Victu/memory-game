@@ -12,22 +12,22 @@ class Sky {
                 this.body.removeChild(estrelas[index]);
         }
 
-        for (let iter = 5; iter <= this.totalDeEstrelas; iter++) {
-            const estrela = document.createElement('div');
-            estrela.className = 'estrela';
+        for (let quantidade = 5; quantidade <= this.totalDeEstrelas; quantidade++) {
+            const brilhoEstrela = document.createElement('div');
+            brilhoEstrela.className = 'brilho-estrela';
 
             const estrelaRandomizada = numRandom(1, 2);
             const img = document.createElement('img');
             img.src = `_media/_images/star-${estrelaRandomizada}.png`;
-
+            
             const estrelaContainer = document.createElement('div');
             estrelaContainer.className = 'estrela-container';
             estrelaContainer.appendChild(img);
-            estrelaContainer.appendChild(estrela)
-
-            const tamanhoRandomizado = numRandom(12, 20);
-            estrela.style.height = `${tamanhoRandomizado - 6}px`;
-            estrela.style.width = `${tamanhoRandomizado - 6}px`;
+            estrelaContainer.appendChild(brilhoEstrela);
+            
+            const tamanhoRandomizado = numRandom(10, 20);
+            brilhoEstrela.style.height = `${tamanhoRandomizado - 6}px`;
+            brilhoEstrela.style.width = `${tamanhoRandomizado - 6}px`;
             img.style.height = `${tamanhoRandomizado}px`;
             img.style.width = `${tamanhoRandomizado}px`;
 
@@ -45,11 +45,11 @@ class Sky {
             estrelaContainer.style.animationDelay = `${atrasoRandomizado}s`;
             estrelaContainer.style.animation = 'flutuarEstrela 10s ease-in-out infinite alternate';
 
-            const tempoEfeitoLuz = numRandom(3, 6);
-            estrela.style.animationDelay = `${atrasoRandomizado}s`;
+            const tempoDeBrilho = numRandom(3, 6);
+            brilhoEstrela.style.animationDelay = `${atrasoRandomizado}s`;
             img.style.animationDelay = `${atrasoRandomizado}s`;
-            estrela.style.animation = `iluminarEstrela ${tempoEfeitoLuz}s ease infinite alternate`;
-            img.style.animation = `piscarEstrela ${tempoEfeitoLuz}s ease infinite alternate, 
+            brilhoEstrela.style.animation = `iluminarEstrela ${tempoDeBrilho}s ease infinite alternate-reverse`;
+            img.style.animation = `piscarEstrela ${tempoDeBrilho}s ease infinite alternate-reverse, 
             girarEstrela ${numRandom(10, 20)}s ease-in-out infinite alternate-reverse`;
             this.body.appendChild(estrelaContainer);
         }

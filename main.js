@@ -1,6 +1,7 @@
 // ----------------------------------- Configurações do conteúdo principal -----------------------------------
 
 const body = document.body.style;
+const caixasContainer = document.getElementById('caixas');
 const caixas = criarCaixas(); // Retorna todos os elementos <button> de classe 'caixa'
 const imagens = []; // Array que armazenará os caminhos das imagens dos personagens
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
@@ -8,7 +9,6 @@ let caixasSelecionadas = []; // Array para armazenar as "caixas" que foram selec
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
 let totalVidas = 8; // Quantidade atual de vidas
 let acertos = 0;
-const vidaRetirada = document.getElementById('vida-retirada');
 const slidesContainer = document.getElementById('slides-container').style;
 let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
 const nivelDificuldade = document.getElementById('nivel-dificuldade');
@@ -17,13 +17,16 @@ const tema = document.getElementById('tema');
 const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 const gameOverMsg = document.getElementById('game-over-msg');
 let jogoFinalizado = false;
+const vidaRetirada = document.createElement('span');
+vidaRetirada.id = 'vida-retirada';
+caixasContainer.appendChild(vidaRetirada);
 
-// Interatividade e animações da introdução
+// Inicialização de interatividade e animações na introdução
 document.addEventListener('DOMContentLoaded', () => {
     const intro = document.getElementById('intro').style;
     numeroDeVidas.innerText = totalVidas;
     embaralharImagens(imagens); // Embaralhamento das imagens
-
+    
     setTimeout(() => {
         quantidadeInicialVidas.transition = '0.7s ease-in'
         quantidadeInicialVidas.visibility = 'visible';
@@ -154,16 +157,16 @@ caixas.forEach((elemento, index) => {
         if (imagensReveladas.length == 2) {
             if (imagensReveladas[0] !== imagensReveladas[1]) {
                 totalVidas--;
-
+                
                 tocarEfeitoSonoro(false, null);
-                setTimeout(() => vidaRetirada.style.visibility = 'hidden', 350);
+                setTimeout(() => vidaRetirada.style.visibility = 'hidden', 410);
                 vidaRetirada.style.visibility = 'visible';
                 vidaRetirada.innerText = '-1 vida';
 
                 if (medidaDaTela(750))
-                    vidaRetirada.style.transform = 'translateY(-150px)';
+                    vidaRetirada.style.transform = 'translateY(-250px)';
                 else
-                    vidaRetirada.style.transform = 'translateY(-170px)';
+                    vidaRetirada.style.transform = 'translateY(-290px)';
                 
                 // Se forem diferentes, desativa temporariamente os cliques
                 caixas.forEach(objeto => objeto.style.pointerEvents = 'none');
@@ -182,7 +185,7 @@ caixas.forEach((elemento, index) => {
 
                         caixaSelecionada.style.cursor = 'pointer';
                         setTimeout(() => caixaSelecionada.style.pointerEvents = 'auto', 450);
-                        caixaSelecionada.style.transform = 'rotate(-360deg)';
+                        caixaSelecionada.style.transform = 'rotateY(-360deg)';
                         caixaSelecionada.style.boxShadow = 'none';
                         
                         // Restaura efeitos de hover
@@ -193,10 +196,10 @@ caixas.forEach((elemento, index) => {
                             if (!temaNoturno)
                                 evento.target.style.boxShadow = '';
                             else
-                                evento.target.style.boxShadow = '-10px 0px 30px var(--caixa-efeito-noite)',
-                                '10px 0px 30px var(--caixa-efeito-noite)',
-                                '0px -10px 30px var(--caixa-efeito-noite)',
-                                '0px 10px 30px var(--caixa-efeito-noite)';
+                                evento.target.style.boxShadow = '10px 10px 30px var(--caixa-efeito-noite)',
+                                '10px 10px 50px var(--caixa-efeito-noite)',
+                                '-10px -10px 30px var(--caixa-efeito-noite)',
+                                '-10px -10px 50px var(--caixa-efeito-noite)';
                         });
 
                         caixaSelecionada.addEventListener('mouseleave', evento => {
