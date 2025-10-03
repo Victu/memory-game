@@ -13,53 +13,53 @@ class Sky {
         }
 
         for (let quantidade = 5; quantidade <= this.totalDeEstrelas; quantidade++) {
-            const brilhoEstrela = document.createElement('div');
+            const estrelaContainer = document.createElement('div'); // Criando container geral da estrela
+            estrelaContainer.className = 'estrela-container';
+            const brilhoEstrela = document.createElement('div'); // Criando container para o efeito de brilho da estela
             brilhoEstrela.className = 'brilho-estrela';
 
-            const estrelaRandomizada = numRandom(1, 2);
+            const estrelaRandomizada = numRandom(1, 2); // Seleciona aleatoriamente entre a estrela amarela ou azul
             const img = document.createElement('img');
             img.src = `_media/_images/star-${estrelaRandomizada}.png`;
             
             if (estrelaRandomizada == 1) {
                 brilhoEstrela.style.backgroundColor = 'rgba(255, 222, 35, .65)';
-                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(255, 222, 35, .3),
-                2px 2px 25px rgba(255, 222, 35, .3),
-                -2px -2px 25px rgba(255, 222, 35, .3),
-                -2px -2px 25px rgba(255, 222, 35, .3),
+                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(255, 222, 35, .4),
+                2px 2px 25px rgba(255, 222, 35, .4),
+                -2px -2px 25px rgba(255, 222, 35, .4),
+                -2px -2px 25px rgba(255, 222, 35, .4),
                 1px 1px 22px rgba(255, 222, 35, .5),
                 1px 1px 22px rgba(255, 222, 35, .5),
                 -1px -1px 22px rgba(255, 222, 35, .5),
                 -1px -1px 22px rgba(255, 222, 35, .5),
-                0px 0px 20px rgba(255, 222, 35, .65),
-                0px 0px 20px rgba(255, 222, 35, .65),
-                0px 0px 20px rgba(255, 222, 35, .65),
-                0px 0px 20px rgba(255, 222, 35, .65),
-                6px 6px 28px rgba(255, 242, 168, 0.4),
-                6px 6px 28px rgba(255, 242, 168, .4),
-                -6px -6px 28px rgba(255, 242, 168, .4),
-                -6px -6px 28px rgba(255, 242, 168, .4)`;
+                0px 0px 20px rgba(255, 222, 35, .6),
+                0px 0px 20px rgba(255, 222, 35, .6),
+                0px 0px 20px rgba(255, 222, 35, .6),
+                0px 0px 20px rgba(255, 222, 35, .6),
+                6px 6px 28px rgba(255, 242, 168, .3),
+                6px 6px 28px rgba(255, 242, 168, .3),
+                -6px -6px 28px rgba(255, 242, 168, .3),
+                -6px -6px 28px rgba(255, 242, 168, .3)`;
             } else if (estrelaRandomizada == 2) {
-                brilhoEstrela.style.backgroundColor = 'rgba(35, 248, 255, 0.65)';
-                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(35, 248, 255, .3),
-                2px 2px 25px rgba(35, 248, 255, .3),
-                -2px -2px 25px rgba(35, 248, 255, .3),
-                -2px -2px 25px rgba(35, 248, 255, .3),
+                brilhoEstrela.style.backgroundColor = 'rgba(35, 248, 255, .65)';
+                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(35, 248, 255, .4),
+                2px 2px 25px rgba(35, 248, 255, .4),
+                -2px -2px 25px rgba(35, 248, 255, .4),
+                -2px -2px 25px rgba(35, 248, 255, .4),
                 1px 1px 22px rgba(35, 248, 255, .5),
                 1px 1px 22px rgba(35, 248, 255, .5),
                 -1px -1px 22px rgba(35, 248, 255, .5),
                 -1px -1px 22px rgba(35, 248, 255, .5),
-                0px 0px 20px rgba(35, 248, 255, .65),
-                0px 0px 20px rgba(35, 248, 255, .65),
-                0px 0px 20px rgba(35, 248, 255, .65),
-                0px 0px 20px rgba(35, 248, 255, .65),
-                6px 6px 28px rgba(145, 251, 255, 0.4),
-                6px 6px 28px rgba(145, 251, 255, .4),
-                -6px -6px 28px rgba(145, 251, 255, .4),
-                -6px -6px 28px rgba(145, 251, 255, .4)`;
+                0px 0px 20px rgba(35, 248, 255, .6),
+                0px 0px 20px rgba(35, 248, 255, .6),
+                0px 0px 20px rgba(35, 248, 255, .6),
+                0px 0px 20px rgba(35, 248, 255, .6),
+                6px 6px 28px rgba(145, 251, 255, .3),
+                6px 6px 28px rgba(145, 251, 255, .3),
+                -6px -6px 28px rgba(145, 251, 255, .3),
+                -6px -6px 28px rgba(145, 251, 255, .3)`;
             }
 
-            const estrelaContainer = document.createElement('div');
-            estrelaContainer.className = 'estrela-container';
             estrelaContainer.appendChild(img);
             estrelaContainer.appendChild(brilhoEstrela);
             
