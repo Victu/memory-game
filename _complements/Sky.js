@@ -1,7 +1,7 @@
 class Sky {
     constructor() {
         this.body = document.querySelector('body');
-        this.totalDeEstrelas = numRandom(8, 16);
+        this.totalDeEstrelas = numRandom(8, 18);
     }
 
     starlit() {
@@ -20,6 +20,44 @@ class Sky {
             const img = document.createElement('img');
             img.src = `_media/_images/star-${estrelaRandomizada}.png`;
             
+            if (estrelaRandomizada == 1) {
+                brilhoEstrela.style.backgroundColor = 'rgba(255, 222, 35, .65)';
+                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(255, 222, 35, .3),
+                2px 2px 25px rgba(255, 222, 35, .3),
+                -2px -2px 25px rgba(255, 222, 35, .3),
+                -2px -2px 25px rgba(255, 222, 35, .3),
+                1px 1px 22px rgba(255, 222, 35, .5),
+                1px 1px 22px rgba(255, 222, 35, .5),
+                -1px -1px 22px rgba(255, 222, 35, .5),
+                -1px -1px 22px rgba(255, 222, 35, .5),
+                0px 0px 20px rgba(255, 222, 35, .65),
+                0px 0px 20px rgba(255, 222, 35, .65),
+                0px 0px 20px rgba(255, 222, 35, .65),
+                0px 0px 20px rgba(255, 222, 35, .65),
+                6px 6px 28px rgba(255, 242, 168, 0.4),
+                6px 6px 28px rgba(255, 242, 168, .4),
+                -6px -6px 28px rgba(255, 242, 168, .4),
+                -6px -6px 28px rgba(255, 242, 168, .4)`;
+            } else if (estrelaRandomizada == 2) {
+                brilhoEstrela.style.backgroundColor = 'rgba(35, 248, 255, 0.65)';
+                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(35, 248, 255, .3),
+                2px 2px 25px rgba(35, 248, 255, .3),
+                -2px -2px 25px rgba(35, 248, 255, .3),
+                -2px -2px 25px rgba(35, 248, 255, .3),
+                1px 1px 22px rgba(35, 248, 255, .5),
+                1px 1px 22px rgba(35, 248, 255, .5),
+                -1px -1px 22px rgba(35, 248, 255, .5),
+                -1px -1px 22px rgba(35, 248, 255, .5),
+                0px 0px 20px rgba(35, 248, 255, .65),
+                0px 0px 20px rgba(35, 248, 255, .65),
+                0px 0px 20px rgba(35, 248, 255, .65),
+                0px 0px 20px rgba(35, 248, 255, .65),
+                6px 6px 28px rgba(145, 251, 255, 0.4),
+                6px 6px 28px rgba(145, 251, 255, .4),
+                -6px -6px 28px rgba(145, 251, 255, .4),
+                -6px -6px 28px rgba(145, 251, 255, .4)`;
+            }
+
             const estrelaContainer = document.createElement('div');
             estrelaContainer.className = 'estrela-container';
             estrelaContainer.appendChild(img);
@@ -31,8 +69,10 @@ class Sky {
             img.style.height = `${tamanhoRandomizado}px`;
             img.style.width = `${tamanhoRandomizado}px`;
 
-            const zIndexRandomizado = numRandom(-1, 0);
-            estrelaContainer.style.zIndex = `${zIndexRandomizado}`;
+            if (tamanhoRandomizado <= 15)
+                estrelaContainer.style.zIndex = '-1';
+            else
+                estrelaContainer.style.zIndex = '1';
 
             const topRandomizado = numRandom(1, 98);
             estrelaContainer.style.top = `${topRandomizado}%`;
@@ -40,7 +80,7 @@ class Sky {
             const leftRandomizado = numRandom(1, 98);
             estrelaContainer.style.left = `${leftRandomizado}%`;
 
-            const atrasoRandomizado = numRandom(2, 10);
+            const atrasoRandomizado = numRandom(3, 10);
             estrelaContainer.style.pointerEvents = 'none';
             estrelaContainer.style.animationDelay = `${atrasoRandomizado}s`;
             estrelaContainer.style.animation = 'flutuarEstrela 10s ease-in-out infinite alternate';
