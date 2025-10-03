@@ -17,7 +17,7 @@ const tema = document.getElementById('tema');
 const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 const gameOverMsg = document.getElementById('game-over-msg');
 let jogoFinalizado = false;
-const vidaRetirada = document.createElement('span');
+const vidaRetirada = document.createElement('span'); // Mensagem flutuante
 vidaRetirada.id = 'vida-retirada';
 caixasContainer.appendChild(vidaRetirada);
 
@@ -80,63 +80,60 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Funcionalidade dos slides de opções na introdução
-async function escolher(escolha) {
-    const quantiadeEscolhidaVidas = document.getElementById('quantidade-escolhida-vidas');
-    const nivelEscolhido = document.getElementById('nivel-escolhido');
+document.querySelectorAll('.escolha').forEach(escolha => {
+    escolha.addEventListener('click', async () => {
+        const quantiadeEscolhidaVidas = document.getElementById('quantidade-escolhida-vidas');
+        const nivelEscolhido = document.getElementById('nivel-escolhido');
 
-    switch (escolha) {
-        case 'aumentar':
-            nivelAtual++; // Mostra o próximo nível de dificuldade
-            break;
-        case 'diminuir':
-            nivelAtual--; // Mostra o nível de dificuldade anterior
-            break;
-        case 'dia':
+        if (escolha.classList.contains('nivel-seta-esquerda')) {
+            nivelAtual--;
+        } else if (escolha.classList.contains('nivel-seta-direita')) {
+            nivelAtual++;
+        } else if (escolha.classList.contains('tema-seta-esquerda')) {
             tema.innerText = 'Dia';
             temaNoturno = false;
             alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
-            break;
-        case 'noite':
+        } else if (escolha.classList.contains('tema-seta-direita')) {
             tema.innerText = 'Noite';
             temaNoturno = true;
             alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
-            break;
-    }
-
-    if (escolha == 'aumentar' || escolha == 'diminuir') {
-        if (nivelAtual < 1) {
-            nivelAtual = 1;
-        } else if (nivelAtual > 3) {
-            nivelAtual = 3;
-        } else {
-            /* O jogo irá começar com uma determinada quantidade de vidas
-            de acordo com a escolha do nível de dificuldade */
-            if (nivelAtual == 1) {
-                totalVidas = 10;
-                nivelDificuldade.innerText = 'Fácil';
-                nivelEscolhido.innerText = 'fácil';
-            } else if (nivelAtual == 2) {
-                totalVidas = 8;
-                nivelDificuldade.innerText = 'Médio';
-                nivelEscolhido.innerText = 'médio';
-            } else if (nivelAtual == 3) {
-                totalVidas = 6;
-                nivelDificuldade.innerText = 'Difícil';
-                nivelEscolhido.innerText = 'difícil';
-            }
-            
-            numeroDeVidas.innerText = totalVidas;
-            quantiadeEscolhidaVidas.innerText = totalVidas;
-            quantidadeInicialVidas.transition = 'none';
-            quantidadeInicialVidas.visibility = 'visible';
-            quantidadeInicialVidas.opacity = '1';
-            await pausar(3);
-            quantidadeInicialVidas.transition = '0.7s ease-out';
-            quantidadeInicialVidas.visibility = 'hidden';
-            quantidadeInicialVidas.opacity = '0';
         }
-    }
-}
+
+        if (escolha.classList.contains('nivel-seta-esquerda') || escolha.classList.contains('nivel-seta-direita')) {
+            if (nivelAtual < 1) {
+                nivelAtual = 1;
+            } else if (nivelAtual > 3) {
+                nivelAtual = 3;
+            } else {
+                /* O jogo irá começar com uma determinada quantidade de vidas
+                de acordo com a escolha do nível de dificuldade */
+                if (nivelAtual == 1) {
+                    totalVidas = 10;
+                    nivelDificuldade.innerText = 'Fácil';
+                    nivelEscolhido.innerText = 'fácil';
+                } else if (nivelAtual == 2) {
+                    totalVidas = 8;
+                    nivelDificuldade.innerText = 'Médio';
+                    nivelEscolhido.innerText = 'médio';
+                } else if (nivelAtual == 3) {
+                    totalVidas = 6;
+                    nivelDificuldade.innerText = 'Difícil';
+                    nivelEscolhido.innerText = 'difícil';
+                }
+                
+                numeroDeVidas.innerText = totalVidas;
+                quantiadeEscolhidaVidas.innerText = totalVidas;
+                quantidadeInicialVidas.transition = 'none';
+                quantidadeInicialVidas.visibility = 'visible';
+                quantidadeInicialVidas.opacity = '1';
+                await pausar(3);
+                quantidadeInicialVidas.transition = '0.7s ease-out';
+                quantidadeInicialVidas.visibility = 'hidden';
+                quantidadeInicialVidas.opacity = '0';
+            }
+        }
+    })
+})
 
 // Associa o evento de clique a cada "caixa"
 caixas.forEach((elemento, index) => {

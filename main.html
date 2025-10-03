@@ -57,11 +57,11 @@
                 <div id="quantidade-inicial-vidas">No nível<span id="nivel-escolhido">médio</span>o jogo começa com<span id="quantidade-escolhida-vidas">8</span>vidas</div>
                 <p>Nível</p>
                 <div>
-                    <button onclick="escolher('diminuir')">&larr;</button><span id="nivel-dificuldade">Médio</span><button onclick="escolher('aumentar')">&rarr;</button>
+                    <button class="escolha nivel-seta-esquerda">&larr;</button><span id="nivel-dificuldade">Médio</span><button class="escolha nivel-seta-direita">&rarr;</button>
                 </div><br>
                 <p>Tema</p>
                 <div>
-                    <button onclick="escolher('dia')">&larr;</button><span id="tema">Dia</span><button onclick="escolher('noite')">&rarr;</button>
+                    <button class="escolha tema-seta-esquerda">&larr;</button><span id="tema">Dia</span><button class="escolha tema-seta-direita">&rarr;</button>
                 </div>
             </div>
             <span id="texto-copyright"><em>Desenvolvido por &copy;Victor Silva</em></span>
@@ -71,9 +71,8 @@
             <!-- Aqui ficarão os elementos <button> -->
             <!-- Cada botão representa uma "caixa com interrogação" -->
         </section>
-        <div id="game-over-msg">
-            <!-- Aqui haverá uma mensagem após o fim do jogo -->
-        </div>
+
+        <div id="game-over-msg"> <!-- Aqui haverá uma mensagem após o fim do jogo --> </div>
     </main>
 
     <!-- Informações de software que serão exibidas numa "janela" após clicar na opção SOBRE -->
@@ -81,8 +80,8 @@
         <button id="fechar-sobre" title="Fechar">X</button>
         <p><i class="fas fa-user"></i> Desenvolvedor: <span style="animation: iluminarTexto 3s infinite alternate; color: yellowgreen;">&copy;Victor Silva</span></p><br>
         <p><i class="fa-solid fa-calendar-days"></i> Data da criação: 10/07/2025</p><br>
-        <p><i class="fas fa-sync-alt"></i> Última atualização: 30/09/2025</p><br>
-        <p><i class="fas fa-code-branch"></i> Versão: 4.1</p><br>
+        <p><i class="fas fa-sync-alt"></i> Última atualização: 03/09/2025</p><br>
+        <p><i class="fas fa-code-branch"></i> Versão: 4.3</p><br>
         <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/Victu" target="_blank" style="color: var(--fonte-cor-padrao);" title="Ir à página">victu</a></p>
     </div>
 </body>

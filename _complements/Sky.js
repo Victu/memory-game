@@ -25,39 +25,27 @@ class Sky {
             if (estrelaRandomizada == 1) {
                 brilhoEstrela.style.backgroundColor = 'rgba(255, 222, 35, .65)';
                 brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(255, 222, 35, .4),
-                2px 2px 25px rgba(255, 222, 35, .4),
-                -2px -2px 25px rgba(255, 222, 35, .4),
                 -2px -2px 25px rgba(255, 222, 35, .4),
                 1px 1px 22px rgba(255, 222, 35, .5),
-                1px 1px 22px rgba(255, 222, 35, .5),
-                -1px -1px 22px rgba(255, 222, 35, .5),
                 -1px -1px 22px rgba(255, 222, 35, .5),
                 0px 0px 20px rgba(255, 222, 35, .6),
                 0px 0px 20px rgba(255, 222, 35, .6),
-                0px 0px 20px rgba(255, 222, 35, .6),
-                0px 0px 20px rgba(255, 222, 35, .6),
-                6px 6px 28px rgba(255, 242, 168, .3),
                 6px 6px 28px rgba(255, 242, 168, .3),
                 -6px -6px 28px rgba(255, 242, 168, .3),
-                -6px -6px 28px rgba(255, 242, 168, .3)`;
+                10px -10px 32px rgba(255, 251, 232, .35),
+                -10px 10px 32px rgba(255, 251, 232, .35)`;
             } else if (estrelaRandomizada == 2) {
                 brilhoEstrela.style.backgroundColor = 'rgba(35, 248, 255, .65)';
                 brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(35, 248, 255, .4),
-                2px 2px 25px rgba(35, 248, 255, .4),
-                -2px -2px 25px rgba(35, 248, 255, .4),
                 -2px -2px 25px rgba(35, 248, 255, .4),
                 1px 1px 22px rgba(35, 248, 255, .5),
-                1px 1px 22px rgba(35, 248, 255, .5),
-                -1px -1px 22px rgba(35, 248, 255, .5),
                 -1px -1px 22px rgba(35, 248, 255, .5),
                 0px 0px 20px rgba(35, 248, 255, .6),
                 0px 0px 20px rgba(35, 248, 255, .6),
-                0px 0px 20px rgba(35, 248, 255, .6),
-                0px 0px 20px rgba(35, 248, 255, .6),
-                6px 6px 28px rgba(145, 251, 255, .3),
                 6px 6px 28px rgba(145, 251, 255, .3),
                 -6px -6px 28px rgba(145, 251, 255, .3),
-                -6px -6px 28px rgba(145, 251, 255, .3)`;
+                -10px 10px 32px rgba(228, 255, 255, .35),
+                10px -10px 32px rgba(228, 255, 255, .35)`;
             }
 
             estrelaContainer.appendChild(img);

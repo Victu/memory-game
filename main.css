@@ -432,7 +432,7 @@ main {
 
 @keyframes piscarEstrela {
     0%, 100% { filter: brightness(0.6); }
-    50% { filter: brightness(1.5); }
+    50% { filter: brightness(1.6); }
 }
 
 @keyframes iluminarEstrela {
