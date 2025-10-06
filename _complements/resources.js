@@ -68,8 +68,8 @@ function numRandom(min = 0, max = 1) {
 }
 
 // Algoritmo para a alternância dos temas "Noite"/"Dia"
-function alternarTema(temaStatus, body, vetorDeElementos, menu, cabecalho) {
-    if (temaStatus) {
+function alternarTema(temaNoturno, body, vetorDeElementos, menu, cabecalho) {
+    if (temaNoturno) {
         new Sky().starlit(); // Estrelas iluminadas
         body.backgroundImage = "url('_media/_images/bg_night.png')";
         menu.backgroundImage = "url('_media/_images/bg-3_night.png')";
@@ -98,6 +98,7 @@ function alternarTema(temaStatus, body, vetorDeElementos, menu, cabecalho) {
         });
     } else {
         new Sky().daytime();
+        body.backdropFilter = 'initial';
         body.backgroundImage = "url('_media/_images/bg.png')";
         menu.backgroundImage = "url('_media/_images/bg-3.png')";
         cabecalho.backgroundImage = "url('_media/_images/title-memory-game.png')";

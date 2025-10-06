@@ -18,7 +18,7 @@ class Sky {
             const brilhoEstrela = document.createElement('div'); // Criando container para o efeito de brilho da estela
             brilhoEstrela.className = 'brilho-estrela';
 
-            const estrelaRandomizada = numRandom(1, 2); // Seleciona aleatoriamente entre a estrela amarela ou azul
+            const estrelaRandomizada = numRandom(1, 2); // Seleciona aleatoriamente entre a estrela amarela e a azul
             const img = document.createElement('img');
             img.src = `_media/_images/star-${estrelaRandomizada}.png`;
             
@@ -68,7 +68,7 @@ class Sky {
             const leftRandomizado = numRandom(1, 98);
             estrelaContainer.style.left = `${leftRandomizado}%`;
 
-            const atrasoRandomizado = numRandom(3, 10);
+            const atrasoRandomizado = numRandom(5, 12);
             estrelaContainer.style.pointerEvents = 'none';
             estrelaContainer.style.animationDelay = `${atrasoRandomizado}s`;
             estrelaContainer.style.animation = 'flutuarEstrela 10s ease-in-out infinite alternate';

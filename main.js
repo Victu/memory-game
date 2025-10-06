@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         main.transition = '1.5s';
         botaoMenuLateral.style.transform = 'translate(60px, 50px)';
         botaoMenuLateral.style.transition = '1s';
+        setaBotaoMenuLateral.animationDelay = '10s';
         setaBotaoMenuLateral.animation = 'apontar 0.6s linear 5';
         await pausar(1.7);
 
@@ -86,9 +87,9 @@ document.querySelectorAll('.escolha').forEach(escolha => {
         const nivelEscolhido = document.getElementById('nivel-escolhido');
 
         if (escolha.classList.contains('nivel-seta-esquerda')) {
-            nivelAtual--;
+            nivelAtual--;  // Reduz o nível de dificuldade
         } else if (escolha.classList.contains('nivel-seta-direita')) {
-            nivelAtual++;
+            nivelAtual++; // Aumenta o nível de dificuldade
         } else if (escolha.classList.contains('tema-seta-esquerda')) {
             tema.innerText = 'Dia';
             temaNoturno = false;

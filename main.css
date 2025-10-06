@@ -32,6 +32,12 @@ body {
     width: 100vw;
 }
 
+
+@keyframes flutuarBalao {
+    0%, 100% { transform: initial;}
+    50% { transform: translateY(15px);}
+}
+
 #intro {
     position: absolute;
     top: 16%;
@@ -72,12 +78,20 @@ body {
 }
 
 @keyframes acenderLogomark {
-    0%, 100% { box-shadow: initial; }
+    0%, 100% {
+        box-shadow: initial;
+        filter: initial;
+    }
     50% {
-        box-shadow: -25px -25px 58px rgba(255, 70, 70, 0.5),
-        25px -25px 58px rgba(70, 255, 70, 0.5),
-        -25px 25px 58px rgba(70, 199, 255, 0.5),
-        25px 25px 58px rgba(255, 70, 70, 0.5);
+        filter: brightness(1.5);
+        box-shadow: -25px -25px 55px rgba(255, 70, 70, 0.4),
+        25px -25px 55px rgba(70, 255, 70, 0.4),
+        -25px 25px 55px rgba(70, 199, 255, 0.4),
+        25px 25px 55px rgba(255, 70, 70, 0.4),
+        -35px -35px 65px rgba(255, 70, 70, 0.2),
+        35px -35px 65px rgba(70, 255, 70, 0.2),
+        -35px 35px 65px rgba(70, 199, 255, 0.2),
+        35px 35px 65px rgba(255, 70, 70, 0.2);
     }
 }
 
@@ -421,7 +435,6 @@ main {
     top: 3px;
     left: 3px;
     border-radius: 50%;
-    filter: brightness(1.2); 
     z-index: -1;
 }
 
@@ -436,8 +449,14 @@ main {
 }
 
 @keyframes iluminarEstrela {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
+    0%, 100% {
+        opacity: 0;
+        filter: initial; 
+    }
+    50% { 
+        opacity: 1; 
+        filter: brightness(1.2); 
+    }
 }
 
 @keyframes girarEstrela {
