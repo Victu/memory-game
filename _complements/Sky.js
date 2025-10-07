@@ -15,6 +15,7 @@ class Sky {
         for (let quantidade = 5; quantidade <= this.totalDeEstrelas; quantidade++) {
             const estrelaContainer = document.createElement('div'); // Criando container geral da estrela
             estrelaContainer.className = 'estrela-container';
+            
             const brilhoEstrela = document.createElement('div'); // Criando container para o efeito de brilho da estela
             brilhoEstrela.className = 'brilho-estrela';
 
@@ -73,12 +74,13 @@ class Sky {
             estrelaContainer.style.animationDelay = `${atrasoRandomizado}s`;
             estrelaContainer.style.animation = 'flutuarEstrela 10s ease-in-out infinite alternate';
 
+            const tipoDeAlternancia = ['alternate-reverse', 'alternate'];
             const tempoDeBrilho = numRandom(3, 6);
             brilhoEstrela.style.animationDelay = `${atrasoRandomizado}s`;
             img.style.animationDelay = `${atrasoRandomizado}s`;
             brilhoEstrela.style.animation = `iluminarEstrela ${tempoDeBrilho}s ease infinite alternate-reverse`;
             img.style.animation = `piscarEstrela ${tempoDeBrilho}s ease infinite alternate-reverse, 
-            girarEstrela ${numRandom(10, 20)}s ease-in-out infinite alternate-reverse`;
+            girarEstrela ${numRandom(10, 20)}s ease-in-out infinite ${tipoDeAlternancia[numRandom(0, 1)]}`;
             this.body.appendChild(estrelaContainer);
         }
     }

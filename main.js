@@ -7,7 +7,7 @@ const imagens = []; // Array que armazenará os caminhos das imagens dos persona
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
 let caixasSelecionadas = []; // Array para armazenar as "caixas" que foram selecionadas
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
-let totalVidas = 8; // Quantidade atual de vidas
+let totalVidas = 28; // Quantidade atual de vidas
 let acertos = 0;
 const slidesContainer = document.getElementById('slides-container').style;
 let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
@@ -234,6 +234,7 @@ caixas.forEach((elemento, index) => {
                             tocarEfeitoSonoro(null, false);
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none';
                             gameOverMsg.innerHTML = 'Game<br><br>Over';
+                            gameOverMsg.style.left = '14%';
                             gameOverMsg.style.color = 'rgba(255, 50, 50, 0.9)';
                             gameOverMsg.style.visibility = 'visible';
                             gameOverMsg.style.opacity = 1;
@@ -277,7 +278,7 @@ caixas.forEach((elemento, index) => {
                     imagensReveladas = [];
                     caixasSelecionadas = [];
 
-                    if (acertos == 8) {
+                    if (acertos == 10) {
                         acertos = 0;
                         musica.muted = true;
                         jogoFinalizado = true;
@@ -286,7 +287,7 @@ caixas.forEach((elemento, index) => {
                             tocarEfeitoSonoro(null, true);
                             document.querySelector('#cabecalho-principal > figure').style.display = 'none';
                             gameOverMsg.innerHTML = 'You<br><br>Win!';
-                            gameOverMsg.style.marginLeft = '4rem';
+                            gameOverMsg.style.left = '17%';
                             gameOverMsg.style.color = 'lime';
                             gameOverMsg.style.visibility = 'visible';
                             gameOverMsg.style.opacity = 1;

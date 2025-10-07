@@ -389,7 +389,6 @@ main {
 #game-over-msg {
     position: absolute;
     top: 30%;
-    left: 14%;
     padding: 0;
     font-size: 6.2em;
     font-family: pixel-font;
