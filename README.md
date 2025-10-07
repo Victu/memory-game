@@ -57,6 +57,7 @@ JavaScript (ES6+): Responsável por toda a lógica do jogo, incluindo o embaralh
 `|-- _complements/`<br>
 `|   |-- resources.js`<br>
 `|   |-- responsiveness.css`<br>
+`|   |-- Sky.js`<br>
 `|-- _font/`<br>
 `|-- _media/`<br>
 `|   |-- _images/`<br>
