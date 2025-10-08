@@ -12,6 +12,7 @@ class Sky {
                 this.body.removeChild(estrelas[index]);
         }
 
+        // Criação das estrelas
         for (let quantidade = 5; quantidade <= this.totalDeEstrelas; quantidade++) {
             const estrelaContainer = document.createElement('div'); // Criando container geral da estrela
             estrelaContainer.className = 'estrela-container';
@@ -19,11 +20,11 @@ class Sky {
             const brilhoEstrela = document.createElement('div'); // Criando container para o efeito de brilho da estela
             brilhoEstrela.className = 'brilho-estrela';
 
-            const estrelaRandomizada = numRandom(1, 2); // Seleciona aleatoriamente entre a estrela amarela e a azul
+            const estrelaEscolhida = numRandom(1, 2); // Seleciona aleatoriamente entre a estrela amarela e a azul
             const img = document.createElement('img');
-            img.src = `_media/_images/star-${estrelaRandomizada}.png`;
+            img.src = `_media/_images/star-${estrelaEscolhida}.png`;
             
-            if (estrelaRandomizada == 1) {
+            if (estrelaEscolhida == 1) {
                 brilhoEstrela.style.backgroundColor = 'rgba(255, 222, 35, .65)';
                 brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(255, 222, 35, .4),
                 -2px -2px 25px rgba(255, 222, 35, .4),
@@ -35,7 +36,7 @@ class Sky {
                 -6px -6px 28px rgba(255, 242, 168, .3),
                 10px -10px 32px rgba(255, 251, 232, .35),
                 -10px 10px 32px rgba(255, 251, 232, .35)`;
-            } else if (estrelaRandomizada == 2) {
+            } else if (estrelaEscolhida == 2) {
                 brilhoEstrela.style.backgroundColor = 'rgba(35, 248, 255, .65)';
                 brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(35, 248, 255, .4),
                 -2px -2px 25px rgba(35, 248, 255, .4),
@@ -75,12 +76,13 @@ class Sky {
             estrelaContainer.style.animation = 'flutuarEstrela 10s ease-in-out infinite alternate';
 
             const tipoDeAlternancia = ['alternate-reverse', 'alternate'];
+            const tipoEscolhido = tipoDeAlternancia[numRandom(0, 1)];
             const tempoDeBrilho = numRandom(3, 6);
             brilhoEstrela.style.animationDelay = `${atrasoRandomizado}s`;
             img.style.animationDelay = `${atrasoRandomizado}s`;
-            brilhoEstrela.style.animation = `iluminarEstrela ${tempoDeBrilho}s ease infinite alternate-reverse`;
-            img.style.animation = `piscarEstrela ${tempoDeBrilho}s ease infinite alternate-reverse, 
-            girarEstrela ${numRandom(10, 20)}s ease-in-out infinite ${tipoDeAlternancia[numRandom(0, 1)]}`;
+            brilhoEstrela.style.animation = `iluminarEstrela ${tempoDeBrilho}s ease infinite ${tipoEscolhido}`;
+            img.style.animation = `piscarEstrela ${tempoDeBrilho}s ease infinite ${tipoEscolhido}, 
+            girarEstrela ${numRandom(10, 20)}s ease-in-out infinite ${tipoEscolhido}`;
             this.body.appendChild(estrelaContainer);
         }
     }

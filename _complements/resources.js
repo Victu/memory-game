@@ -70,7 +70,7 @@ function numRandom(min = 0, max = 1) {
 // Algoritmo para a alternância dos temas "Noite"/"Dia"
 function alternarTema(temaNoturno, body, vetorDeElementos, menu, cabecalho) {
     if (temaNoturno) {
-        new Sky().starlit(); // Estrelas iluminadas
+        new Sky().starlit(); // Gerando estrelas iluminadas
         body.backgroundImage = "url('_media/_images/bg_night.png')";
         menu.backgroundImage = "url('_media/_images/bg-3_night.png')";
         cabecalho.backgroundImage = "url('_media/_images/title-memory-game_night.png')";
