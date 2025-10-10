@@ -141,19 +141,19 @@ document.querySelectorAll('.escolha').forEach(escolha => {
 })
 
 // Associa o evento de clique a cada "caixa"
-caixas.forEach((elemento, index) => {
-    elemento.addEventListener('click', caixa => {
+caixas.forEach((caixa, index) => {
+    caixa.addEventListener('click', eventoDaCaixa => {
         // Exibe a imagem correspondente à posição embaralhada
-        caixa.target.style.backgroundImage = `url('${imagens[index]}')`;
-        caixa.target.style.filter = 'initial';
-        caixa.target.style.transform = 'initial';
-        caixa.target.style.pointerEvents = 'none';
-        caixa.target.style.border = '5px silver groove';
+        eventoDaCaixa.target.style.backgroundImage = `url('${imagens[index]}')`;
+        eventoDaCaixa.target.style.filter = 'initial';
+        eventoDaCaixa.target.style.transform = 'initial';
+        eventoDaCaixa.target.style.pointerEvents = 'none';
+        eventoDaCaixa.target.style.border = '5px silver groove';
         vidaRetirada.style.transform = '';
         
         // Guarda imagem e "caixa" selecionada
         imagensReveladas.unshift(imagens[index]);
-        caixasSelecionadas.unshift(caixa.target);
+        caixasSelecionadas.unshift(eventoDaCaixa.target);
 
         // Quando duas imagens são reveladas
         if (imagensReveladas.length == 2) {
@@ -236,7 +236,6 @@ caixas.forEach((elemento, index) => {
 
                         setTimeout(() => {
                             tocarEfeitoSonoro(null, false);
-                            document.querySelector('#cabecalho-principal > figure').style.display = 'none';
                             gameOverMsg.innerHTML = 'Game<br><br>Over';
                             gameOverMsg.style.left = '14%';
                             gameOverMsg.style.color = 'rgba(255, 50, 50, 0.9)';
@@ -289,7 +288,6 @@ caixas.forEach((elemento, index) => {
 
                         setTimeout(() => {
                             tocarEfeitoSonoro(null, true);
-                            document.querySelector('#cabecalho-principal > figure').style.display = 'none';
                             gameOverMsg.innerHTML = 'You<br><br>Win!';
                             gameOverMsg.style.left = '17%';
                             gameOverMsg.style.color = 'lime';

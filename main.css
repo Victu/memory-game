@@ -183,6 +183,8 @@ main {
     pointer-events: none;
 }
 
+#cabecalho-principal img { width: 55px; }
+
 #cabecalho-principal img, figcaption { display: inline; }
 
 #cabecalho-principal figure { margin: -10px 0 0 0; }
@@ -282,20 +284,20 @@ main {
 
 #menu-lateral li { cursor: pointer; }
 
-#menu-lateral > nav > ul {
+#menu-lateral nav > ul {
     line-height: 30px;
     transform: translateX(-12px);
     width: 105%;
 }
 
-#menu-lateral > nav > ul > li {
+#menu-lateral nav > ul > li {
     font-size: large;
     padding: 10px 10px 10px 28px;
     margin: 0 0 25px -12px;
     text-indent: 30px;
 }
 
-#menu-lateral > nav > ul > li:hover { background-color: rgba(255, 255, 255, 0.6); }
+#menu-lateral nav > ul > li:hover { background-color: rgba(255, 255, 255, 0.6); }
 
 .sub-menu {
     position: absolute;
