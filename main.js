@@ -14,13 +14,12 @@ let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
 const nivelDificuldade = document.getElementById('nivel-dificuldade');
 const quantidadeInicialVidas = document.getElementById('quantidade-inicial-vidas').style;
 const tema = document.getElementById('tema');
-const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 const gameOverMsg = document.getElementById('game-over-msg');
 let jogoFinalizado = false;
+const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 const vidaRetirada = document.createElement('span'); // Mensagem flutuante
 vidaRetirada.id = 'vida-retirada';
 caixasContainer.appendChild(vidaRetirada);
-const opcaoTema = document.querySelectorAll('#sub-menu-temas li');
 
 // Inicialização de interatividade e animações na introdução
 document.addEventListener('DOMContentLoaded', () => {
@@ -93,20 +92,16 @@ document.querySelectorAll('.escolha').forEach(escolha => {
             nivelAtual++; // Aumenta o nível de dificuldade
         } else if (escolha.classList.contains('tema-seta-esquerda')) {
             tema.innerText = 'Dia';
-            temaNoturno = false;
-            alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
+            temaNoturnoAtivado = false;
+            estiloDeTema[0].style.color = 'gold'; // Cor de destaque do tema escolhido (Dia)
+            estiloDeTema[1].style.color = 'var(--fonte-cor-padrao)';
+            alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
         } else if (escolha.classList.contains('tema-seta-direita')) {
             tema.innerText = 'Noite';
-            temaNoturno = true;
-            alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
-        }
-
-        if (temaNoturno) {
-            opcaoTema[1].style.color = 'gold';
-            opcaoTema[0].style.color = 'var(--fonte-cor-padrao)';
-        } else {
-           opcaoTema[1].style.color = 'var(--fonte-cor-padrao)';
-           opcaoTema[0].style.color = 'gold';
+            temaNoturnoAtivado = true;
+            estiloDeTema[0].style.color = 'var(--fonte-cor-padrao)';
+            estiloDeTema[1].style.color = 'gold'; // Cor de destaque do tema escolhido (Noite)
+            alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
         }
 
         if (escolha.classList.contains('nivel-seta-esquerda') || escolha.classList.contains('nivel-seta-direita')) {
@@ -185,7 +180,7 @@ caixas.forEach((elemento, index) => {
                 setTimeout(() => {
                     for (const caixaSelecionada of caixasSelecionadas) {
                         // Define imagem de fundo conforme o tema
-                        if (!temaNoturno)
+                        if (!temaNoturnoAtivado)
                             caixaSelecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`;
                         else
                             caixaSelecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`;
@@ -200,13 +195,13 @@ caixas.forEach((elemento, index) => {
                             evento.target.style.filter = '';
                             evento.target.style.transform = '';
 
-                            if (!temaNoturno)
+                            if (!temaNoturnoAtivado)
                                 evento.target.style.boxShadow = '';
                             else
                                 evento.target.style.boxShadow = '10px 10px 30px var(--caixa-efeito-noite)',
-                                '10px 10px 50px var(--caixa-efeito-noite)',
+                                '15px 15px 50px var(--caixa-efeito-noite)',
                                 '-10px -10px 30px var(--caixa-efeito-noite)',
-                                '-10px -10px 50px var(--caixa-efeito-noite)';
+                                '-15px -15px 50px var(--caixa-efeito-noite)';
                         });
 
                         caixaSelecionada.addEventListener('mouseleave', evento => {
@@ -319,9 +314,10 @@ const setaBotaoMenuLateral = document.getElementById('seta-botao-menu-lateral').
 const menuLateral = document.getElementById('menu-lateral').style;
 const cabecalhoMenuLateral = document.getElementById('cabecalho-menu-lateral').style;
 const subMenuTemas = document.getElementById('sub-menu-temas').style;
+const estiloDeTema = document.querySelectorAll('#sub-menu-temas li');
 const subMenuMusica = document.getElementById('sub-menu-musica').style;
 let menuAberto = true; // Variável para controlar a visibilidade do menu lateral     
-let temaNoturno = false; // Variável para controlar o tema "Dia"/"Noite"
+let temaNoturnoAtivado = false; // Variável para controlar o tema "Dia"/"Noite"
 
 // Mostra ou oculta o menu lateral
 botaoMenuLateral.addEventListener('click', evento => {
@@ -370,18 +366,18 @@ document.getElementById('opcao-temas').addEventListener('mouseenter', evento => 
 });
 
 // Alterna para os temas "Noite"/"Dia"
-document.querySelectorAll('#sub-menu-temas > li').forEach(opcao => {
+estiloDeTema.forEach(opcao => {
     opcao.addEventListener('click', evento => {
         // Por padrão, o tema "Dia" fica ativado
         if (evento.target.textContent === '🌙 Noite') {
-            temaNoturno = true;
-            alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
+            temaNoturnoAtivado = true;
+            alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
         } else if (evento.target.textContent === '☀️ Dia') {
-            temaNoturno = false;
-            alternarTema(temaNoturno, body, caixas, menuLateral, cabecalhoMenuLateral);
+            temaNoturnoAtivado = false;
+            alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
         }
 
-        for (const li of document.querySelectorAll('#sub-menu-temas > li'))
+        for (const li of estiloDeTema)
             li.style.color = 'var(--cor-fonte-padrao)';
 
         // Cor de destaque da opção selecionada
@@ -403,7 +399,7 @@ document.getElementById('opcao-musica').addEventListener('mouseenter', evento =>
 });
 
 // Ativar ou desativar a música de fundo
-document.querySelectorAll('#sub-menu-musica > li').forEach(opcao => {
+document.querySelectorAll('#sub-menu-musica li').forEach(opcao => {
     opcao.addEventListener('click', evento => {
         if (!jogoFinalizado) {
             if (evento.target.textContent === '🔊 Ativada') {
@@ -414,8 +410,8 @@ document.querySelectorAll('#sub-menu-musica > li').forEach(opcao => {
                 musica.currentTime = 0;
             }
 
-            for (const li of document.querySelectorAll('#sub-menu-musica > li'))
-                li.style.color = 'var(--fonte-cor-padrao';
+            for (const li of document.querySelectorAll('#sub-menu-musica li'))
+                li.style.color = 'var(--fonte-cor-padrao)';
 
             // Cor de destaque da opção selecionada
             evento.target.style.color = 'gold';
