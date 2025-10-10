@@ -42,9 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     caixas.forEach(caixa => caixa.style.transform = 'translateX(60vw)');
 
     // Ação do botão "Começar"
-    document.getElementById('start').addEventListener('click', async botaoStart => {
+    document.getElementById('start').addEventListener('click', async eventoDoBotaoStart => {
         musica.loop = true;
-        botaoStart.target.style.display = 'none';
+        eventoDoBotaoStart.target.style.display = 'none';
         slidesContainer.display = 'none';
         intro.transform = 'scale(6) rotate(-65deg)';
         intro.transition = '1.2s ease-in-out';
