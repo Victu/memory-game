@@ -20,7 +20,7 @@ class Sky {
             const brilhoEstrela = document.createElement('div'); // Criando container para o efeito de brilho da estela
             brilhoEstrela.className = 'brilho-estrela';
 
-            const estrelaEscolhida = numRandom(1, 3); // Seleciona aleatoriamente entre a estrela amarela e a azul
+            const estrelaEscolhida = numRandom(1, 2); // Seleciona aleatoriamente entre a estrela amarela e a azul
             const img = document.createElement('img');
             img.src = `_media/_images/star-${estrelaEscolhida}.png`;
             
@@ -48,24 +48,12 @@ class Sky {
                 -6px -6px 28px rgba(145, 251, 255, 0.3),
                 -10px 10px 32px rgba(228, 255, 255, 0.35),
                 10px -10px 32px rgba(228, 255, 255, 0.35)`;
-            } else if (estrelaEscolhida == 3) { // Estrela violeta
-                brilhoEstrela.style.backgroundColor = 'rgba(174, 35, 255, 0.65)';
-                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(174, 35, 255, 0.55),
-                -2px -2px 25px rgba(174, 35, 255, 0.55),
-                1px 1px 22px rgba(174, 35, 255, 0.5),
-                -1px -1px 22px rgba(174, 35, 255, 0.5),
-                0px 0px 20px rgba(174, 35, 255, 0.6),
-                0px 0px 20px rgba(174, 35, 255, 0.6),
-                6px 6px 28px rgba(234, 152, 255, 0.3),
-                -6px -6px 28px rgba(234, 152, 255, 0.3),
-                -10px 10px 32px rgba(249, 224, 255, 0.35),
-                10px -10px 32px rgba(249, 224, 255, 0.35)`;
             }
 
             estrelaContainer.appendChild(img);
             estrelaContainer.appendChild(brilhoEstrela);
             
-            const tamanhoRandomizado = numRandom(10, 20);
+            const tamanhoRandomizado = numRandom(12, 20);
             brilhoEstrela.style.height = `${tamanhoRandomizado - 9}px`;
             brilhoEstrela.style.width = `${tamanhoRandomizado - 9}px`;
             img.style.height = `${tamanhoRandomizado}px`;
