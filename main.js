@@ -17,6 +17,7 @@ const tema = document.getElementById('tema');
 const gameOverMsg = document.getElementById('game-over-msg');
 let jogoFinalizado = false;
 const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
+let combo = 0;
 const vidaRetirada = document.createElement('span'); // Mensagem flutuante
 vidaRetirada.id = 'vida-retirada';
 caixasContainer.appendChild(vidaRetirada);
@@ -115,15 +116,15 @@ document.querySelectorAll('.escolha').forEach(escolha => {
                 if (nivelAtual == 1) {
                     totalVidas = 10;
                     nivelDificuldade.innerText = 'Fácil';
-                    nivelEscolhido.innerText = 'fácil';
+                    nivelEscolhido.innerText = 'fácil,';
                 } else if (nivelAtual == 2) {
                     totalVidas = 8;
                     nivelDificuldade.innerText = 'Médio';
-                    nivelEscolhido.innerText = 'médio';
+                    nivelEscolhido.innerText = 'médio,';
                 } else if (nivelAtual == 3) {
                     totalVidas = 6;
                     nivelDificuldade.innerText = 'Difícil';
-                    nivelEscolhido.innerText = 'difícil';
+                    nivelEscolhido.innerText = 'difícil,';
                 }
                 
                 numeroDeVidas.innerText = totalVidas;
@@ -159,11 +160,14 @@ caixas.forEach((caixa, index) => {
         if (imagensReveladas.length == 2) {
             if (imagensReveladas[0] !== imagensReveladas[1]) {
                 totalVidas--;
+                combo = 0;
                 
                 tocarEfeitoSonoro(false, null);
-                setTimeout(() => vidaRetirada.style.visibility = 'hidden', 410);
+                setTimeout(() => vidaRetirada.style.visibility = 'hidden', 800);
                 vidaRetirada.style.visibility = 'visible';
                 vidaRetirada.innerText = '-1 vida';
+                vidaRetirada.style.color = 'red';
+                vidaRetirada.style.transition = 'transform 0.9s';
 
                 if (medidaDaTela(750))
                     vidaRetirada.style.transform = 'translateY(-250px)';
@@ -253,6 +257,19 @@ caixas.forEach((caixa, index) => {
                 }, 1200);
             } else {
                 acertos++;
+                combo++;
+
+                if (combo >= 2) {
+                    setTimeout(() => vidaRetirada.style.visibility = 'hidden', 800);
+                    vidaRetirada.style.visibility = 'visible';
+                    vidaRetirada.innerText = `Combo ${combo}x`;
+                    vidaRetirada.style.color = 'lime';
+
+                    if (medidaDaTela(750))
+                        vidaRetirada.style.transform = 'translateY(-250px)';
+                    else
+                        vidaRetirada.style.transform = 'translateY(-290px)';
+                }
 
                 tocarEfeitoSonoro(true, null);
                 // Se as imagens forem iguais (par encontrado), esconde as caixas
