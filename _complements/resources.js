@@ -8,7 +8,19 @@ function criarCaixas() {
         caixasContainer.appendChild(elementoButton);
     }
 
-    return document.querySelectorAll('.caixa'); // Seleciona todos as "caixas" criadas
+    return document.querySelectorAll('.caixa'); // Seleciona tados as "caixas" criadas
+}
+
+function comboMensagem() {
+    // Verifica se já existe o elemento
+    document.querySelector('#combo-mensagem')?.remove();
+
+    const comboMensagem = document.createElement('span');
+    comboMensagem.id = 'combo-mensagem';
+    
+    document.getElementById('caixas').appendChild(comboMensagem);
+    
+    return comboMensagem;
 }
 
 // Algoritmo para embaralhar as imagens

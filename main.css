@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: pixel-font;
-    src: url('_font/PressStart2P-Regular.ttf') format('truetype');
+    src: url('_media/_font/PressStart2P-Regular.ttf') format('truetype');
     font-weight: normal;
 }
 
@@ -198,6 +198,7 @@ main {
 }
 
 #caixas {
+    position: relative;
     padding: 25px;
     margin: 0;
     display: grid;
@@ -392,6 +393,26 @@ main {
     }
 }
 
+#combo-mensagem {
+    position: absolute;
+    top: 19%;
+    left: 26%;
+    text-align: center;
+    width: max-content;
+    font-size: 2em;
+    font-family: pixel-font;
+    text-shadow: 2px 2px 1px rgb(10, 10, 10);
+    z-index: 1000;
+    transition: transform 0.5s ease-in;
+    animation: colorir 0.4s linear infinite alternate;
+}
+
+@keyframes colorir {
+    0% { color: blue; }
+    50% { color: limegreen; }
+    100% { color: orange; }
+}
+
 #game-over-msg {
     position: absolute;
     top: 30%;
@@ -404,19 +425,7 @@ main {
     animation: none;
 }
 
-#vida-retirada {
-    position: absolute;
-    top: 33%;
-    left: 30%;
-    text-align: center;
-    width: max-content;
-    font-size: 2em;
-    font-family: pixel-font;
-    text-shadow: 2px 2px 1px rgb(10, 10, 10);
-    z-index: 100;
-}
-
-@keyframes piscarMsg {
+@keyframes piscarGameOver {
     0% {
         opacity: 1;
         visibility: visible;
@@ -431,7 +440,7 @@ main {
     position: fixed;
     width: max-content;
     height: max-content;
-    filter: brightness(1.5);
+    filter: brightness(1.7);
 }
 
 .brilho-estrela {
@@ -448,15 +457,12 @@ main {
 }
 
 @keyframes piscarEstrela {
-    0%, 100% { filter: brightness(0.6); }
-    50% { filter: brightness(1.15); }
+    0%, 100% { filter: brightness(0.4); }
+    50% { filter: brightness(1.2); }
 }
 
 @keyframes iluminarEstrela {
-    0%, 100% {
-        opacity: 0;
-        filter: initial; 
-    }
+    0%, 100% { opacity: 0; }
     50% { 
         opacity: 1; 
         filter: brightness(2); 

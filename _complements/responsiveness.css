@@ -1,4 +1,4 @@
-/* --------------------------- Configurações de responsividade --------------------------------- */
+/* --------------------------- Configuração geral de responsividade --------------------------------- */
 
 @charset "UTF-8";
 
@@ -76,9 +76,9 @@
         background: none;
     }
 
-    #vida-retirada {
-        top: 36.5%;
-        font-size: 1.4em;
+    #combo-mensagem {
+        top: 29%;
+        font-size: 1.7em;
     }
 
     #game-over-msg { 
@@ -171,9 +171,9 @@
         background: none;
     }
 
-    #vida-retirada {
-        top: 36.5%;
-        font-size: 1.4em;
+    #combo-mensagem {
+        top: 29%;
+        font-size: 1.7em;
     }
 
     #game-over-msg { 

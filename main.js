@@ -7,7 +7,7 @@ const imagens = []; // Array que armazenará os caminhos das imagens dos persona
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
 let caixasSelecionadas = []; // Array para armazenar as "caixas" que foram selecionadas
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
-let totalVidas = 8; // Por padrão, a quantidade atual de vidas é 8
+let totalVidas = 50; // Por padrão, a quantidade atual de vidas é 8
 let acertos = 0;
 const slidesContainer = document.getElementById('slides-container').style;
 let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
@@ -18,9 +18,7 @@ const gameOverMsg = document.getElementById('game-over-msg');
 let jogoFinalizado = false;
 const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 let combo = 0;
-const vidaRetirada = document.createElement('span'); // Mensagem flutuante
-vidaRetirada.id = 'vida-retirada';
-caixasContainer.appendChild(vidaRetirada);
+const comboMsg = comboMensagem();
 
 // Inicialização de interatividade e animações na introdução
 document.addEventListener('DOMContentLoaded', () => {
@@ -150,7 +148,7 @@ caixas.forEach((caixa, index) => {
         eventoDaCaixa.target.style.transform = 'initial';
         eventoDaCaixa.target.style.pointerEvents = 'none';
         eventoDaCaixa.target.style.border = '5px silver groove';
-        vidaRetirada.style.transform = '';
+        //comboMsg.style.transform = '';
         
         // Guarda imagem e "caixa" selecionada
         imagensReveladas.unshift(imagens[index]);
@@ -161,24 +159,14 @@ caixas.forEach((caixa, index) => {
             if (imagensReveladas[0] !== imagensReveladas[1]) {
                 totalVidas--;
                 combo = 0;
+                comboMsg.style.transform = '';
+                comboMsg.style.visibility = 'hidden';
                 
-                tocarEfeitoSonoro(false, null);
-                setTimeout(() => vidaRetirada.style.visibility = 'hidden', 800);
-                vidaRetirada.style.visibility = 'visible';
-                vidaRetirada.innerText = '-1 vida';
-                vidaRetirada.style.color = 'red';
-                vidaRetirada.style.transition = 'transform 0.9s';
-
-                if (medidaDaTela(750))
-                    vidaRetirada.style.transform = 'translateY(-250px)';
-                else
-                    vidaRetirada.style.transform = 'translateY(-290px)';
-                
-                // Se forem diferentes, desativa temporariamente os cliques
-                caixas.forEach(objeto => objeto.style.pointerEvents = 'none');
+                tocarEfeitoSonoro(false, null);      
+                caixas.forEach(objeto => objeto.style.pointerEvents = 'none'); // Se forem diferentes, desativa temporariamente os cliques
                 caixasSelecionadas[1].style.transform = 'initial';
                 numeroDeVidas.innerText = totalVidas;
-                numeroDeVidas.style.animation = 'mudaCor 0.3s linear 3';
+                numeroDeVidas.style.animation = 'mudaCor 0.4s linear 4 alternate';
 
                 // Após um tempo, reseta as caixas para o estado inicial
                 setTimeout(() => {
@@ -240,12 +228,13 @@ caixas.forEach((caixa, index) => {
 
                         setTimeout(() => {
                             tocarEfeitoSonoro(null, false);
+                            comboMsg.style.visibility = 'hidden';
                             gameOverMsg.innerHTML = 'Game<br><br>Over';
                             gameOverMsg.style.left = '14%';
                             gameOverMsg.style.color = 'rgba(255, 50, 50, 0.9)';
                             gameOverMsg.style.visibility = 'visible';
                             gameOverMsg.style.opacity = 1;
-                            gameOverMsg.style.animation = 'piscarMsg 0.6s ease-in-out infinite';
+                            gameOverMsg.style.animation = 'piscarGameOver 0.6s ease-in-out infinite';
                         }, 1100);
 
                         setTimeout(() => {
@@ -260,15 +249,9 @@ caixas.forEach((caixa, index) => {
                 combo++;
 
                 if (combo >= 2) {
-                    setTimeout(() => vidaRetirada.style.visibility = 'hidden', 800);
-                    vidaRetirada.style.visibility = 'visible';
-                    vidaRetirada.innerText = `Combo ${combo}x`;
-                    vidaRetirada.style.color = 'lime';
-
-                    if (medidaDaTela(750))
-                        vidaRetirada.style.transform = 'translateY(-250px)';
-                    else
-                        vidaRetirada.style.transform = 'translateY(-290px)';
+                    comboMsg.style.visibility = 'visible';
+                    comboMsg.innerText = `Combo ${combo}x`;
+                    comboMsg.style.transform = 'translateY(-250px)';
                 }
 
                 tocarEfeitoSonoro(true, null);
@@ -305,12 +288,13 @@ caixas.forEach((caixa, index) => {
 
                         setTimeout(() => {
                             tocarEfeitoSonoro(null, true);
+                            comboMsg.style.visibility = 'hidden';
                             gameOverMsg.innerHTML = 'You<br><br>Win!';
                             gameOverMsg.style.left = '17%';
                             gameOverMsg.style.color = 'lime';
                             gameOverMsg.style.visibility = 'visible';
                             gameOverMsg.style.opacity = 1;
-                            gameOverMsg.style.animation = 'piscarMsg 0.6s ease-in-out infinite';
+                            gameOverMsg.style.animation = 'piscarGameOver 0.6s ease-in-out infinite';
                         }, 1100);
 
                         setTimeout(() => alert('Você conseguiu finalizar!'), 3600);
