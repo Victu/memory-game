@@ -7,7 +7,7 @@ const imagens = []; // Array que armazenará os caminhos das imagens dos persona
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
 let caixasSelecionadas = []; // Array para armazenar as "caixas" que foram selecionadas
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
-let totalVidas = 50; // Por padrão, a quantidade atual de vidas é 8
+let totalVidas = 8; // Por padrão, a quantidade atual de vidas é 8
 let acertos = 0;
 const slidesContainer = document.getElementById('slides-container').style;
 let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
@@ -17,7 +17,7 @@ const tema = document.getElementById('tema');
 const gameOverMsg = document.getElementById('game-over-msg');
 let jogoFinalizado = false;
 const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
-let combo = 0;
+let combo = 0; // Combo de acertos consecutivos
 const comboMsg = comboMensagem();
 
 // Inicialização de interatividade e animações na introdução
@@ -92,14 +92,14 @@ document.querySelectorAll('.escolha').forEach(escolha => {
         } else if (escolha.classList.contains('tema-seta-esquerda')) {
             tema.innerText = 'Dia';
             temaNoturnoAtivado = false;
-            estiloDeTema[0].style.color = 'gold'; // Cor de destaque do tema escolhido (Dia)
-            estiloDeTema[1].style.color = 'var(--fonte-cor-padrao)';
+            temaSelecionado[0].style.color = 'gold'; // Cor de destaque do tema escolhido (Dia)
+            temaSelecionado[1].style.color = 'var(--fonte-cor-padrao)';
             alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
         } else if (escolha.classList.contains('tema-seta-direita')) {
             tema.innerText = 'Noite';
             temaNoturnoAtivado = true;
-            estiloDeTema[0].style.color = 'var(--fonte-cor-padrao)';
-            estiloDeTema[1].style.color = 'gold'; // Cor de destaque do tema escolhido (Noite)
+            temaSelecionado[0].style.color = 'var(--fonte-cor-padrao)';
+            temaSelecionado[1].style.color = 'gold'; // Cor de destaque do tema escolhido (Noite)
             alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
         }
 
@@ -148,7 +148,6 @@ caixas.forEach((caixa, index) => {
         eventoDaCaixa.target.style.transform = 'initial';
         eventoDaCaixa.target.style.pointerEvents = 'none';
         eventoDaCaixa.target.style.border = '5px silver groove';
-        //comboMsg.style.transform = '';
         
         // Guarda imagem e "caixa" selecionada
         imagensReveladas.unshift(imagens[index]);
@@ -166,7 +165,7 @@ caixas.forEach((caixa, index) => {
                 caixas.forEach(objeto => objeto.style.pointerEvents = 'none'); // Se forem diferentes, desativa temporariamente os cliques
                 caixasSelecionadas[1].style.transform = 'initial';
                 numeroDeVidas.innerText = totalVidas;
-                numeroDeVidas.style.animation = 'mudaCor 0.4s linear 4 alternate';
+                numeroDeVidas.style.animation = 'destacarVidas 0.4s linear 4 alternate';
 
                 // Após um tempo, reseta as caixas para o estado inicial
                 setTimeout(() => {
@@ -234,7 +233,7 @@ caixas.forEach((caixa, index) => {
                             gameOverMsg.style.color = 'rgba(255, 50, 50, 0.9)';
                             gameOverMsg.style.visibility = 'visible';
                             gameOverMsg.style.opacity = 1;
-                            gameOverMsg.style.animation = 'piscarGameOver 0.6s ease-in-out infinite';
+                            gameOverMsg.style.animation = 'piscarGameOver 0.6s linear infinite';
                         }, 1100);
 
                         setTimeout(() => {
@@ -251,12 +250,12 @@ caixas.forEach((caixa, index) => {
                 if (combo >= 2) {
                     comboMsg.style.visibility = 'visible';
                     comboMsg.innerText = `Combo ${combo}x`;
-                    comboMsg.style.transform = 'translateY(-250px)';
+                    comboMsg.style.animation = `ressaltar 0.4s linear infinite alternate,
+                    colorirMensagem 0.5s ease-in-out infinite alternate`;
                 }
 
                 tocarEfeitoSonoro(true, null);
-                // Se as imagens forem iguais (par encontrado), esconde as caixas
-                caixas.forEach(objeto => objeto.style.pointerEvents = 'none');
+                caixas.forEach(objeto => objeto.style.pointerEvents = 'none'); // Se as imagens forem iguais (par encontrado), esconde as caixas
                 caixasSelecionadas[0].style.transform = 'initial';
                 caixasSelecionadas[1].style.transform = 'initial';
 
@@ -294,7 +293,7 @@ caixas.forEach((caixa, index) => {
                             gameOverMsg.style.color = 'lime';
                             gameOverMsg.style.visibility = 'visible';
                             gameOverMsg.style.opacity = 1;
-                            gameOverMsg.style.animation = 'piscarGameOver 0.6s ease-in-out infinite';
+                            gameOverMsg.style.animation = 'piscarGameOver 0.6s linear infinite';
                         }, 1100);
 
                         setTimeout(() => alert('Você conseguiu finalizar!'), 3600);
@@ -313,7 +312,7 @@ const setaBotaoMenuLateral = document.getElementById('seta-botao-menu-lateral').
 const menuLateral = document.getElementById('menu-lateral').style;
 const cabecalhoMenuLateral = document.getElementById('cabecalho-menu-lateral').style;
 const subMenuTemas = document.getElementById('sub-menu-temas').style;
-const estiloDeTema = document.querySelectorAll('#sub-menu-temas li');
+const temaSelecionado = document.querySelectorAll('#sub-menu-temas li');
 const subMenuMusica = document.getElementById('sub-menu-musica').style;
 let menuAberto = true; // Variável para controlar a visibilidade do menu lateral     
 let temaNoturnoAtivado = false; // Variável para controlar o tema "Dia"/"Noite"
@@ -365,7 +364,7 @@ document.getElementById('opcao-temas').addEventListener('mouseenter', evento => 
 });
 
 // Alterna para os temas "Noite"/"Dia"
-estiloDeTema.forEach(opcao => {
+temaSelecionado.forEach(opcao => {
     opcao.addEventListener('click', evento => {
         // Por padrão, o tema "Dia" fica ativado
         if (evento.target.textContent === '🌙 Noite') {
@@ -376,7 +375,7 @@ estiloDeTema.forEach(opcao => {
             alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
         }
 
-        for (const li of estiloDeTema)
+        for (const li of temaSelecionado)
             li.style.color = 'var(--cor-fonte-padrao)';
 
         // Cor de destaque da opção selecionada

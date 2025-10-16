@@ -77,8 +77,8 @@
     }
 
     #combo-mensagem {
-        top: 29%;
-        font-size: 1.7em;
+        top: -20%;
+        font-size: 1.4em;
     }
 
     #game-over-msg { 
@@ -172,8 +172,8 @@
     }
 
     #combo-mensagem {
-        top: 29%;
-        font-size: 1.7em;
+        top: -20%;
+        font-size: 1.4em;
     }
 
     #game-over-msg { 

@@ -6,13 +6,14 @@ class Sky {
 
     starlit() {
         const estrelas = document.querySelectorAll('.estrela-container');
+        const tipoDeAlternancia = ['alternate-reverse', 'alternate'];
 
         if (estrelas.length > 0) {
             for (let index = 0; index < estrelas.length; index++)
                 this.body.removeChild(estrelas[index]);
         }
 
-        // Criação das estrelas
+        // Laço para a criação das estrelas
         for (let quantidade = 5; quantidade <= this.totalDeEstrelas; quantidade++) {
             const estrelaContainer = document.createElement('div'); // Criando container geral da estrela
             estrelaContainer.className = 'estrela-container';
@@ -71,12 +72,11 @@ class Sky {
             estrelaContainer.style.left = `${leftRandomizado}%`;
 
             const atrasoRandomizado = numRandom(5, 12);
+            const tipoEscolhido = tipoDeAlternancia[numRandom(0, 1)];
             estrelaContainer.style.pointerEvents = 'none';
             estrelaContainer.style.animationDelay = `${atrasoRandomizado}s`;
             estrelaContainer.style.animation = 'flutuarEstrela 10s ease-in-out infinite alternate';
-
-            const tipoDeAlternancia = ['alternate-reverse', 'alternate'];
-            const tipoEscolhido = tipoDeAlternancia[numRandom(0, 1)];
+            
             const tempoDeBrilho = numRandom(3, 6);
             brilhoEstrela.style.animationDelay = `${atrasoRandomizado}s`;
             img.style.animationDelay = `${atrasoRandomizado}s`;
