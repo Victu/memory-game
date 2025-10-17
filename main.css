@@ -443,15 +443,7 @@ main {
     position: fixed;
     width: max-content;
     height: max-content;
-    filter: brightness(1.7);
-}
-
-.brilho-estrela {
-    position: absolute;
-    top: 4.5px;
-    left: 4px;
-    border-radius: 50%;
-    z-index: -1;
+    filter: brightness(1.85);
 }
 
 .estrela-container img {
@@ -459,9 +451,17 @@ main {
     padding: 0;
 }
 
+.brilho-estrela {
+    position: absolute;
+    top: 7.5px;
+    left: 7px;
+    border-radius: 50%;
+    z-index: -1;
+}
+
 @keyframes piscarEstrela {
     0%, 100% { filter: brightness(0.4); }
-    50% { filter: brightness(1.2); }
+    50% { filter: brightness(0.8); }
 }
 
 @keyframes iluminarEstrela {

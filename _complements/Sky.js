@@ -26,11 +26,11 @@ class Sky {
             img.src = `_media/_images/star-${estrelaEscolhida}.png`;
             
             if (estrelaEscolhida == 1) { // Estrela amarela
-                brilhoEstrela.style.backgroundColor = 'rgba(255, 222, 35, 0.65)';
-                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(255, 222, 35, 0.55),
-                -2px -2px 25px rgba(255, 222, 35, 0.55),
-                1px 1px 22px rgba(255, 222, 35, 0.5),
-                -1px -1px 22px rgba(255, 222, 35, 0.5),
+                brilhoEstrela.style.backgroundColor = 'rgba(255, 219, 14, 0.65)';
+                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(255, 219, 14, 0.65),
+                -2px -2px 25px rgba(255, 219, 14, 0.65),
+                1px 1px 22px rgba(255, 219, 14, 0.5),
+                -1px -1px 22px rgba(255, 219, 14, 0.5),
                 0px 0px 20px rgba(255, 222, 35, 0.6),
                 0px 0px 20px rgba(255, 222, 35, 0.6),
                 6px 6px 28px rgba(255, 242, 168, 0.3),
@@ -38,11 +38,11 @@ class Sky {
                 10px -10px 32px rgba(255, 251, 232, 0.35),
                 -10px 10px 32px rgba(255, 251, 232, 0.35)`;
             } else if (estrelaEscolhida == 2) { // Estrela azul
-                brilhoEstrela.style.backgroundColor = 'rgba(35, 248, 255, 0.65)';
-                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(35, 248, 255, 0.55),
-                -2px -2px 25px rgba(35, 248, 255, 0.55),
-                1px 1px 22px rgba(35, 248, 255, 0.5),
-                -1px -1px 22px rgba(35, 248, 255, 0.5),
+                brilhoEstrela.style.backgroundColor = 'rgba(13, 247, 255, 0.65)';
+                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(13, 247, 255, 0.65),
+                -2px -2px 25px rgba(13, 247, 255, 0.65),
+                1px 1px 22px rgba(13, 247, 255, 0.5),
+                -1px -1px 22px rgba(13, 247, 255, 0.5),
                 0px 0px 20px rgba(35, 248, 255, 0.6),
                 0px 0px 20px rgba(35, 248, 255, 0.6),
                 6px 6px 28px rgba(145, 251, 255, 0.3),
@@ -54,13 +54,13 @@ class Sky {
             estrelaContainer.appendChild(img);
             estrelaContainer.appendChild(brilhoEstrela);
             
-            const tamanhoRandomizado = numRandom(12, 20);
-            brilhoEstrela.style.height = `${tamanhoRandomizado - 9}px`;
-            brilhoEstrela.style.width = `${tamanhoRandomizado - 9}px`;
+            const tamanhoRandomizado = numRandom(20, 27);
+            brilhoEstrela.style.height = `${tamanhoRandomizado - 15}px`;
+            brilhoEstrela.style.width = `${tamanhoRandomizado - 15}px`;
             img.style.height = `${tamanhoRandomizado}px`;
             img.style.width = `${tamanhoRandomizado}px`;
 
-            if (tamanhoRandomizado <= 15)
+            if (tamanhoRandomizado <= 24)
                 estrelaContainer.style.zIndex = '-1';
             else
                 estrelaContainer.style.zIndex = '1';
@@ -71,15 +71,11 @@ class Sky {
             const leftRandomizado = numRandom(1, 98);
             estrelaContainer.style.left = `${leftRandomizado}%`;
 
-            const atrasoRandomizado = numRandom(5, 12);
             const tipoEscolhido = tipoDeAlternancia[numRandom(0, 1)];
             estrelaContainer.style.pointerEvents = 'none';
-            estrelaContainer.style.animationDelay = `${atrasoRandomizado}s`;
             estrelaContainer.style.animation = 'flutuarEstrela 10s ease-in-out infinite alternate';
             
             const tempoDeBrilho = numRandom(3, 6);
-            brilhoEstrela.style.animationDelay = `${atrasoRandomizado}s`;
-            img.style.animationDelay = `${atrasoRandomizado}s`;
             brilhoEstrela.style.animation = `iluminarEstrela ${tempoDeBrilho}s ease infinite ${tipoEscolhido}`;
             img.style.animation = `piscarEstrela ${tempoDeBrilho}s ease infinite ${tipoEscolhido}, 
             girarEstrela ${numRandom(10, 20)}s ease-in-out infinite ${tipoEscolhido}`;
