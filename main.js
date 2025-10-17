@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         intro.visibility = 'hidden';
         
         document.getElementById('logomark').style.animation = 'none';
-        document.getElementById('luz-logomark-container').style.display = 'none';
+        document.getElementById('brilho-logomark-container').style.display = 'none';
         document.getElementById('texto-copyright').style.display = 'none';
         document.getElementById('caixas').style.display = 'grid';
         await pausar(1.5);

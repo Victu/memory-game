@@ -65,7 +65,7 @@ body {
     50% { filter: brightness(1.2); }
 }
 
-#luz-logomark-container {
+#brilho-logomark-container {
     position: absolute;
     top: 18.55%;
     left: 50%;
@@ -73,11 +73,11 @@ body {
     width: 560px;
     height: 290px;
     border-radius: 17% 17% 20% 20%;
-    animation: acenderLogomark 2.5s infinite steps(1);
+    animation: brilharLogomark 2.5s infinite steps(1);
     transition: none;
 }
 
-@keyframes acenderLogomark {
+@keyframes brilharLogomark {
     0%, 100% {
         box-shadow: initial;
         filter: initial;
