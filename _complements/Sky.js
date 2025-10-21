@@ -55,8 +55,8 @@ class Sky {
             estrelaContainer.appendChild(brilhoEstrela);
             
             const tamanhoRandomizado = numRandom(20, 27);
-            brilhoEstrela.style.height = `${tamanhoRandomizado - 15}px`;
-            brilhoEstrela.style.width = `${tamanhoRandomizado - 15}px`;
+            brilhoEstrela.style.height = `${tamanhoRandomizado - 17}px`;
+            brilhoEstrela.style.width = `${tamanhoRandomizado - 17}px`;
             img.style.height = `${tamanhoRandomizado}px`;
             img.style.width = `${tamanhoRandomizado}px`;
 
@@ -76,7 +76,7 @@ class Sky {
             estrelaContainer.style.animation = 'flutuarEstrela 10s ease-in-out infinite alternate';
             
             const tempoDeBrilho = numRandom(3, 6);
-            brilhoEstrela.style.animation = `iluminarEstrela ${tempoDeBrilho}s ease infinite ${tipoEscolhido}`;
+            brilhoEstrela.style.animation = `brilharEstrela ${tempoDeBrilho}s ease infinite ${tipoEscolhido}`;
             img.style.animation = `piscarEstrela ${tempoDeBrilho}s ease infinite ${tipoEscolhido}, 
             girarEstrela ${numRandom(10, 20)}s ease-in-out infinite ${tipoEscolhido}`;
             this.body.appendChild(estrelaContainer);

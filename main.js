@@ -7,18 +7,18 @@ const imagens = []; // Array que armazenará os caminhos das imagens dos persona
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
 let caixasSelecionadas = []; // Array para armazenar as "caixas" que foram selecionadas
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
-let totalVidas = 8; // Por padrão, a quantidade atual de vidas é 8
+let totalVidas = 30; // Por padrão, a quantidade atual de vidas é 8
 let acertos = 0;
 const slidesContainer = document.getElementById('slides-container').style;
 let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
 const nivelDificuldade = document.getElementById('nivel-dificuldade');
 const quantidadeInicialVidas = document.getElementById('quantidade-inicial-vidas').style;
 const tema = document.getElementById('tema');
-const gameOverMsg = document.getElementById('game-over-msg');
 let jogoFinalizado = false;
 const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 let combo = 0; // Combo de acertos consecutivos
 const comboMsg = comboMensagem();
+const gameOverMsg = gameOverMensagem();
 
 // Inicialização de interatividade e animações na introdução
 document.addEventListener('DOMContentLoaded', () => {

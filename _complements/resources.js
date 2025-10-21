@@ -23,6 +23,15 @@ function comboMensagem() {
     return comboMensagem;
 }
 
+function gameOverMensagem() {
+    const gameOverMensagem = document.createElement('div');
+    gameOverMensagem.id = 'game-over-msg';
+
+    document.querySelector('main').appendChild(gameOverMensagem);
+
+    return gameOverMensagem;
+}
+
 // Algoritmo para embaralhar as imagens
 function embaralharImagens(imagens) {
     // Adiciona duas vezes os caminhos das imagens ao array, formando pares

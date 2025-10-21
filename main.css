@@ -26,12 +26,6 @@ body {
     user-select: none;
 }
 
-
-@keyframes flutuarBalao {
-    0%, 100% { transform: initial;}
-    50% { transform: translateY(15px);}
-}
-
 #intro {
     position: absolute;
     top: 16%;
@@ -412,7 +406,7 @@ main {
 
 #game-over-msg {
     position: absolute;
-    top: 30%;
+    top: 31%;
     padding: 0;
     font-size: 6.2em;
     font-family: pixel-font;
@@ -433,6 +427,7 @@ main {
     }
 }
 
+/* Configurações de estilo da estrela */
 .estrela-container {
     position: fixed;
     width: max-content;
@@ -447,18 +442,18 @@ main {
 
 .brilho-estrela {
     position: absolute;
-    top: 7.5px;
-    left: 7px;
+    top: 8px;
+    left: 8px;
     border-radius: 50%;
     z-index: -1;
 }
 
 @keyframes piscarEstrela {
-    0%, 100% { filter: brightness(0.4); }
+    0%, 100% { filter: brightness(0.3); }
     50% { filter: brightness(0.8); }
 }
 
-@keyframes iluminarEstrela {
+@keyframes brilharEstrela {
     0%, 100% { opacity: 0; }
     50% { 
         opacity: 1; 
