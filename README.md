@@ -1,6 +1,6 @@
 <h1 align="center">🎮 Jogo da Memória 🎮</h1><br>
 Um pequeno projeto desenvolvido para testar e aprimorar suas habilidades de memorização de uma forma divertida e interativa. Este jogo contém figuras mundialmente conhecidas; foi criado utilizando as tecnologias web fundamentais: HTML, CSS e JavaScript puro.<br>
-Ainda há alguns elementos a serem implementados e pequenas correções a serem feitas.<br><br>
+Ainda há alguns elementos a serem implementados e pequenas correções e melhorias a serem feitas.<br><br>
 
 ℹ️ <strong>Manual</strong>
 
@@ -53,19 +53,21 @@ CSS3: Para a estilização, layout, animações e a criação dos temas visuais.
 JavaScript (ES6+): Responsável por toda a lógica do jogo, incluindo o embaralhamento de cartas, a mecânica de pares, o gerenciamento de vidas, a manipulação de eventos e a interatividade do menu.<br>
 
 📁 <strong>Estrutura do Projeto</strong>
-
-`|-- _complements/`<br>
-`|   |-- resources.js`<br>
-`|   |-- responsiveness.css`<br>
-`|   |-- Sky.js`<br>
-`|-- _font/`<br>
-`|-- _media/`<br>
-`|   |-- _images/`<br>
-`|   |-- _sounds/`<br>
-`-- main.css`<br>
-`-- main.html`<br>
-`-- main.js`
-
+```
+├── _complements/
+│ ├── Sky.js
+│ ├── resources.js
+│ └── responsiveness.css
+│
+├── _media/
+│ ├── _images/
+│ ├── _sounds/
+│ └── _font/
+│
+├── main.html
+├── main.css
+└── main.js
+```
 ⌨️ <strong>Como Executar o Projeto</strong>
 
 Para executar o jogo, basta clonar este repositório e abrir o arquivo main.html em seu navegador de preferência.
