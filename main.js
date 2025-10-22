@@ -14,9 +14,9 @@ let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
 const nivelDificuldade = document.getElementById('nivel-dificuldade');
 const quantidadeInicialVidas = document.getElementById('quantidade-inicial-vidas').style;
 const tema = document.getElementById('tema');
-let jogoFinalizado = false;
 const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 let combo = 0; // Combo de acertos consecutivos
+let jogoFinalizado = false;
 const comboMsg = comboMensagem();
 const gameOverMsg = gameOverMensagem();
 

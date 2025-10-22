@@ -1,7 +1,7 @@
 class Sky {
     constructor() {
         this.body = document.querySelector('body');
-        this.totalDeEstrelas = numRandom(8, 20);
+        this.totalDeEstrelas = numRandom(8, 18);
     }
 
     starlit() {
@@ -54,13 +54,13 @@ class Sky {
             estrelaContainer.appendChild(img);
             estrelaContainer.appendChild(brilhoEstrela);
             
-            const tamanhoRandomizado = numRandom(20, 27);
+            const tamanhoRandomizado = numRandom(22, 28);
             brilhoEstrela.style.height = `${tamanhoRandomizado - 17}px`;
             brilhoEstrela.style.width = `${tamanhoRandomizado - 17}px`;
             img.style.height = `${tamanhoRandomizado}px`;
             img.style.width = `${tamanhoRandomizado}px`;
 
-            if (tamanhoRandomizado <= 24)
+            if (tamanhoRandomizado <= 26)
                 estrelaContainer.style.zIndex = '-1';
             else
                 estrelaContainer.style.zIndex = '1';

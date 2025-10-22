@@ -11,9 +11,9 @@ function criarCaixas() {
     return document.querySelectorAll('.caixa'); // Seleciona tados as "caixas" criadas
 }
 
+// Cria um elemento para mensagem de combo de acertos
 function comboMensagem() {
-    // Verifica se já existe o elemento
-    document.querySelector('#combo-mensagem')?.remove();
+    document.querySelector('#combo-mensagem')?.remove(); // Verifica se já existe o elemento
 
     const comboMensagem = document.createElement('span');
     comboMensagem.id = 'combo-mensagem';
@@ -23,6 +23,7 @@ function comboMensagem() {
     return comboMensagem;
 }
 
+// Cria um elemento para mensagem de "Game Over"
 function gameOverMensagem() {
     const gameOverMensagem = document.createElement('div');
     gameOverMensagem.id = 'game-over-msg';
