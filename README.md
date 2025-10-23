@@ -1,5 +1,5 @@
 <h1 align="center">🎮 Jogo da Memória 🎮</h1><br>
-Um pequeno projeto desenvolvido para testar e aprimorar suas habilidades de memorização de uma forma divertida e interativa. Este jogo contém figuras mundialmente conhecidas; foi criado utilizando as tecnologias web fundamentais: HTML, CSS e JavaScript puro.<br>
+Um pequeno projeto desenvolvido para testar e aprimorar suas habilidades de memorização de uma forma divertida e interativa. Este jogo contém figuras mundialmente conhecidas; foi desenvolvido utilizando o básico das tecnologias web fundamentais: HTML, CSS e JavaScript puro.<br>
 Ainda há alguns elementos a serem implementados e pequenas correções e melhorias a serem feitas.<br><br>
 
 ℹ️ <strong>Manual</strong>
@@ -54,19 +54,23 @@ JavaScript (ES6+): Responsável por toda a lógica do jogo, incluindo o embaralh
 
 📁 <strong>Estrutura do Projeto</strong>
 ```
-├── _complements/
-│ ├── Sky.js
-│ ├── resources.js
-│ └── responsiveness.css
-│
-├── _media/
+├── _assets/
 │ ├── _images/
 │ ├── _sounds/
-│ └── _font/
+│ └── _fonts/
 │
+├── _styles/
+│ ├── main.css      
+│ └── responsiveness.css 
+│
+└── _scripts/
+    ├── _modules/
+    │   ├── Sky.js    
+    │   └── resources.js
+    │
+    └── main.js
+
 ├── main.html
-├── main.css
-└── main.js
 ```
 ⌨️ <strong>Como Executar o Projeto</strong>
 
