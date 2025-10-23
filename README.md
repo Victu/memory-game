@@ -1,4 +1,7 @@
-<h1 align="center">🎮 Jogo da Memória 🎮</h1><br>
+<div align="center">
+  <img src="./_assets/_images/logomark.png" alt="Capa do Jogo da Memória" width="600"/>
+</div><br>
+
 Um pequeno projeto desenvolvido para testar e aprimorar suas habilidades de memorização de uma forma divertida e interativa. Este jogo contém figuras mundialmente conhecidas; foi desenvolvido utilizando o básico das tecnologias web fundamentais: HTML, CSS e JavaScript puro.<br>
 Ainda há alguns elementos a serem implementados e pequenas correções e melhorias a serem feitas.<br><br>
 
@@ -6,7 +9,7 @@ Ainda há alguns elementos a serem implementados e pequenas correções e melhor
 
 O objetivo do jogo é óbvio: Encontre todos os pares de cartas idênticas no menor número de tentativas possível.
 
-Início do Jogo: Ao carregar a página, você verá um tabuleiro com 16 cartas viradas para baixo.
+Início do Jogo: Ao carregar a página, você verá um tabuleiro com 20 cartas viradas para baixo.
 
 Revelando as Cartas: Clique em uma carta para revelá-la. Em seguida, clique em uma segunda carta para tentar encontrar o seu par.
 
@@ -16,7 +19,7 @@ Se as cartas forem diferentes, elas serão viradas novamente para baixo após um
 
 Vidas: Você começa o jogo com um número limitado de vidas. O jogo termina se suas vidas chegarem a zero.
 
-Condições de Vitória: Você vence o jogo ao encontrar todos os 8 pares de cartas. Uma mensagem de "You Win!" será exibida.
+Condições de Vitória: Você vence o jogo ao encontrar todos os 10 pares de cartas. Uma mensagem de "You Win!" será exibida.
 
 Fim de Jogo: Se suas vidas se esgotarem, o jogo termina e uma mensagem de "Game Over" aparecerá, com a opção de reiniciar a partida.
 
@@ -65,7 +68,7 @@ JavaScript (ES6+): Responsável por toda a lógica do jogo, incluindo o embaralh
 │
 └── _scripts/
     ├── _modules/
-    │   ├── Sky.js    
+    │   ├── Sky.js # Classe dedicada para a animação de céu estrelado
     │   └── resources.js
     │
     └── main.js
