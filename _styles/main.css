@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: pixel-font;
-    src: url('_media/_font/PressStart2P-Regular.ttf') format('truetype');
+    src: url('../_assets/_font/PressStart2P-Regular.ttf') format('truetype');
     font-weight: normal;
 }
 
@@ -19,7 +19,7 @@
 }
 
 body {
-    background-image: url('_media/_images/bg.png');
+    background-image: url('../_assets/_images/bg.png');
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -201,7 +201,7 @@ main {
     cursor: pointer;
     border-radius: 8px;
     border: none;
-    background-image: url('_media/_images/box_yellow.png');
+    background-image: url('../_assets/_images/box_yellow.png');
     background-size: cover;
     transition: 0.2s ease-in;
     pointer-events: all;
@@ -249,7 +249,7 @@ main {
     top: -50px;
     right: 0;
     margin-bottom: 10px;
-    background: url('_media/_images/title-memory-game.png') no-repeat;
+    background: url('../_assets/_images/title-memory-game.png') no-repeat;
     background-size: contain;
     height: 200px;
     transition: 0.5s;
@@ -263,7 +263,7 @@ main {
     height: 100%;
     margin: 0;
     transform: translateX(-100%);
-    background-image: url('_media/_images/bg-3.png');
+    background-image: url('../_assets/_images/bg-3.png');
     background-size: contain;
     font-family: pixel-font;
     border-right: 2px solid #222;
@@ -326,7 +326,7 @@ main {
     color: var(--fonte-cor-padrao);
     line-height: 40px;
     padding: 20px;
-    background: url('_media/_images/bg-bricks.png') no-repeat;
+    background: url('../_assets/_images/bg-bricks.png') no-repeat;
     background-size: cover;
     position: absolute;
     top: 6%;
@@ -432,7 +432,7 @@ main {
     position: fixed;
     width: max-content;
     height: max-content;
-    filter: brightness(1.85);
+    filter: brightness(2);
 }
 
 .estrela-container img {
@@ -450,7 +450,7 @@ main {
 
 @keyframes piscarEstrela {
     0%, 100% { filter: brightness(0.3); }
-    50% { filter: brightness(0.8); }
+    50% { filter: brightness(0.7); }
 }
 
 @keyframes brilharEstrela {

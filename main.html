@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="_media/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="_assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="_complements/responsiveness.css" media="screen">
-    <script defer src="_complements/resources.js"></script>
-    <script defer src="_complements/Sky.js"></script>
-    <script defer src="main.js"></script>
+    <link rel="stylesheet" href="_styles/main.css">
+    <link rel="stylesheet" href="_styles/responsiveness.css" media="screen">
+    <script defer src="_scripts/_modules/Sky.js"></script>
+    <script defer src="_scripts/_modules/resources.js"></script>
+    <script defer src="_scripts/main.js"></script>
     <title>Jogo da Memória</title>
 </head>
 
 <body>
     <aside id="menu-lateral">
         <button id="botao-menu-lateral" title="Abrir menu">
-            <img src="_media/_images/arrow.png" id="seta-botao-menu-lateral" alt="Seta do Menu Lateral">
+            <img src="_assets/_images/arrow.png" id="seta-botao-menu-lateral" alt="Seta do Menu Lateral">
         </button>
         <header id="cabecalho-menu-lateral"> <!-- Título em background no menu lateral --> </header>
-        
+
         <nav>
             <ul type="none" id="opcoes-menu">
                 <li id="opcao-temas">Tema »
@@ -43,7 +43,7 @@
     <main>
         <header id="cabecalho-principal">
             <figure>
-                <img src="_media/_images/life.png" alt="Ícone de vidas">
+                <img src="_assets/_images/life.png" alt="Ícone de vidas">
                 <figcaption>Vidas: <span id="numero-de-vidas"></span></figcaption>
             </figure>
         </header>
@@ -51,7 +51,7 @@
         <!------------ Tela de introdução ------------->
         <div id="brilho-logomark-container"></div>
         <section id="intro">
-            <img id="logomark" src="_media/_images/logomark.png" alt="Logomarca do Jogo da Memória">
+            <img id="logomark" src="_assets/_images/logomark.png" alt="Logomarca do Jogo da Memória">
             <button id="start">Começar</button>
 
             <menu id="slides-container">
@@ -80,7 +80,7 @@
         <button id="fechar-sobre" title="Fechar">X</button>
         <p><i class="fas fa-user"></i> Desenvolvedor: <span style="animation: iluminarTexto 5s ease-in-out infinite; color: yellowgreen;">Victor Silva</span></p><br>
         <p><i class="fa-solid fa-calendar-days"></i> Data da criação: 10/07/2025</p><br>
-        <p><i class="fas fa-sync-alt"></i> Última atualização: 21/10/2025</p><br>
+        <p><i class="fas fa-sync-alt"></i> Última atualização: 23/10/2025</p><br>
         <p><i class="fas fa-code-branch"></i> Versão: 4.7</p><br>
         <p><i class="fab fa-github"></i> GitHub: <a href="https://github.com/Victu" target="_blank" style="color: var(--fonte-cor-padrao);" title="Ir à página">victu</a></p>
     </section>

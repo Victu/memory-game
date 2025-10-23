@@ -14,7 +14,7 @@ let nivelAtual = 2; // O nível médio fica selecionado por padrão (8 vidas)
 const nivelDificuldade = document.getElementById('nivel-dificuldade');
 const quantidadeInicialVidas = document.getElementById('quantidade-inicial-vidas').style;
 const tema = document.getElementById('tema');
-const musica = new Audio('./_media/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
+const musica = new Audio('./_assets/_sounds/soundtrack.ogg'); // Música que será tocada durante o jogo
 let combo = 0; // Combo de acertos consecutivos
 let jogoFinalizado = false;
 const comboMsg = comboMensagem();
@@ -172,9 +172,9 @@ caixas.forEach((caixa, index) => {
                     for (const caixaSelecionada of caixasSelecionadas) {
                         // Define imagem de fundo conforme o tema
                         if (!temaNoturnoAtivado)
-                            caixaSelecionada.style.backgroundImage = `url('_media/_images/box_yellow.png')`;
+                            caixaSelecionada.style.backgroundImage = `url('_assets/_images/box_yellow.png')`;
                         else
-                            caixaSelecionada.style.backgroundImage = `url('_media/_images/box_blue.png')`;
+                            caixaSelecionada.style.backgroundImage = `url('_assets/_images/box_blue.png')`;
 
                         caixaSelecionada.style.cursor = 'pointer';
                         setTimeout(() => caixaSelecionada.style.pointerEvents = 'auto', 450);

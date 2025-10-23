@@ -4,14 +4,12 @@ class Sky {
         this.totalDeEstrelas = numRandom(8, 18);
     }
 
+    // Cria animação de céu estrelado
     starlit() {
         const estrelas = document.querySelectorAll('.estrela-container');
         const tipoDeAlternancia = ['alternate-reverse', 'alternate'];
 
-        if (estrelas.length > 0) {
-            for (let index = 0; index < estrelas.length; index++)
-                this.body.removeChild(estrelas[index]);
-        }
+        if (estrelas.length > 0) estrelas = [];
 
         // Laço para a criação das estrelas
         for (let quantidade = 5; quantidade <= this.totalDeEstrelas; quantidade++) {
@@ -23,32 +21,32 @@ class Sky {
 
             const estrelaEscolhida = numRandom(1, 2); // Seleciona aleatoriamente entre a estrela amarela e a azul
             const img = document.createElement('img');
-            img.src = `_media/_images/star-${estrelaEscolhida}.png`;
+            img.src = `_assets/_images/star-${estrelaEscolhida}.png`;
             
             if (estrelaEscolhida == 1) { // Estrela amarela
                 brilhoEstrela.style.backgroundColor = 'rgba(255, 219, 14, 0.65)';
-                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(255, 219, 14, 0.65),
-                -2px -2px 25px rgba(255, 219, 14, 0.65),
-                1px 1px 22px rgba(255, 219, 14, 0.5),
-                -1px -1px 22px rgba(255, 219, 14, 0.5),
-                0px 0px 20px rgba(255, 222, 35, 0.6),
-                0px 0px 20px rgba(255, 222, 35, 0.6),
-                6px 6px 28px rgba(255, 242, 168, 0.3),
-                -6px -6px 28px rgba(255, 242, 168, 0.3),
-                10px -10px 32px rgba(255, 251, 232, 0.35),
-                -10px 10px 32px rgba(255, 251, 232, 0.35)`;
+                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(255, 219, 13, 0.65),
+                -2px -2px 25px rgba(255, 219, 13, 0.65),
+                1px 1px 22px rgba(255, 219, 13, 0.5),
+                -1px -1px 22px rgba(255, 219, 13, 0.5),
+                0px 0px 20px rgba(255, 222, 13, 0.6),
+                0px 0px 20px rgba(255, 222, 13, 0.6),
+                6px 6px 28px rgba(255, 242, 35, 0.3),
+                -6px -6px 28px rgba(255, 242, 35, 0.3),
+                10px -10px 32px rgba(255, 245, 195, 0.35),
+                -10px 10px 32px rgba(255, 245, 195, 0.35)`;
             } else if (estrelaEscolhida == 2) { // Estrela azul
-                brilhoEstrela.style.backgroundColor = 'rgba(13, 247, 255, 0.65)';
-                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(13, 247, 255, 0.65),
-                -2px -2px 25px rgba(13, 247, 255, 0.65),
-                1px 1px 22px rgba(13, 247, 255, 0.5),
-                -1px -1px 22px rgba(13, 247, 255, 0.5),
-                0px 0px 20px rgba(35, 248, 255, 0.6),
-                0px 0px 20px rgba(35, 248, 255, 0.6),
-                6px 6px 28px rgba(145, 251, 255, 0.3),
-                -6px -6px 28px rgba(145, 251, 255, 0.3),
-                -10px 10px 32px rgba(228, 255, 255, 0.35),
-                10px -10px 32px rgba(228, 255, 255, 0.35)`;
+                brilhoEstrela.style.backgroundColor = 'rgba(13, 248, 255, 0.65)';
+                brilhoEstrela.style.boxShadow = `2px 2px 25px rgba(13, 248, 255, 0.65),
+                -2px -2px 25px rgba(13, 248, 255, 0.65),
+                1px 1px 22px rgba(13, 248, 255, 0.5),
+                -1px -1px 22px rgba(13, 248, 255, 0.5),
+                0px 0px 20px rgba(13, 248, 255, 0.6),
+                0px 0px 20px rgba(13, 248, 255, 0.6),
+                6px 6px 28px rgba(35, 248, 255, 0.3),
+                -6px -6px 28px rgba(35, 248, 255, 0.3),
+                -10px 10px 32px rgba(195, 255, 255, 0.35),
+                10px -10px 32px rgba(195, 255, 255, 0.35)`;
             }
 
             estrelaContainer.appendChild(img);
@@ -83,10 +81,10 @@ class Sky {
         }
     }
 
-    daytime() {
+    // Remove todas as estrelas
+    clearStars() {
         const estrelas = document.querySelectorAll('.estrela-container');
 
-        for (let index = 0; index < estrelas.length; index++)
-            this.body.removeChild(estrelas[index]);
+        estrelas.forEach(estrela => estrela?.remove()); // Remove cada elemento da classe ".estrela-container"
     }
 }

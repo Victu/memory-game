@@ -38,7 +38,7 @@ function embaralharImagens(imagens) {
     // Adiciona duas vezes os caminhos das imagens ao array, formando pares
     for (let i = 0; i < 2; i++) {
         for (let numeroDaImagem = 0; numeroDaImagem < 10; numeroDaImagem++)
-            imagens.unshift(`_media/_images/person-${numeroDaImagem}.png`);
+            imagens.unshift(`_assets/_images/person-${numeroDaImagem}.png`);
     }
 
     // Randomiza a posição de cada imagem do array
@@ -58,20 +58,20 @@ function medidaDaTela(medida) {
 // Emite os efeitos sonoros no caso de erro, acerto, derrota ou vitória
 function tocarEfeitoSonoro(acertou, venceu) {
     if (acertou != null) {
-        const somDeErro = new Audio('./_media/_sounds/error.ogg');
+        const somDeErro = new Audio('./_assets/_sounds/error.ogg');
         somDeErro.volume = 0.7;
 
         if (acertou)
-            new Audio('./_media/_sounds/success.ogg').play();
+            new Audio('./_assets/_sounds/success.ogg').play();
         else
             somDeErro.play();
     }
 
     if (venceu != null) {
         if (venceu) 
-            new Audio('./_media/_sounds/victory.ogg').play();
+            new Audio('./_assets/_sounds/victory.ogg').play();
         else
-            new Audio('./_media/_sounds/game-over.ogg').play();
+            new Audio('./_assets/_sounds/game-over.ogg').play();
     }
 }
 
@@ -90,18 +90,18 @@ function numRandom(min = 0, max = 1) {
 }
 
 // Algoritmo para a alternância dos temas "Noite"/"Dia"
-function alternarTema(temaNoturno, body, vetorDeElementos, menu, cabecalho) {
-    if (temaNoturno) {
+function alternarTema(temaNoturnoAtivado, body, vetorDeElementos, menu, cabecalho) {
+    if (temaNoturnoAtivado) {
         new Sky().starlit();
-        body.backgroundImage = "url('_media/_images/bg_night.png')";
-        menu.backgroundImage = "url('_media/_images/bg-3_night.png')";
-        cabecalho.backgroundImage = "url('_media/_images/title-memory-game_night.png')";
+        body.backgroundImage = "url('_assets/_images/bg_night.png')";
+        menu.backgroundImage = "url('_assets/_images/bg-3_night.png')";
+        cabecalho.backgroundImage = "url('_assets/_images/title-memory-game_night.png')";
 
         vetorDeElementos.forEach(caixa => {
             const imagemRevelada = getComputedStyle(caixa).backgroundImage;
 
             if (!imagemRevelada.includes(`box_blue.png`)) 
-                caixa.style.backgroundImage = "url('_media/_images/box_blue.png')";
+                caixa.style.backgroundImage = "url('_assets/_images/box_blue.png')";
 
             for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
                 if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
@@ -119,17 +119,17 @@ function alternarTema(temaNoturno, body, vetorDeElementos, menu, cabecalho) {
             caixa.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
         });
     } else {
-        new Sky().daytime();
+        new Sky().clearStars();
         body.backdropFilter = 'initial';
-        body.backgroundImage = "url('_media/_images/bg.png')";
-        menu.backgroundImage = "url('_media/_images/bg-3.png')";
-        cabecalho.backgroundImage = "url('_media/_images/title-memory-game.png')";
+        body.backgroundImage = "url('_assets/_images/bg.png')";
+        menu.backgroundImage = "url('_assets/_images/bg-3.png')";
+        cabecalho.backgroundImage = "url('_assets/_images/title-memory-game.png')";
 
         vetorDeElementos.forEach(caixa => {
             const imagemRevelada = getComputedStyle(caixa).backgroundImage;
 
             if (!imagemRevelada.includes('box_yellow.png'))
-                caixa.style.backgroundImage = "url('_media/_images/box_yellow.png')";
+                caixa.style.backgroundImage = "url('_assets/_images/box_yellow.png')";
 
             for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
                 if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
