@@ -52,17 +52,13 @@ class Sky {
             estrelaContainer.appendChild(img);
             estrelaContainer.appendChild(brilhoEstrela);
             
-            const tamanhoRandomizado = numRandom(22, 28);
+            const tamanhoRandomizado = numRandom(22, 30);
             brilhoEstrela.style.height = `${tamanhoRandomizado - 17}px`;
             brilhoEstrela.style.width = `${tamanhoRandomizado - 17}px`;
             img.style.height = `${tamanhoRandomizado}px`;
             img.style.width = `${tamanhoRandomizado}px`;
-
-            if (tamanhoRandomizado <= 26)
-                estrelaContainer.style.zIndex = '-1';
-            else
-                estrelaContainer.style.zIndex = '1';
-
+            estrelaContainer.style.zIndex = tamanhoRandomizado <= 27 ? '-1' : '1';
+            
             const topRandomizado = numRandom(1, 98);
             estrelaContainer.style.top = `${topRandomizado}%`;
 
@@ -85,6 +81,6 @@ class Sky {
     clearStars() {
         const estrelas = document.querySelectorAll('.estrela-container');
 
-        estrelas.forEach(estrela => estrela?.remove()); // Remove cada elemento da classe ".estrela-container"
+        estrelas.forEach(estrela => estrela?.remove()); // Verifica existência e remove cada elemento da classe ".estrela-container"
     }
 }

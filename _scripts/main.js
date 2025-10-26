@@ -375,8 +375,7 @@ temaSelecionado.forEach(opcao => {
             alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
         }
 
-        for (const li of temaSelecionado)
-            li.style.color = 'var(--cor-fonte-padrao)';
+        for (const li of temaSelecionado) li.style.color = 'var(--cor-fonte-padrao)';
 
         // Cor de destaque da opção selecionada
         evento.target.style.color = 'gold';
@@ -421,10 +420,7 @@ document.querySelectorAll('#sub-menu-musica li').forEach(opcao => {
 document.getElementById('opcao-sobre').addEventListener('click', () => {
     const sobre = document.getElementById('sobre').style;
 
-    if (sobre.display != 'block')
-        sobre.display = 'block';
-    else
-        sobre.display = 'none';
+    sobre.display = sobre.display != 'block' ? 'block' : 'none';
 });
 
 document.getElementById('fechar-sobre').addEventListener('click', () => document.getElementById('sobre').style.display = 'none');
