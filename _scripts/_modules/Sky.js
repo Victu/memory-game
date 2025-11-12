@@ -1,7 +1,7 @@
 class Sky {
     constructor() {
         this.body = document.querySelector('body');
-        this.totalDeEstrelas = numRandom(8, 18);
+        this.totalDeEstrelas = numRandom(10, 20);
     }
 
     // Cria animação de céu estrelado
@@ -52,12 +52,12 @@ class Sky {
             estrelaContainer.appendChild(img);
             estrelaContainer.appendChild(brilhoEstrela);
             
-            const tamanhoRandomizado = numRandom(22, 30);
+            const tamanhoRandomizado = numRandom(10, 30);
             brilhoEstrela.style.height = `${tamanhoRandomizado - 17}px`;
             brilhoEstrela.style.width = `${tamanhoRandomizado - 17}px`;
             img.style.height = `${tamanhoRandomizado}px`;
             img.style.width = `${tamanhoRandomizado}px`;
-            estrelaContainer.style.zIndex = tamanhoRandomizado <= 27 ? '-1' : '1';
+            estrelaContainer.style.zIndex = tamanhoRandomizado <= 26 ? '-1' : '1';
             
             const topRandomizado = numRandom(1, 98);
             estrelaContainer.style.top = `${topRandomizado}%`;
