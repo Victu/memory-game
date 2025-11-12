@@ -1,11 +1,11 @@
 // ----------------------------------- Configurações do conteúdo principal -----------------------------------
 
 const body = document.body.style;
-const caixasContainer = document.getElementById('caixas');
-const caixas = criarCaixas(); // Retorna todos os elementos <button> de classe 'caixa'
+const cardsContainer = document.getElementById('cards');
+const cards = criarCards(); // Retorna todos os elementos <button> de classe 'card'
 const imagens = []; // Array que armazenará os caminhos das imagens dos personagens
 let imagensReveladas = []; // Array para armazenar imagens reveladas no clique
-let caixasSelecionadas = []; // Array para armazenar as "caixas" que foram selecionadas
+let cardsSelecionadas = []; // Array para armazenar os "cards" que foram selecionados
 let numeroDeVidas = document.getElementById('numero-de-vidas'); // Quantidade de vidas sendo exibidas ao usuário no cabeçalho do elemento <main>
 let totalVidas = 8; // Por padrão, a quantidade atual de vidas é 8
 let acertos = 0;
@@ -38,12 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
         quantidadeInicialVidas.opacity = '0';
     }, 5000);
 
-    caixas.forEach(caixa => caixa.style.transform = 'translateX(60vw)');
+    cards.forEach(card => card.style.transform = 'translateX(60vw)');
 
     // Ação do botão "Começar"
-    document.getElementById('start').addEventListener('click', async eventoDoBotaoStart => {
+    document.getElementById('start').addEventListener('click', async botaoStart => {
         musica.loop = true;
-        eventoDoBotaoStart.target.style.display = 'none';
+        botaoStart.target.style.display = 'none';
         slidesContainer.display = 'none';
         intro.transform = 'scale(6) rotate(-65deg)';
         intro.transition = '1.2s ease-in-out';
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('logomark').style.animation = 'none';
         document.getElementById('brilho-logomark-container').style.display = 'none';
         document.getElementById('texto-copyright').style.display = 'none';
-        document.getElementById('caixas').style.display = 'grid';
+        document.getElementById('cards').style.display = 'grid';
         await pausar(1.5);
 
         musica.play();
@@ -66,16 +66,16 @@ document.addEventListener('DOMContentLoaded', () => {
         setaBotaoMenuLateral.animation = 'apontar 0.6s linear 5';
         await pausar(1.7);
 
-        for (const caixa of caixas) {
+        for (const card of cards) {
             document.getElementById('cabecalho-principal').style.visibility = 'visible';
-            caixa.style.visibility = 'visible';
-            caixa.style.opacity = '1';
-            caixa.style.transform = '';
-            caixa.style.pointerEvents = 'none';
+            card.style.visibility = 'visible';
+            card.style.opacity = '1';
+            card.style.transform = '';
+            card.style.pointerEvents = 'none';
             await pausar(0.20);
         }
 
-        caixas.forEach(caixa => caixa.style.pointerEvents = 'auto'); 
+        cards.forEach(card => card.style.pointerEvents = 'auto'); 
     });
 });
 
@@ -94,13 +94,13 @@ document.querySelectorAll('.escolha').forEach(escolha => {
             temaNoturnoAtivado = false;
             temaSelecionado[0].style.color = 'gold'; // Cor de destaque do tema escolhido (Dia)
             temaSelecionado[1].style.color = 'var(--fonte-cor-padrao)';
-            alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
+            alternarTema(temaNoturnoAtivado, body, cards, menuLateral, cabecalhoMenuLateral);
         } else if (escolha.classList.contains('tema-seta-direita')) {
             tema.innerText = 'Noite';
             temaNoturnoAtivado = true;
             temaSelecionado[0].style.color = 'var(--fonte-cor-padrao)';
             temaSelecionado[1].style.color = 'gold'; // Cor de destaque do tema escolhido (Noite)
-            alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
+            alternarTema(temaNoturnoAtivado, body, cards, menuLateral, cabecalhoMenuLateral);
         }
 
         if (escolha.classList.contains('nivel-seta-esquerda') || escolha.classList.contains('nivel-seta-direita')) {
@@ -139,19 +139,19 @@ document.querySelectorAll('.escolha').forEach(escolha => {
     })
 })
 
-// Associa o evento de clique a cada "caixa"
-caixas.forEach((caixa, index) => {
-    caixa.addEventListener('click', eventoDaCaixa => {
+// Associa o evento de clique a cada "card"
+cards.forEach((card, index) => {
+    card.addEventListener('click', eventoDaCard => {
         // Exibe a imagem correspondente à posição embaralhada
-        eventoDaCaixa.target.style.backgroundImage = `url('${imagens[index]}')`;
-        eventoDaCaixa.target.style.filter = 'initial';
-        eventoDaCaixa.target.style.transform = 'initial';
-        eventoDaCaixa.target.style.pointerEvents = 'none';
-        eventoDaCaixa.target.style.border = '5px silver groove';
+        eventoDaCard.target.style.backgroundImage = `url('${imagens[index]}')`;
+        eventoDaCard.target.style.filter = 'initial';
+        eventoDaCard.target.style.transform = 'initial';
+        eventoDaCard.target.style.pointerEvents = 'none';
+        eventoDaCard.target.style.border = '5px silver groove';
         
-        // Guarda imagem e "caixa" selecionada
+        // Guarda imagem e "card" selecionada
         imagensReveladas.unshift(imagens[index]);
-        caixasSelecionadas.unshift(eventoDaCaixa.target);
+        cardsSelecionadas.unshift(eventoDaCard.target);
 
         // Quando duas imagens são reveladas
         if (imagensReveladas.length == 2) {
@@ -162,64 +162,64 @@ caixas.forEach((caixa, index) => {
                 comboMsg.style.visibility = 'hidden';
                 
                 tocarEfeitoSonoro(false, null);      
-                caixas.forEach(objeto => objeto.style.pointerEvents = 'none'); // Se forem diferentes, desativa temporariamente os cliques
-                caixasSelecionadas[1].style.transform = 'initial';
+                cards.forEach(objeto => objeto.style.pointerEvents = 'none'); // Se forem diferentes, desativa temporariamente os cliques
+                cardsSelecionadas[1].style.transform = 'initial';
                 numeroDeVidas.innerText = totalVidas;
                 numeroDeVidas.style.animation = 'destacarVidas 0.4s linear 4 alternate';
 
-                // Após um tempo, reseta as caixas para o estado inicial
+                // Após um tempo, reseta os cards para o estado inicial
                 setTimeout(() => {
-                    for (const caixaSelecionada of caixasSelecionadas) {
+                    for (const cardSelecionada of cardsSelecionadas) {
                         // Define imagem de fundo conforme o tema
                         if (!temaNoturnoAtivado)
-                            caixaSelecionada.style.backgroundImage = `url('_assets/_images/box_yellow.png')`;
+                            cardSelecionada.style.backgroundImage = `url('_assets/_images/box_yellow.png')`;
                         else
-                            caixaSelecionada.style.backgroundImage = `url('_assets/_images/box_blue.png')`;
+                            cardSelecionada.style.backgroundImage = `url('_assets/_images/box_blue.png')`;
 
-                        caixaSelecionada.style.cursor = 'pointer';
-                        setTimeout(() => caixaSelecionada.style.pointerEvents = 'auto', 450);
-                        caixaSelecionada.style.transform = 'rotateY(-360deg)';
-                        caixaSelecionada.style.boxShadow = 'none';
+                        cardSelecionada.style.cursor = 'pointer';
+                        setTimeout(() => cardSelecionada.style.pointerEvents = 'auto', 450);
+                        cardSelecionada.style.transform = 'rotateY(-360deg)';
+                        cardSelecionada.style.boxShadow = 'none';
                         
                         // Restaura efeitos de hover
-                        caixaSelecionada.addEventListener('mouseenter', evento => {
+                        cardSelecionada.addEventListener('mouseenter', evento => {
                             evento.target.style.filter = '';
                             evento.target.style.transform = '';
 
                             if (!temaNoturnoAtivado)
                                 evento.target.style.boxShadow = '';
                             else
-                                evento.target.style.boxShadow = '10px 10px 30px var(--caixa-efeito-noite)',
-                                '15px 15px 50px var(--caixa-efeito-noite)',
-                                '-10px -10px 30px var(--caixa-efeito-noite)',
-                                '-15px -15px 50px var(--caixa-efeito-noite)';
+                                evento.target.style.boxShadow = '10px 10px 30px var(--card-efeito-noite)',
+                                '15px 15px 50px var(--card-efeito-noite)',
+                                '-10px -10px 30px var(--card-efeito-noite)',
+                                '-15px -15px 50px var(--card-efeito-noite)';
                         });
 
-                        caixaSelecionada.addEventListener('mouseleave', evento => {
+                        cardSelecionada.addEventListener('mouseleave', evento => {
                             evento.target.style.filter = '';
                             evento.target.style.transform = '';
                         });
                     }
 
-                    // Reativa o clique nas caixas que ainda não foram resolvidas
-                    caixas.forEach(objeto => {
+                    // Reativa o clique nos cards que ainda não foram resolvidos
+                    cards.forEach(objeto => {
                         objeto.style.border = 'none';
-                        const corDaCaixa = getComputedStyle(objeto).backgroundImage;
+                        const corDaCard = getComputedStyle(objeto).backgroundImage;
 
-                        if (corDaCaixa.includes('box_yellow.png') || corDaCaixa.includes('box_blue.png'))
+                        if (corDaCard.includes('box_yellow.png') || corDaCard.includes('box_blue.png'))
                             objeto.style.pointerEvents = 'auto';
                     });
 
                     // Limpa os arrays
                     imagensReveladas = [];
-                    caixasSelecionadas = [];
+                    cardsSelecionadas = [];
                     numeroDeVidas.style.animation = 'initial';
 
                     if (totalVidas == 0) {
                         musica.muted = true;
                         jogoFinalizado = true;
 
-                        caixas.forEach(objeto => {
+                        cards.forEach(objeto => {
                             objeto.style.transform = 'rotate(-360deg)';
                             objeto.style.opacity = '0';
                             objeto.style.visibility = 'hidden';
@@ -255,30 +255,30 @@ caixas.forEach((caixa, index) => {
                 }
 
                 tocarEfeitoSonoro(true, null);
-                caixas.forEach(objeto => objeto.style.pointerEvents = 'none'); // Se as imagens forem iguais (par encontrado), esconde as caixas
-                caixasSelecionadas[0].style.transform = 'initial';
-                caixasSelecionadas[1].style.transform = 'initial';
+                cards.forEach(objeto => objeto.style.pointerEvents = 'none'); // Se as imagens forem iguais (par encontrado), esconde os cards
+                cardsSelecionadas[0].style.transform = 'initial';
+                cardsSelecionadas[1].style.transform = 'initial';
 
-                // Após um tempo, faz as caixas desaparecerem
+                // Após um tempo, faz os cards desaparecerem
                 setTimeout(() => {
-                    for (const caixaSelecionada of caixasSelecionadas) {
-                        caixaSelecionada.style.transform = 'translateY(-160px)';
-                        caixaSelecionada.style.transition = '0.7s';
-                        caixaSelecionada.style.opacity = '0';
-                        caixaSelecionada.style.visibility = 'hidden';
+                    for (const cardSelecionada of cardsSelecionadas) {
+                        cardSelecionada.style.transform = 'translateY(-160px)';
+                        cardSelecionada.style.transition = '0.7s';
+                        cardSelecionada.style.opacity = '0';
+                        cardSelecionada.style.visibility = 'hidden';
                     }
 
-                    // Reativa cliques nas caixas não resolvidas
-                    caixas.forEach(objeto => {
-                        const corDaCaixa = getComputedStyle(objeto).backgroundImage;
+                    // Reativa cliques nos cards não resolvidos
+                    cards.forEach(objeto => {
+                        const corDaCard = getComputedStyle(objeto).backgroundImage;
 
-                        if (corDaCaixa.includes('box_yellow.png') || corDaCaixa.includes('box_blue.png'))
+                        if (corDaCard.includes('box_yellow.png') || corDaCard.includes('box_blue.png'))
                             objeto.style.pointerEvents = 'auto';
                     });
 
                     // Limpa os arrays
                     imagensReveladas = [];
-                    caixasSelecionadas = [];
+                    cardsSelecionadas = [];
 
                     if (acertos == 10) {
                         acertos = 0;
@@ -369,10 +369,10 @@ temaSelecionado.forEach(opcao => {
         // Por padrão, o tema "Dia" fica ativado
         if (evento.target.textContent === '🌙 Noite') {
             temaNoturnoAtivado = true;
-            alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
+            alternarTema(temaNoturnoAtivado, body, cards, menuLateral, cabecalhoMenuLateral);
         } else if (evento.target.textContent === '☀️ Dia') {
             temaNoturnoAtivado = false;
-            alternarTema(temaNoturnoAtivado, body, caixas, menuLateral, cabecalhoMenuLateral);
+            alternarTema(temaNoturnoAtivado, body, cards, menuLateral, cabecalhoMenuLateral);
         }
 
         for (const li of temaSelecionado) li.style.color = 'var(--cor-fonte-padrao)';

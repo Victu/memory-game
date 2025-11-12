@@ -8,7 +8,7 @@
 
 :root {
     --fonte-cor-padrao: rgb(223, 223, 233);
-    --caixa-efeito-noite: rgba(0, 60, 255, 0.8); /* Está incluído somente no javascript */
+    --card-efeito-noite: rgba(0, 60, 255, 0.8); /* Está incluído somente no javascript */
 }
 
 * {
@@ -185,7 +185,7 @@ main {
     text-shadow: 2px 2px 1px rgb(10, 10, 10);
 }
 
-#caixas {
+#cards {
     position: relative;
     padding: 25px;
     margin: 0;
@@ -195,7 +195,7 @@ main {
     box-sizing: border-box;
 }
 
-.caixa {
+.card {
     width: 100px;
     height: 100px;
     cursor: pointer;
@@ -209,7 +209,7 @@ main {
     opacity: 0;
 }
 
-.caixa:hover {
+.card:hover {
     transform: scale(1.35);
     filter: brightness(1.4);
     box-shadow: 10px 10px 30px rgba(255, 217, 0, 0.8),
