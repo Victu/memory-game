@@ -9,7 +9,7 @@ Ainda há alguns elementos a serem implementados e pequenas correções e melhor
 
 O objetivo do jogo é óbvio: Encontre todos os pares de cartas idênticas no menor número de tentativas possível.
 
-Início do Jogo: Ao carregar a página, você verá um tabuleiro com 20 cartas viradas para baixo.
+Início do Jogo: Ao carregar a página, você verá um tipo de tabuleiro com 20 cartas viradas para baixo.
 
 Revelando as Cartas: Clique em uma carta para revelá-la. Em seguida, clique em uma segunda carta para tentar encontrar o seu par.
 
@@ -68,7 +68,7 @@ JavaScript (ES6+): Responsável por toda a lógica do jogo, incluindo o embaralh
 │
 └── _scripts/
     ├── _modules/
-    │   ├── Sky.js # Classe dedicada para a animação de céu estrelado
+    │   ├── sky.js
     │   └── resources.js
     │
     └── main.js
