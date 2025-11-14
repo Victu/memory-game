@@ -1,3 +1,10 @@
+// Gera efeito de brilho da logo na introdução
+function brilharLogomark() {
+    const brilhoLogomarkContainer = document.createElement('div');
+    brilhoLogomarkContainer.id = 'brilho-logomark-container';
+    document.querySelector('main').appendChild(brilhoLogomarkContainer);
+}
+
 // Cria os elementos <button> com a classe 'card'
 function criarCards() {
     const cardsContainer = document.getElementById('cards');
@@ -97,26 +104,26 @@ function alternarTema(temaNoturnoAtivado, body, vetorDeElementos, menu, cabecalh
         menu.backgroundImage = "url('_assets/_images/bg-3_night.png')";
         cabecalho.backgroundImage = "url('_assets/_images/title-memory-game_night.png')";
 
-        vetorDeElementos.forEach(card => {
-            const imagemRevelada = getComputedStyle(card).backgroundImage;
+        vetorDeElementos.forEach(elemento => {
+            const imagemRevelada = getComputedStyle(elemento).backgroundImage;
 
             if (!imagemRevelada.includes(`box_blue.png`)) 
-                card.style.backgroundImage = "url('_assets/_images/box_blue.png')";
+                elemento.style.backgroundImage = "url('_assets/_images/box_blue.png')";
 
             for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
                 if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
-                    card.style.backgroundImage = imagemRevelada;
+                    elemento.style.backgroundImage = imagemRevelada;
             }
 
             // Adiciona efeitos de hover específicos do tema escuro
-            card.addEventListener('mouseenter', evento => {
+            elemento.addEventListener('mouseenter', evento => {
                 evento.target.style.boxShadow = '-10px 0px 30px var(--card-efeito-noite)',
                 '10px 0px 30px var(--card-efeito-noite)',
                 '0px -10px 30px var(--card-efeito-noite)',
                 '0px 10px 30px var(--card-efeito-noite)';
             });
 
-            card.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
+            elemento.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
         });
     } else {
         new Sky().clearStars();
@@ -125,20 +132,20 @@ function alternarTema(temaNoturnoAtivado, body, vetorDeElementos, menu, cabecalh
         menu.backgroundImage = "url('_assets/_images/bg-3.png')";
         cabecalho.backgroundImage = "url('_assets/_images/title-memory-game.png')";
 
-        vetorDeElementos.forEach(card => {
-            const imagemRevelada = getComputedStyle(card).backgroundImage;
+        vetorDeElementos.forEach(elemento => {
+            const imagemRevelada = getComputedStyle(elemento).backgroundImage;
 
             if (!imagemRevelada.includes('box_yellow.png'))
-                card.style.backgroundImage = "url('_assets/_images/box_yellow.png')";
+                elemento.style.backgroundImage = "url('_assets/_images/box_yellow.png')";
 
             for (let numeroDaImagem = 0; numeroDaImagem < 8; numeroDaImagem++) {
                 if (imagemRevelada.includes(`person-${numeroDaImagem}.png`))
-                    card.style.backgroundImage = imagemRevelada;
+                    elemento.style.backgroundImage = imagemRevelada;
             }
 
             // Remove efeitos de hover do tema escuro
-            card.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '');
-            card.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
+            elemento.addEventListener('mouseenter', evento => evento.target.style.boxShadow = '');
+            elemento.addEventListener('mouseleave', evento => evento.target.style.boxShadow = 'none');
         });
     }
 }

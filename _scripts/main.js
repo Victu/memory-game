@@ -24,6 +24,7 @@ const gameOverMsg = gameOverMensagem();
 document.addEventListener('DOMContentLoaded', () => {
     const intro = document.getElementById('intro').style;
     numeroDeVidas.innerText = totalVidas;
+    brilharLogomark(); // Brilho da logo na introdução
     embaralharImagens(imagens); // Embaralhamento das imagens
     
     setTimeout(() => {
@@ -41,9 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach(card => card.style.transform = 'translateX(60vw)');
 
     // Ação do botão "Começar"
-    document.getElementById('start').addEventListener('click', async botaoStart => {
+    document.getElementById('start').addEventListener('click', async evento => {
         musica.loop = true;
-        botaoStart.target.style.display = 'none';
+        evento.target.style.display = 'none';
         slidesContainer.display = 'none';
         intro.transform = 'scale(6) rotate(-65deg)';
         intro.transition = '1.2s ease-in-out';
@@ -80,22 +81,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Funcionalidade dos slides de opções na introdução
-document.querySelectorAll('.escolha').forEach(escolha => {
-    escolha.addEventListener('click', async () => {
+document.querySelectorAll('.escolha').forEach(elemento => {
+    elemento.addEventListener('click', async () => {
         const quantiadeEscolhidaVidas = document.getElementById('quantidade-escolhida-vidas');
         const nivelEscolhido = document.getElementById('nivel-escolhido');
 
-        if (escolha.classList.contains('nivel-seta-esquerda')) {
+        if (elemento.classList.contains('nivel-seta-esquerda')) {
             nivelAtual--;  // Reduz o nível de dificuldade
-        } else if (escolha.classList.contains('nivel-seta-direita')) {
+        } else if (elemento.classList.contains('nivel-seta-direita')) {
             nivelAtual++; // Aumenta o nível de dificuldade
-        } else if (escolha.classList.contains('tema-seta-esquerda')) {
+        } else if (elemento.classList.contains('tema-seta-esquerda')) {
             tema.innerText = 'Dia';
             temaNoturnoAtivado = false;
             temaSelecionado[0].style.color = 'gold'; // Cor de destaque do tema escolhido (Dia)
             temaSelecionado[1].style.color = 'var(--fonte-cor-padrao)';
             alternarTema(temaNoturnoAtivado, body, cards, menuLateral, cabecalhoMenuLateral);
-        } else if (escolha.classList.contains('tema-seta-direita')) {
+        } else if (elemento.classList.contains('tema-seta-direita')) {
             tema.innerText = 'Noite';
             temaNoturnoAtivado = true;
             temaSelecionado[0].style.color = 'var(--fonte-cor-padrao)';
@@ -103,7 +104,7 @@ document.querySelectorAll('.escolha').forEach(escolha => {
             alternarTema(temaNoturnoAtivado, body, cards, menuLateral, cabecalhoMenuLateral);
         }
 
-        if (escolha.classList.contains('nivel-seta-esquerda') || escolha.classList.contains('nivel-seta-direita')) {
+        if (elemento.classList.contains('nivel-seta-esquerda') || elemento.classList.contains('nivel-seta-direita')) {
             if (nivelAtual < 1) {
                 nivelAtual = 1;
             } else if (nivelAtual > 3) {
@@ -140,18 +141,18 @@ document.querySelectorAll('.escolha').forEach(escolha => {
 })
 
 // Associa o evento de clique a cada "card"
-cards.forEach((card, index) => {
-    card.addEventListener('click', eventoDaCard => {
+cards.forEach((elemento, index) => {
+    elemento.addEventListener('click', evento => {
         // Exibe a imagem correspondente à posição embaralhada
-        eventoDaCard.target.style.backgroundImage = `url('${imagens[index]}')`;
-        eventoDaCard.target.style.filter = 'initial';
-        eventoDaCard.target.style.transform = 'initial';
-        eventoDaCard.target.style.pointerEvents = 'none';
-        eventoDaCard.target.style.border = '5px silver groove';
+        evento.target.style.backgroundImage = `url('${imagens[index]}')`;
+        evento.target.style.filter = 'initial';
+        evento.target.style.transform = 'initial';
+        evento.target.style.pointerEvents = 'none';
+        evento.target.style.border = '5px silver groove';
         
         // Guarda imagem e "card" selecionada
         imagensReveladas.unshift(imagens[index]);
-        cardsSelecionadas.unshift(eventoDaCard.target);
+        cardsSelecionadas.unshift(evento.target);
 
         // Quando duas imagens são reveladas
         if (imagensReveladas.length == 2) {
@@ -162,7 +163,7 @@ cards.forEach((card, index) => {
                 comboMsg.style.visibility = 'hidden';
                 
                 tocarEfeitoSonoro(false, null);      
-                cards.forEach(objeto => objeto.style.pointerEvents = 'none'); // Se forem diferentes, desativa temporariamente os cliques
+                cards.forEach(elemento => elemento.style.pointerEvents = 'none'); // Se forem diferentes, desativa temporariamente os cliques
                 cardsSelecionadas[1].style.transform = 'initial';
                 numeroDeVidas.innerText = totalVidas;
                 numeroDeVidas.style.animation = 'destacarVidas 0.4s linear 4 alternate';
@@ -202,12 +203,12 @@ cards.forEach((card, index) => {
                     }
 
                     // Reativa o clique nos cards que ainda não foram resolvidos
-                    cards.forEach(objeto => {
-                        objeto.style.border = 'none';
-                        const corDaCard = getComputedStyle(objeto).backgroundImage;
+                    cards.forEach(elemento => {
+                        elemento.style.border = 'none';
+                        const corDoCard = getComputedStyle(elemento).backgroundImage;
 
-                        if (corDaCard.includes('box_yellow.png') || corDaCard.includes('box_blue.png'))
-                            objeto.style.pointerEvents = 'auto';
+                        if (corDoCard.includes('box_yellow.png') || corDoCard.includes('box_blue.png'))
+                            elemento.style.pointerEvents = 'auto';
                     });
 
                     // Limpa os arrays
@@ -219,10 +220,10 @@ cards.forEach((card, index) => {
                         musica.muted = true;
                         jogoFinalizado = true;
 
-                        cards.forEach(objeto => {
-                            objeto.style.transform = 'rotate(-360deg)';
-                            objeto.style.opacity = '0';
-                            objeto.style.visibility = 'hidden';
+                        cards.forEach(elemento => {
+                            elemento.style.transform = 'rotate(-360deg)';
+                            elemento.style.opacity = '0';
+                            elemento.style.visibility = 'hidden';
                         });
 
                         setTimeout(() => {
@@ -255,7 +256,7 @@ cards.forEach((card, index) => {
                 }
 
                 tocarEfeitoSonoro(true, null);
-                cards.forEach(objeto => objeto.style.pointerEvents = 'none'); // Se as imagens forem iguais (par encontrado), esconde os cards
+                cards.forEach(elemento => elemento.style.pointerEvents = 'none'); // Se as imagens forem iguais (par encontrado), esconde os cards
                 cardsSelecionadas[0].style.transform = 'initial';
                 cardsSelecionadas[1].style.transform = 'initial';
 
@@ -269,11 +270,11 @@ cards.forEach((card, index) => {
                     }
 
                     // Reativa cliques nos cards não resolvidos
-                    cards.forEach(objeto => {
-                        const corDaCard = getComputedStyle(objeto).backgroundImage;
+                    cards.forEach(elemento => {
+                        const corDoCard = getComputedStyle(elemento).backgroundImage;
 
-                        if (corDaCard.includes('box_yellow.png') || corDaCard.includes('box_blue.png'))
-                            objeto.style.pointerEvents = 'auto';
+                        if (corDoCard.includes('box_yellow.png') || corDoCard.includes('box_blue.png'))
+                            elemento.style.pointerEvents = 'auto';
                     });
 
                     // Limpa os arrays
@@ -364,8 +365,8 @@ document.getElementById('opcao-temas').addEventListener('mouseenter', evento => 
 });
 
 // Alterna para os temas "Noite"/"Dia"
-temaSelecionado.forEach(opcao => {
-    opcao.addEventListener('click', evento => {
+temaSelecionado.forEach(elemento => {
+    elemento.addEventListener('click', evento => {
         // Por padrão, o tema "Dia" fica ativado
         if (evento.target.textContent === '🌙 Noite') {
             temaNoturnoAtivado = true;
@@ -396,8 +397,8 @@ document.getElementById('opcao-musica').addEventListener('mouseenter', evento =>
 });
 
 // Ativar ou desativar a música de fundo
-document.querySelectorAll('#sub-menu-musica li').forEach(opcao => {
-    opcao.addEventListener('click', evento => {
+document.querySelectorAll('#sub-menu-musica li').forEach(elemento => {
+    elemento.addEventListener('click', evento => {
         if (!jogoFinalizado) {
             if (evento.target.textContent === '🔊 Ativada') {
                 musica.muted = false;
