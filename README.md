@@ -80,4 +80,4 @@ JavaScript (ES6+): Responsável por toda a lógica do jogo, incluindo o embaralh
 Para executar o jogo, basta clonar este repositório e abrir o arquivo main.html em seu navegador de preferência.
 
 `git clone https://github.com/Victu/memory-game.git
-cd memory-game` # Abra o arquivo main.html no navegador
+cd memory-game` <em>Abra o arquivo main.html no navegador</em>
