@@ -183,13 +183,16 @@
     }
 }
 
-@media (max-height: 640px) {
-    #intro { top: 15%; }
+@media (max-height: 650px) {
+    #intro { 
+        top: 15%; 
+        gap: 45px;
+    }
 
-    #texto-copyright { top: -678px; }
+    #texto-copyright { top: -655px; }
 
     #brilho-logomark-container { top: 18%; }
-
+    
     main { margin-top: 40px; }
 
     #combo-mensagem {
