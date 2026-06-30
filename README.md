@@ -2,8 +2,8 @@
   <img src="./_assets/_images/logomark.png" alt="Capa do Jogo da Memória" width="600"/>
 </div><br>
 
-Um jogo que desenvolvi para testar e aprimorar suas habilidades de memorização de uma forma divertida e interativa. Este jogo contém figuras mundialmente conhecidas; foi desenvolvido utilizando o básico das tecnologias web fundamentais: HTML, CSS e Javascript puro.<br>
-
+Um jogo que desenvolvi para testar e aprimorar suas habilidades de memorização de uma forma divertida e interativa! Este jogo contém figuras mundialmente conhecidas; foi desenvolvido utilizando o básico das tecnologias web fundamentais: HTML, CSS e Javascript puro.<br>
+Até o momento, este jogo não foi projetado para telas de dispositivos móveis.<br>
 ## ✨ <strong>Como jogar</strong>
 
 O objetivo do jogo é óbvio: Encontre todos os pares de cartas idênticas no menor número de tentativas possível.
@@ -40,7 +40,7 @@ Níveis de Dificuldade: Ajuste o desafio do jogo selecionando um dos três níve
 
 Animações e Efeitos Visuais: O jogo é enriquecido com diversas animações, como o giro das cartas, efeitos de brilho ao passar o mouse e transições suaves, tornando a jogabilidade mais fluida e agradável.
 
-Design Responsivo: A interface se adapta a diferentes tamanhos de tela, garantindo uma boa experiência tanto em desktops quanto em dispositivos móveis.
+Design Responsivo: A interface se adapta a diferentes tamanhos de tela, garantindo uma boa experiência tanto em desktops quanto em dispositivos móveis. Entretanto, a responsividade precisará de alguns ajustes que, talvez, serão feitos em atualizações futuras.
 
 ## 🚀 <strong>Tecnologias Utilizadas</strong>
 
@@ -81,4 +81,4 @@ Este projeto foi construído do zero, utilizando a base do desenvolvimento web:
 Para executar o jogo, basta clonar este repositório e abrir o arquivo main.html em seu navegador de preferência.
 
 `git clone https://github.com/Victu/memory-game.git
-cd memory-game` <em>Abra o arquivo main.html no navegador</em>
+cd memory-game` <em>Abra o arquivo main.html no navegador</em> 🌐
