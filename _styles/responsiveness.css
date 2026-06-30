@@ -95,10 +95,7 @@
 }
 
 @media (max-height: 915px) {
-    #intro {
-        top: 19.5%;
-        gap: 52px;
-    }
+    #intro { top: 19.5%; }
 
     #brilho-logomark-container {
         top: 21.5%;
@@ -183,5 +180,20 @@
     .estrela-container img { 
         width: 10px;
         height: 10px;
+    }
+}
+
+@media (max-height: 640px) {
+    #intro { top: 15%; }
+
+    #texto-copyright { top: -678px; }
+
+    #brilho-logomark-container { top: 18%; }
+
+    main { margin-top: 40px; }
+
+    #combo-mensagem {
+        top: -16.2%;
+        font-size: 1.2em;
     }
 }
