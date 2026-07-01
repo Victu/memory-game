@@ -47,9 +47,10 @@ Design Responsivo: A interface se adapta a diferentes tamanhos de tela, garantin
 Este projeto foi construído do zero, utilizando a base do desenvolvimento web:
 
 <p align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="50">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" width="50">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" width="50">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="Javascript" width="50">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" width="50">
 </p>
 
 - HTML: Para a estruturação semântica do conteúdo do jogo.<br>
@@ -74,11 +75,11 @@ Este projeto foi construído do zero, utilizando a base do desenvolvimento web:
     │
     └── main.js
 
-├── main.html
+├── index.html
 ```
 ## ⌨️ <strong>Como Executar o Projeto</strong>
 
-Para executar o jogo, basta clonar este repositório e abrir o arquivo main.html em seu navegador de preferência.
+Para executar o jogo, basta clonar este repositório e abrir o arquivo index.html em seu navegador de preferência.
 
 `git clone https://github.com/Victu/memory-game.git
-cd memory-game` <em>Abra o arquivo main.html no navegador</em> 🌐
+cd memory-game` <em>Abra o arquivo index.html no navegador</em> 🌐
